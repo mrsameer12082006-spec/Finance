@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+/* Fruitful Signature Pill Button with scale-fill effect */
+.btn-fruitful {
+  @apply relative inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full font-semibold text-sm transition-all duration-200 overflow-hidden active:scale-95;
+}
+
+.btn-fruitful-primary {
+  @apply bg-fruitful-forest text-white hover:text-fruitful-mint hover:bg-fruitful-emerald dark:bg-fruitful-emerald dark:hover:bg-fruitful-forest shadow-sm;
+}
+
+.btn-fruitful-secondary {
+  @apply bg-white dark:bg-fruitful-darkCard text-fruitful-forest dark:text-fruitful-mint border border-fruitful-forest/15 dark:border-fruitful-darkBorder hover:bg-fruitful-wasabi dark:hover:bg-fruitful-darkBg;
+}
+
+.btn-fruitful-mint {
+  @apply bg-fruitful-mint text-fruitful-forest hover:bg-emerald-200 font-bold;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 dark:bg-gray-700 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400 dark:bg-gray-600;
+}
