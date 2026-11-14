@@ -195,8 +195,8 @@ export default function Home() {
         <header 
           className={`pointer-events-auto transition-all duration-300 ease-out flex items-center justify-between ${
             isScrolled
-              ? 'w-full max-w-5xl bg-white/85 dark:bg-nectar-darkCard/85 backdrop-blur-xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar-float rounded-full px-5 py-2.5'
-              : 'w-full max-w-full bg-white/80 dark:bg-nectar-darkBg/80 backdrop-blur-xl border-b border-nectar-forest/10 dark:border-nectar-darkBorder shadow-none rounded-none px-6 lg:px-12 py-3.5'
+              ? 'w-full max-w-5xl glass-nectar-pill rounded-full px-5 py-2.5'
+              : 'w-full max-w-full glass-nectar-full rounded-none px-6 lg:px-12 py-3.5'
           }`}
         >
           
@@ -208,7 +208,7 @@ export default function Home() {
             <span className="font-bold text-nectar-forest dark:text-nectar-mint tracking-tight text-base">
               Nectar
             </span>
-            <span className="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-nectar-mint text-nectar-forest dark:bg-nectar-emerald/20 dark:text-nectar-mint">
+            <span className="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-nectar-mint/80 text-nectar-forest dark:bg-nectar-emerald/20 dark:text-nectar-mint border border-nectar-forest/10 dark:border-nectar-mint/20">
               Smart Finance
             </span>
           </Link>
@@ -226,12 +226,12 @@ export default function Home() {
           >
             <div
               ref={containerRef}
-              className="relative flex items-center rounded-full bg-gray-100/70 dark:bg-white/[0.04] border border-nectar-forest/10 dark:border-white/10 overflow-hidden shadow-xs"
+              className="relative flex items-center rounded-full bg-black/[0.04] dark:bg-white/[0.05] border border-black/[0.06] dark:border-white/[0.08] backdrop-blur-md overflow-hidden shadow-[inset_0_1px_2px_rgba(0,0,0,0.03)]"
             >
               {/* Hardware-accelerated sliding indicator pill */}
               <span
                 aria-hidden="true"
-                className={`pointer-events-none absolute inset-y-0 -z-0 rounded-full bg-nectar-mint/90 dark:bg-nectar-emerald/30 shadow-xs ${
+                className={`pointer-events-none absolute inset-y-0 -z-0 rounded-full bg-nectar-mint/90 dark:bg-nectar-emerald/35 shadow-xs ${
                   mounted ? 'nav-indicator-glide' : 'transition-opacity duration-200'
                 }`}
                 style={{
