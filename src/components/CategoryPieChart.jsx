@@ -6,13 +6,13 @@ const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
     const data = payload[0];
     return (
-      <div className="bg-white dark:bg-fruitful-darkCard p-3 rounded-2xl shadow-fruitful-float border border-fruitful-forest/15 dark:border-fruitful-darkBorder text-xs">
+      <div className="bg-white dark:bg-nectar-darkCard p-3 rounded-2xl shadow-nectar-float border border-nectar-forest/15 dark:border-nectar-darkBorder text-xs">
         <div className="flex items-center gap-2 mb-1">
           <span 
             className="w-2.5 h-2.5 rounded-full" 
             style={{ backgroundColor: data.payload.color }}
           />
-          <span className="font-bold text-fruitful-forest dark:text-fruitful-mint">
+          <span className="font-bold text-nectar-forest dark:text-nectar-mint">
             {data.name}
           </span>
         </div>
@@ -68,7 +68,7 @@ export default function CategoryPieChart({ data = [] }) {
           <span className="text-[11px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">
             Total
           </span>
-          <span className="text-xl font-bold font-serif text-fruitful-forest dark:text-fruitful-mint">
+          <span className="text-xl font-bold font-serif text-nectar-forest dark:text-nectar-mint">
             {formatCurrency(total).split('.')[0]}
           </span>
         </div>
@@ -81,7 +81,7 @@ export default function CategoryPieChart({ data = [] }) {
           return (
             <div 
               key={item.name}
-              className="flex items-center justify-between p-2 rounded-xl hover:bg-gray-50 dark:hover:bg-fruitful-darkBg text-xs transition-colors"
+              className="flex items-center justify-between p-2 rounded-xl hover:bg-gray-50 dark:hover:bg-nectar-darkBg text-xs transition-colors"
             >
               <div className="flex items-center gap-2.5">
                 <span 

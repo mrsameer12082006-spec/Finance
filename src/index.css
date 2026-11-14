@@ -8,21 +8,21 @@
   }
 }
 
-/* Fruitful Signature Pill Button with scale-fill effect */
-.btn-fruitful {
+/* Nectar Signature Pill Button with scale-fill effect */
+.btn-nectar {
   @apply relative inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full font-semibold text-sm transition-all duration-200 overflow-hidden active:scale-95;
 }
 
-.btn-fruitful-primary {
-  @apply bg-fruitful-forest text-white hover:text-fruitful-mint hover:bg-fruitful-emerald dark:bg-fruitful-emerald dark:hover:bg-fruitful-forest shadow-sm;
+.btn-nectar-primary {
+  @apply bg-nectar-forest text-white hover:text-nectar-mint hover:bg-nectar-emerald dark:bg-nectar-emerald dark:hover:bg-nectar-forest shadow-sm;
 }
 
-.btn-fruitful-secondary {
-  @apply bg-white dark:bg-fruitful-darkCard text-fruitful-forest dark:text-fruitful-mint border border-fruitful-forest/15 dark:border-fruitful-darkBorder hover:bg-fruitful-wasabi dark:hover:bg-fruitful-darkBg;
+.btn-nectar-secondary {
+  @apply bg-white dark:bg-nectar-darkCard text-nectar-forest dark:text-nectar-mint border border-nectar-forest/15 dark:border-nectar-darkBorder hover:bg-nectar-wasabi dark:hover:bg-nectar-darkBg;
 }
 
-.btn-fruitful-mint {
-  @apply bg-fruitful-mint text-fruitful-forest hover:bg-emerald-200 font-bold;
+.btn-nectar-mint {
+  @apply bg-nectar-mint text-nectar-forest hover:bg-emerald-200 font-bold;
 }
 
 /* Custom Scrollbar */

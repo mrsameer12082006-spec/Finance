@@ -1,6 +1,6 @@
 # Nectar &bull; Smart Expense Tracker & Financial Insights Dashboard
 
-A modern full-stack-ready frontend architecture for personal finance tracking and automated 50/30/20 money flow, built with **React + Vite** and styled with the serene aesthetic, typography, and micro-interactions of **Fruitful.com**.
+A modern full-stack-ready frontend architecture for personal finance tracking and automated 50/30/20 money flow, built with **React + Vite** and styled with the serene aesthetic, typography, and micro-interactions of **Nectar**.
 
 ---
 
@@ -9,7 +9,7 @@ A modern full-stack-ready frontend architecture for personal finance tracking an
 - **React 18 (Vite, ES6+)** — Blazing fast component runtime with Hot Module Replacement (HMR).
 - **Redux Toolkit + React Redux** — Predictable, modular state management with typed slices (`authSlice`, `expenseSlice`, `themeSlice`).
 - **React Router (v6)** — Declarative client-side routing with route-level code splitting and `React.lazy` / `Suspense`.
-- **Tailwind CSS** — Utility-first styling configured with Fruitful design tokens (warm peach `#FFFBF7`, deep forest `#054F31`, mint `#D1FADF`, pill buttons, and responsive grid layouts).
+- **Tailwind CSS** — Utility-first styling configured with Nectar design tokens (warm peach `#FFFBF7`, deep forest `#054F31`, mint `#D1FADF`, pill buttons, and responsive grid layouts).
 - **Recharts** — Interactive, responsive data visualizations (Donut / Pie category chart and daily spending velocity area chart).
 - **LocalStorage Persistence** — Zero backend required for immediate demo; mock authentication and transactional data are persisted locally.
 - **Lucide Icons** — Clean, minimalist iconography.

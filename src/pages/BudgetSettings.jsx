@@ -36,7 +36,7 @@ export default function BudgetSettings() {
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-fadeIn">
       <div>
-        <h2 className="text-2xl font-serif font-bold text-fruitful-forest dark:text-fruitful-mint">
+        <h2 className="text-2xl font-serif font-bold text-nectar-forest dark:text-nectar-mint">
           Budget Settings & Thresholds
         </h2>
         <p className="text-xs text-gray-500 dark:text-gray-400">
@@ -45,8 +45,8 @@ export default function BudgetSettings() {
       </div>
 
       {saveMessage && (
-        <div className="p-4 rounded-2xl bg-fruitful-wasabi dark:bg-emerald-950/30 border border-fruitful-mint dark:border-emerald-800 text-fruitful-forest dark:text-fruitful-mint text-xs font-bold flex items-center gap-2">
-          <CheckCircle2 className="w-4 h-4 text-fruitful-emerald" />
+        <div className="p-4 rounded-2xl bg-nectar-wasabi dark:bg-emerald-950/30 border border-nectar-mint dark:border-emerald-800 text-nectar-forest dark:text-nectar-mint text-xs font-bold flex items-center gap-2">
+          <CheckCircle2 className="w-4 h-4 text-nectar-emerald" />
           <span>{saveMessage}</span>
         </div>
       )}
@@ -55,11 +55,11 @@ export default function BudgetSettings() {
       <div className={`p-6 rounded-3xl border ${
         isBudgetExceeded 
           ? 'bg-red-50 dark:bg-red-950/20 border-red-200 dark:border-red-900/40 text-red-900 dark:text-red-200' 
-          : 'bg-white dark:bg-fruitful-darkCard border-fruitful-forest/10 dark:border-fruitful-darkBorder'
-      } shadow-fruitful flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4`}>
+          : 'bg-white dark:bg-nectar-darkCard border-nectar-forest/10 dark:border-nectar-darkBorder'
+      } shadow-nectar flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4`}>
         <div className="flex items-center gap-3.5">
           <div className={`w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0 ${
-            isBudgetExceeded ? 'bg-red-100 text-red-600' : 'bg-fruitful-wasabi text-fruitful-forest'
+            isBudgetExceeded ? 'bg-red-100 text-red-600' : 'bg-nectar-wasabi text-nectar-forest'
           }`}>
             {isBudgetExceeded ? <AlertTriangle className="w-6 h-6" /> : <ShieldCheck className="w-6 h-6" />}
           </div>
@@ -76,8 +76,8 @@ export default function BudgetSettings() {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Monthly Limits Grid */}
-        <div className="bg-white dark:bg-fruitful-darkCard p-6 sm:p-8 rounded-3xl border border-fruitful-forest/10 dark:border-fruitful-darkBorder shadow-fruitful space-y-6">
-          <div className="flex items-center gap-2 text-fruitful-forest dark:text-fruitful-mint font-bold text-sm">
+        <div className="bg-white dark:bg-nectar-darkCard p-6 sm:p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar space-y-6">
+          <div className="flex items-center gap-2 text-nectar-forest dark:text-nectar-mint font-bold text-sm">
             <Sliders className="w-4 h-4" />
             <span>Macro Financial Ceilings</span>
           </div>
@@ -95,7 +95,7 @@ export default function BudgetSettings() {
                   min="1000"
                   value={monthlyLimit}
                   onChange={(e) => setMonthlyLimit(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-fruitful-darkBorder bg-gray-50 dark:bg-fruitful-darkBg text-sm font-semibold font-mono focus:outline-none focus:ring-2 focus:ring-fruitful-emerald"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-nectar-darkBorder bg-gray-50 dark:bg-nectar-darkBg text-sm font-semibold font-mono focus:outline-none focus:ring-2 focus:ring-nectar-emerald"
                   required
                 />
               </div>
@@ -114,7 +114,7 @@ export default function BudgetSettings() {
                   min="1000"
                   value={monthlyIncome}
                   onChange={(e) => setMonthlyIncome(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-fruitful-darkBorder bg-gray-50 dark:bg-fruitful-darkBg text-sm font-semibold font-mono focus:outline-none focus:ring-2 focus:ring-fruitful-emerald"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-nectar-darkBorder bg-gray-50 dark:bg-nectar-darkBg text-sm font-semibold font-mono focus:outline-none focus:ring-2 focus:ring-nectar-emerald"
                   required
                 />
               </div>
@@ -124,9 +124,9 @@ export default function BudgetSettings() {
         </div>
 
         {/* Category Budget Caps */}
-        <div className="bg-white dark:bg-fruitful-darkCard p-6 sm:p-8 rounded-3xl border border-fruitful-forest/10 dark:border-fruitful-darkBorder shadow-fruitful space-y-6">
+        <div className="bg-white dark:bg-nectar-darkCard p-6 sm:p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar space-y-6">
           <div>
-            <h3 className="text-sm font-bold uppercase tracking-wider text-fruitful-forest dark:text-fruitful-mint">
+            <h3 className="text-sm font-bold uppercase tracking-wider text-nectar-forest dark:text-nectar-mint">
               Category Spending Caps
             </h3>
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
@@ -136,7 +136,7 @@ export default function BudgetSettings() {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {Object.keys(categoryLimits).map((cat) => (
-              <div key={cat} className="p-3.5 rounded-2xl bg-gray-50 dark:bg-fruitful-darkBg border border-gray-100 dark:border-fruitful-darkBorder">
+              <div key={cat} className="p-3.5 rounded-2xl bg-gray-50 dark:bg-nectar-darkBg border border-gray-100 dark:border-nectar-darkBorder">
                 <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1.5">
                   {cat}
                 </label>
@@ -148,7 +148,7 @@ export default function BudgetSettings() {
                     min="0"
                     value={categoryLimits[cat]}
                     onChange={(e) => handleCategoryLimitChange(cat, e.target.value)}
-                    className="w-full pl-7 pr-3 py-1.5 rounded-lg border border-gray-200 dark:border-fruitful-darkBorder bg-white dark:bg-fruitful-darkCard text-xs font-semibold font-mono focus:outline-none focus:ring-2 focus:ring-fruitful-emerald"
+                    className="w-full pl-7 pr-3 py-1.5 rounded-lg border border-gray-200 dark:border-nectar-darkBorder bg-white dark:bg-nectar-darkCard text-xs font-semibold font-mono focus:outline-none focus:ring-2 focus:ring-nectar-emerald"
                   />
                 </div>
               </div>
@@ -158,7 +158,7 @@ export default function BudgetSettings() {
           <div className="flex justify-end pt-4">
             <button
               type="submit"
-              className="btn-fruitful btn-fruitful-primary"
+              className="btn-nectar btn-nectar-primary"
             >
               <Save className="w-4 h-4" />
               <span>Save Budget Configurations</span>

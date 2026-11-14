@@ -13,11 +13,11 @@ import { formatCurrency, formatCompactCurrency } from '../utils/formatters';
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-white dark:bg-fruitful-darkCard p-3 rounded-2xl shadow-fruitful-float border border-fruitful-forest/15 dark:border-fruitful-darkBorder text-xs">
+      <div className="bg-white dark:bg-nectar-darkCard p-3 rounded-2xl shadow-nectar-float border border-nectar-forest/15 dark:border-nectar-darkBorder text-xs">
         <p className="font-bold text-gray-500 dark:text-gray-400 mb-1">
           {label}
         </p>
-        <p className="font-mono font-bold text-fruitful-forest dark:text-fruitful-mint text-sm">
+        <p className="font-mono font-bold text-nectar-forest dark:text-nectar-mint text-sm">
           {formatCurrency(payload[0].value)}
         </p>
         <p className="text-[10px] text-gray-400">Cumulative spend</p>
@@ -44,7 +44,7 @@ export default function DailyTrendChart({ data = [] }) {
           margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
         >
           <defs>
-            <linearGradient id="fruitfulGradient" x1="0" y1="0" x2="0" y2="1">
+            <linearGradient id="nectarGradient" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor="#0B7443" stopOpacity={0.25} />
               <stop offset="95%" stopColor="#0B7443" stopOpacity={0.0} />
             </linearGradient>
@@ -75,7 +75,7 @@ export default function DailyTrendChart({ data = [] }) {
             stroke="#054F31" 
             strokeWidth={2.5}
             fillOpacity={1} 
-            fill="url(#fruitfulGradient)" 
+            fill="url(#nectarGradient)" 
           />
         </AreaChart>
       </ResponsiveContainer>

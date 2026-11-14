@@ -96,49 +96,49 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-fruitful-canvas dark:bg-fruitful-darkBg text-gray-900 dark:text-gray-100 transition-colors">
+    <div className="min-h-screen bg-nectar-canvas dark:bg-nectar-darkBg text-gray-900 dark:text-gray-100 transition-colors">
       
       {/* ==========================================================================
-           FLOATING PILL NAVIGATION (Fruitful Design)
+           FLOATING PILL NAVIGATION (Nectar Design)
            ========================================================================== */}
       <div className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
-        <header className="pointer-events-auto w-full max-w-5xl bg-white/80 dark:bg-fruitful-darkCard/80 backdrop-blur-xl border border-fruitful-forest/10 dark:border-fruitful-darkBorder shadow-fruitful-float rounded-full px-5 py-3 flex items-center justify-between transition-all">
+        <header className="pointer-events-auto w-full max-w-5xl bg-white/80 dark:bg-nectar-darkCard/80 backdrop-blur-xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar-float rounded-full px-5 py-3 flex items-center justify-between transition-all">
           
           {/* Brand */}
           <Link to="/" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-fruitful-emerald to-fruitful-forest flex items-center justify-center text-white shadow-sm">
-              <Leaf className="w-4 h-4 text-fruitful-mint" />
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-nectar-emerald to-nectar-forest flex items-center justify-center text-white shadow-sm">
+              <Leaf className="w-4 h-4 text-nectar-mint" />
             </div>
-            <span className="font-bold text-fruitful-forest dark:text-fruitful-mint tracking-tight text-base">
+            <span className="font-bold text-nectar-forest dark:text-nectar-mint tracking-tight text-base">
               Nectar
             </span>
-            <span className="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-fruitful-mint text-fruitful-forest dark:bg-fruitful-emerald/20 dark:text-fruitful-mint">
+            <span className="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-nectar-mint text-nectar-forest dark:bg-nectar-emerald/20 dark:text-nectar-mint">
               Smart Finance
             </span>
           </Link>
 
           {/* Nav Links */}
           <nav className="hidden md:flex items-center gap-6 text-xs font-semibold text-gray-600 dark:text-gray-300">
-            <a href="#features" className="hover:text-fruitful-forest dark:hover:text-fruitful-mint transition-colors">Features</a>
-            <a href="#flow" className="hover:text-fruitful-forest dark:hover:text-fruitful-mint transition-colors">Money Flow</a>
-            <a href="#simulator" className="hover:text-fruitful-forest dark:hover:text-fruitful-mint transition-colors">Simulator</a>
-            <a href="#integrity" className="hover:text-fruitful-forest dark:hover:text-fruitful-mint transition-colors">Privacy</a>
+            <a href="#features" className="hover:text-nectar-forest dark:hover:text-nectar-mint transition-colors">Features</a>
+            <a href="#flow" className="hover:text-nectar-forest dark:hover:text-nectar-mint transition-colors">Money Flow</a>
+            <a href="#simulator" className="hover:text-nectar-forest dark:hover:text-nectar-mint transition-colors">Simulator</a>
+            <a href="#integrity" className="hover:text-nectar-forest dark:hover:text-nectar-mint transition-colors">Privacy</a>
           </nav>
 
           {/* Right Actions */}
           <div className="flex items-center gap-2.5">
             <button
               onClick={() => dispatch(toggleTheme())}
-              className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-fruitful-darkBg transition-colors"
+              className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-nectar-darkBg transition-colors"
               title="Toggle theme"
             >
-              {mode === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-fruitful-forest" />}
+              {mode === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-nectar-forest" />}
             </button>
 
             {isAuthenticated ? (
               <Link
                 to="/dashboard"
-                className="btn-fruitful btn-fruitful-primary text-xs py-2 px-4 flex items-center gap-1.5"
+                className="btn-nectar btn-nectar-primary text-xs py-2 px-4 flex items-center gap-1.5"
               >
                 <LayoutDashboard className="w-3.5 h-3.5" />
                 <span>Go to Dashboard</span>
@@ -147,13 +147,13 @@ export default function Home() {
               <>
                 <Link
                   to="/login"
-                  className="hidden sm:inline-flex px-4 py-2 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:text-fruitful-forest dark:hover:text-fruitful-mint transition-colors"
+                  className="hidden sm:inline-flex px-4 py-2 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:text-nectar-forest dark:hover:text-nectar-mint transition-colors"
                 >
                   Log in
                 </Link>
                 <Link
                   to="/signup"
-                  className="btn-fruitful btn-fruitful-primary text-xs py-2 px-4 shadow-sm"
+                  className="btn-nectar btn-nectar-primary text-xs py-2 px-4 shadow-sm"
                 >
                   <span>Sign Up</span>
                   <ArrowRight className="w-3 h-3" />
@@ -169,17 +169,17 @@ export default function Home() {
            ========================================================================== */}
       <section className="pt-36 pb-20 px-6 sm:px-10 max-w-6xl mx-auto text-center relative overflow-hidden">
         {/* Glow backdrop */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-gradient-to-tr from-fruitful-mint/30 to-fruitful-peach/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-gradient-to-tr from-nectar-mint/30 to-nectar-peach/20 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 max-w-3xl mx-auto space-y-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-fruitful-peach dark:bg-fruitful-darkCard border border-fruitful-peachDeep/10 dark:border-fruitful-darkBorder text-fruitful-peachDeep dark:text-fruitful-mint text-xs font-semibold">
-            <span className="w-2 h-2 rounded-full bg-fruitful-forest dark:bg-fruitful-mint animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-nectar-peach dark:bg-nectar-darkCard border border-nectar-peachDeep/10 dark:border-nectar-darkBorder text-nectar-peachDeep dark:text-nectar-mint text-xs font-semibold">
+            <span className="w-2 h-2 rounded-full bg-nectar-forest dark:bg-nectar-mint animate-pulse" />
             <span>Smart Personal Finance Architecture</span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-serif font-medium text-fruitful-forest dark:text-fruitful-mint tracking-tight leading-[1.08]">
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-serif font-medium text-nectar-forest dark:text-nectar-mint tracking-tight leading-[1.08]">
             Turn every dollar into <br />
-            <span className="italic font-normal text-fruitful-emerald dark:text-emerald-400">peace of mind.</span>
+            <span className="italic font-normal text-nectar-emerald dark:text-emerald-400">peace of mind.</span>
           </h1>
 
           <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
@@ -189,7 +189,7 @@ export default function Home() {
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               to="/signup"
-              className="btn-fruitful btn-fruitful-primary text-base py-3.5 px-8 shadow-fruitful hover:shadow-fruitful-float w-full sm:w-auto"
+              className="btn-nectar btn-nectar-primary text-base py-3.5 px-8 shadow-nectar hover:shadow-nectar-float w-full sm:w-auto"
             >
               <span>Get Started Free</span>
               <ArrowRight className="w-4 h-4" />
@@ -197,7 +197,7 @@ export default function Home() {
 
             <Link
               to="/login"
-              className="btn-fruitful btn-fruitful-secondary text-base py-3.5 px-8 w-full sm:w-auto"
+              className="btn-nectar btn-nectar-secondary text-base py-3.5 px-8 w-full sm:w-auto"
             >
               <span>Explore Demo Dashboard</span>
             </Link>
@@ -205,7 +205,7 @@ export default function Home() {
         </div>
 
         {/* Social Proof Trust Ribbon */}
-        <div className="mt-16 pt-8 border-t border-fruitful-forest/10 dark:border-fruitful-darkBorder flex flex-wrap items-center justify-center gap-8 sm:gap-14 text-xs font-medium text-gray-500 dark:text-gray-400">
+        <div className="mt-16 pt-8 border-t border-nectar-forest/10 dark:border-nectar-darkBorder flex flex-wrap items-center justify-center gap-8 sm:gap-14 text-xs font-medium text-gray-500 dark:text-gray-400">
           <div className="flex items-center gap-2">
             <div className="text-amber-500 flex">★★★★★</div>
             <span className="font-bold text-gray-800 dark:text-gray-200">Rated 4.9 / 5.0</span>
@@ -213,13 +213,13 @@ export default function Home() {
           </div>
 
           <div className="flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-fruitful-emerald" />
+            <Sparkles className="w-4 h-4 text-nectar-emerald" />
             <span className="font-bold text-gray-800 dark:text-gray-200">FinTech Award 2026</span>
             <span>Best Planning UX</span>
           </div>
 
           <div className="flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-fruitful-forest dark:text-fruitful-mint" />
+            <ShieldCheck className="w-4 h-4 text-nectar-forest dark:text-nectar-mint" />
             <span className="font-bold text-gray-800 dark:text-gray-200">100% Private</span>
             <span>Client-side storage</span>
           </div>
@@ -227,14 +227,14 @@ export default function Home() {
       </section>
 
       {/* ==========================================================================
-           MONEYFLOW INTERACTIVE SHOWCASE (Fruitful Signature Split)
+           MONEYFLOW INTERACTIVE SHOWCASE (Nectar Signature Split)
            ========================================================================== */}
       <section id="flow" className="py-20 px-6 sm:px-10 max-w-6xl mx-auto">
         <div className="text-center max-w-xl mx-auto mb-14">
-          <span className="text-xs font-bold uppercase tracking-wider text-fruitful-forest dark:text-fruitful-mint">
+          <span className="text-xs font-bold uppercase tracking-wider text-nectar-forest dark:text-nectar-mint">
             The MoneyFlow Engine
           </span>
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-fruitful-forest dark:text-fruitful-mint mt-2 mb-3">
+          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-nectar-forest dark:text-nectar-mint mt-2 mb-3">
             We don't just log spending.<br />We make progress stick.
           </h2>
           <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -242,7 +242,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="bg-white dark:bg-fruitful-darkCard rounded-3xl p-6 sm:p-12 border border-fruitful-forest/10 dark:border-fruitful-darkBorder shadow-fruitful grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="bg-white dark:bg-nectar-darkCard rounded-3xl p-6 sm:p-12 border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Left Tabs */}
           <div className="lg:col-span-6 space-y-3">
             {flowTabs.map((tab, idx) => (
@@ -252,12 +252,12 @@ export default function Home() {
                 className={`
                   w-full text-left p-5 rounded-2xl border transition-all duration-300 flex items-start justify-between gap-4
                   ${activeTab === idx
-                    ? 'bg-fruitful-wasabi dark:bg-fruitful-forest/30 border-fruitful-forest dark:border-fruitful-mint shadow-sm'
-                    : 'bg-gray-50 dark:bg-fruitful-darkBg border-transparent hover:border-gray-200'}
+                    ? 'bg-nectar-wasabi dark:bg-nectar-forest/30 border-nectar-forest dark:border-nectar-mint shadow-sm'
+                    : 'bg-gray-50 dark:bg-nectar-darkBg border-transparent hover:border-gray-200'}
                 `}
               >
                 <div>
-                  <h3 className={`text-base font-bold mb-1 ${activeTab === idx ? 'text-fruitful-forest dark:text-fruitful-mint' : 'text-gray-800 dark:text-gray-200'}`}>
+                  <h3 className={`text-base font-bold mb-1 ${activeTab === idx ? 'text-nectar-forest dark:text-nectar-mint' : 'text-gray-800 dark:text-gray-200'}`}>
                     {tab.title}
                   </h3>
                   <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
@@ -265,7 +265,7 @@ export default function Home() {
                   </p>
                 </div>
                 <div className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 transition-transform ${
-                  activeTab === idx ? 'bg-fruitful-forest text-white scale-100' : 'opacity-0 scale-50'
+                  activeTab === idx ? 'bg-nectar-forest text-white scale-100' : 'opacity-0 scale-50'
                 }`}>
                   <Check className="w-3.5 h-3.5 stroke-[3]" />
                 </div>
@@ -275,39 +275,39 @@ export default function Home() {
 
           {/* Right Live Device Simulator */}
           <div className="lg:col-span-6 flex justify-center">
-            <div className="w-full max-w-sm bg-fruitful-canvas dark:bg-fruitful-darkBg rounded-3xl p-6 border border-fruitful-forest/15 dark:border-fruitful-darkBorder shadow-fruitful-float space-y-5 animate-fadeIn">
-              <div className="w-20 h-3.5 rounded-full bg-gray-200 dark:bg-fruitful-darkCard mx-auto" />
+            <div className="w-full max-w-sm bg-nectar-canvas dark:bg-nectar-darkBg rounded-3xl p-6 border border-nectar-forest/15 dark:border-nectar-darkBorder shadow-nectar-float space-y-5 animate-fadeIn">
+              <div className="w-20 h-3.5 rounded-full bg-gray-200 dark:bg-nectar-darkCard mx-auto" />
 
-              <div className="bg-white dark:bg-fruitful-darkCard rounded-2xl p-5 border border-fruitful-forest/10 dark:border-fruitful-darkBorder shadow-sm space-y-3">
+              <div className="bg-white dark:bg-nectar-darkCard rounded-2xl p-5 border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-sm space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
                     Active System
                   </span>
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-fruitful-mint text-fruitful-forest">
+                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-nectar-mint text-nectar-forest">
                     {flowTabs[activeTab].preview.tag}
                   </span>
                 </div>
 
-                <div className="text-3xl font-serif font-bold text-fruitful-forest dark:text-fruitful-mint">
+                <div className="text-3xl font-serif font-bold text-nectar-forest dark:text-nectar-mint">
                   {flowTabs[activeTab].preview.amount}
                 </div>
                 <p className="text-xs text-gray-500">
                   {flowTabs[activeTab].preview.sub}
                 </p>
 
-                <div className="w-full h-2 bg-gray-100 dark:bg-fruitful-darkBg rounded-full overflow-hidden">
+                <div className="w-full h-2 bg-gray-100 dark:bg-nectar-darkBg rounded-full overflow-hidden">
                   <div 
-                    className="h-full bg-fruitful-emerald rounded-full transition-all duration-500"
+                    className="h-full bg-nectar-emerald rounded-full transition-all duration-500"
                     style={{ width: `${flowTabs[activeTab].preview.barPct}%` }}
                   />
                 </div>
               </div>
 
-              <div className="bg-white dark:bg-fruitful-darkCard rounded-2xl p-4 border border-fruitful-forest/10 dark:border-fruitful-darkBorder space-y-2.5">
+              <div className="bg-white dark:bg-nectar-darkCard rounded-2xl p-4 border border-nectar-forest/10 dark:border-nectar-darkBorder space-y-2.5">
                 {flowTabs[activeTab].preview.details.map((item, i) => (
                   <div key={i} className="flex justify-between text-xs">
                     <span className="text-gray-500 dark:text-gray-400">{item.label}</span>
-                    <span className={`font-bold ${item.highlight ? 'text-fruitful-emerald font-mono' : 'text-gray-800 dark:text-gray-200'}`}>
+                    <span className={`font-bold ${item.highlight ? 'text-nectar-emerald font-mono' : 'text-gray-800 dark:text-gray-200'}`}>
                       {item.val}
                     </span>
                   </div>
@@ -322,12 +322,12 @@ export default function Home() {
            50/30/20 INTERACTIVE INCOME SIMULATOR
            ========================================================================== */}
       <section id="simulator" className="py-20 px-6 sm:px-10 max-w-5xl mx-auto">
-        <div className="bg-white dark:bg-fruitful-darkCard rounded-3xl p-8 sm:p-12 border border-fruitful-forest/10 dark:border-fruitful-darkBorder shadow-fruitful space-y-8">
+        <div className="bg-white dark:bg-nectar-darkCard rounded-3xl p-8 sm:p-12 border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar space-y-8">
           <div className="text-center max-w-xl mx-auto">
-            <span className="text-xs font-bold uppercase tracking-wider text-fruitful-forest dark:text-fruitful-mint">
+            <span className="text-xs font-bold uppercase tracking-wider text-nectar-forest dark:text-nectar-mint">
               Personalized Calculator
             </span>
-            <h2 className="text-3xl font-serif font-bold text-fruitful-forest dark:text-fruitful-mint mt-2 mb-2">
+            <h2 className="text-3xl font-serif font-bold text-nectar-forest dark:text-nectar-mint mt-2 mb-2">
               50/30/20 Take-Home Simulator
             </h2>
             <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
@@ -335,12 +335,12 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-fruitful-canvas dark:bg-fruitful-darkBg border border-fruitful-forest/10 dark:border-fruitful-darkBorder space-y-4">
+          <div className="p-6 rounded-2xl bg-nectar-canvas dark:bg-nectar-darkBg border border-nectar-forest/10 dark:border-nectar-darkBorder space-y-4">
             <div className="flex justify-between items-end">
               <span className="text-xs font-bold uppercase tracking-wider text-gray-500">
                 Monthly Net Income
               </span>
-              <span className="text-3xl font-serif font-bold text-fruitful-forest dark:text-fruitful-mint">
+              <span className="text-3xl font-serif font-bold text-nectar-forest dark:text-nectar-mint">
                 {formatCurrency(income).split('.')[0]}
               </span>
             </div>
@@ -352,7 +352,7 @@ export default function Home() {
               step="2000"
               value={income}
               onChange={(e) => setIncome(parseFloat(e.target.value))}
-              className="w-full accent-fruitful-forest cursor-pointer"
+              className="w-full accent-nectar-forest cursor-pointer"
             />
 
             <div className="flex justify-between text-[11px] text-gray-400">
@@ -363,17 +363,17 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="p-5 rounded-2xl bg-gray-50 dark:bg-fruitful-darkBg border border-gray-100 dark:border-fruitful-darkBorder">
+            <div className="p-5 rounded-2xl bg-gray-50 dark:bg-nectar-darkBg border border-gray-100 dark:border-nectar-darkBorder">
               <span className="text-xs font-bold uppercase tracking-wider text-gray-400">
                 50% Needs Cap
               </span>
-              <div className="text-2xl font-serif font-bold text-fruitful-forest dark:text-fruitful-mint my-1.5">
+              <div className="text-2xl font-serif font-bold text-nectar-forest dark:text-nectar-mint my-1.5">
                 {formatCurrency(needs).split('.')[0]}
               </div>
               <p className="text-[11px] text-gray-500">Rent, groceries, utilities, basic transit, healthcare</p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-gray-50 dark:bg-fruitful-darkBg border border-gray-100 dark:border-fruitful-darkBorder">
+            <div className="p-5 rounded-2xl bg-gray-50 dark:bg-nectar-darkBg border border-gray-100 dark:border-nectar-darkBorder">
               <span className="text-xs font-bold uppercase tracking-wider text-gray-400">
                 30% Wants Cap
               </span>
@@ -383,14 +383,14 @@ export default function Home() {
               <p className="text-[11px] text-gray-500">Dining, weekend travel, hobbies, entertainment</p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-fruitful-wasabi dark:bg-fruitful-forest/30 border border-fruitful-mint dark:border-fruitful-darkBorder">
-              <span className="text-xs font-bold uppercase tracking-wider text-fruitful-forest dark:text-fruitful-mint">
+            <div className="p-5 rounded-2xl bg-nectar-wasabi dark:bg-nectar-forest/30 border border-nectar-mint dark:border-nectar-darkBorder">
+              <span className="text-xs font-bold uppercase tracking-wider text-nectar-forest dark:text-nectar-mint">
                 20% Growth Goal
               </span>
-              <div className="text-2xl font-serif font-bold text-fruitful-emerald dark:text-fruitful-mint my-1.5">
+              <div className="text-2xl font-serif font-bold text-nectar-emerald dark:text-nectar-mint my-1.5">
                 {formatCurrency(savings).split('.')[0]}
               </div>
-              <p className="text-[11px] text-fruitful-forest dark:text-fruitful-mint">Automated emergency buffer and compound investments</p>
+              <p className="text-[11px] text-nectar-forest dark:text-nectar-mint">Automated emergency buffer and compound investments</p>
             </div>
           </div>
         </div>
@@ -401,40 +401,40 @@ export default function Home() {
            ========================================================================== */}
       <section id="features" className="py-20 px-6 sm:px-10 max-w-6xl mx-auto">
         <div className="text-center max-w-xl mx-auto mb-14">
-          <span className="text-xs font-bold uppercase tracking-wider text-fruitful-forest dark:text-fruitful-mint">
+          <span className="text-xs font-bold uppercase tracking-wider text-nectar-forest dark:text-nectar-mint">
             Designed for Serenity
           </span>
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-fruitful-forest dark:text-fruitful-mint mt-2 mb-3">
+          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-nectar-forest dark:text-nectar-mint mt-2 mb-3">
             Everything you need.<br />Nothing you don't.
           </h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white dark:bg-fruitful-darkCard p-8 rounded-3xl border border-fruitful-forest/10 dark:border-fruitful-darkBorder shadow-fruitful space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-fruitful-wasabi dark:bg-fruitful-forest/20 flex items-center justify-center text-fruitful-forest dark:text-fruitful-mint">
+          <div className="bg-white dark:bg-nectar-darkCard p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-nectar-wasabi dark:bg-nectar-forest/20 flex items-center justify-center text-nectar-forest dark:text-nectar-mint">
               <Sparkles className="w-5 h-5" />
             </div>
-            <h3 className="font-bold text-base text-fruitful-forest dark:text-fruitful-mint">Natural Language Parsing</h3>
+            <h3 className="font-bold text-base text-nectar-forest dark:text-nectar-mint">Natural Language Parsing</h3>
             <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
               Log expenses by typing casually like "₹450 dinner with team". Our parser extracts amount, category, and date automatically.
             </p>
           </div>
 
-          <div className="bg-white dark:bg-fruitful-darkCard p-8 rounded-3xl border border-fruitful-forest/10 dark:border-fruitful-darkBorder shadow-fruitful space-y-3">
+          <div className="bg-white dark:bg-nectar-darkCard p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar space-y-3">
             <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/20 flex items-center justify-center text-amber-600">
               <Zap className="w-5 h-5" />
             </div>
-            <h3 className="font-bold text-base text-fruitful-forest dark:text-fruitful-mint">Daily Safe-to-Spend Limit</h3>
+            <h3 className="font-bold text-base text-nectar-forest dark:text-nectar-mint">Daily Safe-to-Spend Limit</h3>
             <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
               Dynamic calculations that divide remaining discretionary allowance by the days remaining in your monthly billing cycle.
             </p>
           </div>
 
-          <div className="bg-white dark:bg-fruitful-darkCard p-8 rounded-3xl border border-fruitful-forest/10 dark:border-fruitful-darkBorder shadow-fruitful space-y-3">
+          <div className="bg-white dark:bg-nectar-darkCard p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar space-y-3">
             <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/20 flex items-center justify-center text-emerald-600">
               <Lock className="w-5 h-5" />
             </div>
-            <h3 className="font-bold text-base text-fruitful-forest dark:text-fruitful-mint">Zero Telemetry & Offline</h3>
+            <h3 className="font-bold text-base text-nectar-forest dark:text-nectar-mint">Zero Telemetry & Offline</h3>
             <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
               Your financial records never leave your browser. Full CRUD and export capabilities operate completely client-side in localStorage.
             </p>
@@ -443,11 +443,11 @@ export default function Home() {
       </section>
 
       {/* ==========================================================================
-           CALL TO ACTION (Fruitful Luxury Banner)
+           CALL TO ACTION (Nectar Luxury Banner)
            ========================================================================== */}
       <section className="py-20 px-6 sm:px-10 max-w-5xl mx-auto text-center">
-        <div className="bg-gradient-to-br from-fruitful-forest to-emerald-950 text-white rounded-3xl p-10 sm:p-16 shadow-fruitful-float relative overflow-hidden space-y-6">
-          <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center mx-auto text-fruitful-mint">
+        <div className="bg-gradient-to-br from-nectar-forest to-emerald-950 text-white rounded-3xl p-10 sm:p-16 shadow-nectar-float relative overflow-hidden space-y-6">
+          <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center mx-auto text-nectar-mint">
             <Leaf className="w-6 h-6" />
           </div>
 
@@ -462,7 +462,7 @@ export default function Home() {
           <div className="pt-2">
             <Link
               to="/signup"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-fruitful-mint text-fruitful-forest font-bold text-sm hover:bg-emerald-200 transition-transform active:scale-95 shadow-lg"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-nectar-mint text-nectar-forest font-bold text-sm hover:bg-emerald-200 transition-transform active:scale-95 shadow-lg"
             >
               <span>Create Free Account</span>
               <ArrowRight className="w-4 h-4" />
@@ -472,19 +472,19 @@ export default function Home() {
       </section>
 
       {/* ==========================================================================
-           FOOTER (Fruitful Editorial Layout)
+           FOOTER (Nectar Editorial Layout)
            ========================================================================== */}
-      <footer id="integrity" className="border-t border-fruitful-forest/10 dark:border-fruitful-darkBorder py-12 px-6 sm:px-10 max-w-6xl mx-auto text-xs text-gray-500 dark:text-gray-400">
+      <footer id="integrity" className="border-t border-nectar-forest/10 dark:border-nectar-darkBorder py-12 px-6 sm:px-10 max-w-6xl mx-auto text-xs text-gray-500 dark:text-gray-400">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-2 text-fruitful-forest dark:text-fruitful-mint font-bold">
+          <div className="flex items-center gap-2 text-nectar-forest dark:text-nectar-mint font-bold">
             <Leaf className="w-4 h-4" />
             <span>Nectar Smart Finance</span>
           </div>
 
           <div className="flex items-center gap-6">
-            <Link to="/login" className="hover:text-fruitful-forest dark:hover:text-fruitful-mint">Log in</Link>
-            <Link to="/signup" className="hover:text-fruitful-forest dark:hover:text-fruitful-mint">Sign up</Link>
-            <Link to="/dashboard" className="hover:text-fruitful-forest dark:hover:text-fruitful-mint">Dashboard</Link>
+            <Link to="/login" className="hover:text-nectar-forest dark:hover:text-nectar-mint">Log in</Link>
+            <Link to="/signup" className="hover:text-nectar-forest dark:hover:text-nectar-mint">Sign up</Link>
+            <Link to="/dashboard" className="hover:text-nectar-forest dark:hover:text-nectar-mint">Dashboard</Link>
           </div>
 
           <p className="text-center sm:text-right">

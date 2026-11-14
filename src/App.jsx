@@ -15,8 +15,8 @@ const Signup = lazy(() => import('./pages/Signup'));
 
 function LoadingFallback() {
   return (
-    <div className="min-h-screen bg-fruitful-canvas dark:bg-fruitful-darkBg flex flex-col items-center justify-center gap-3">
-      <div className="w-9 h-9 border-3 border-fruitful-mint border-t-fruitful-forest rounded-full animate-spin" />
+    <div className="min-h-screen bg-nectar-canvas dark:bg-nectar-darkBg flex flex-col items-center justify-center gap-3">
+      <div className="w-9 h-9 border-3 border-nectar-mint border-t-nectar-forest rounded-full animate-spin" />
       <span className="text-xs font-semibold text-gray-500">Loading Nectar Finance...</span>
     </div>
   );
@@ -28,7 +28,7 @@ function ProtectedLayout() {
   const [addModalOpen, setAddModalOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-fruitful-canvas dark:bg-fruitful-darkBg transition-colors flex">
+    <div className="min-h-screen bg-nectar-canvas dark:bg-nectar-darkBg transition-colors flex">
       {/* Sidebar Navigation */}
       <Sidebar 
         isOpen={sidebarOpen} 

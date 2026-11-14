@@ -29,13 +29,13 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-fruitful-canvas dark:bg-fruitful-darkBg flex items-center justify-center p-6 transition-colors">
-      <div className="w-full max-w-md bg-white dark:bg-fruitful-darkCard rounded-3xl border border-fruitful-forest/15 dark:border-fruitful-darkBorder shadow-fruitful-float p-8 sm:p-10 relative">
+    <div className="min-h-screen bg-nectar-canvas dark:bg-nectar-darkBg flex items-center justify-center p-6 transition-colors">
+      <div className="w-full max-w-md bg-white dark:bg-nectar-darkCard rounded-3xl border border-nectar-forest/15 dark:border-nectar-darkBorder shadow-nectar-float p-8 sm:p-10 relative">
         
         {/* Back to Home Link */}
         <Link 
           to="/" 
-          className="inline-flex items-center gap-1.5 text-xs text-gray-500 hover:text-fruitful-forest dark:hover:text-fruitful-mint mb-6 font-medium transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs text-gray-500 hover:text-nectar-forest dark:hover:text-nectar-mint mb-6 font-medium transition-colors"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           <span>Back to Home</span>
@@ -43,10 +43,10 @@ export default function Login() {
 
         {/* Brand Header */}
         <div className="text-center mb-8">
-          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-fruitful-emerald to-fruitful-forest flex items-center justify-center text-white mx-auto mb-3 shadow-md">
-            <Leaf className="w-6 h-6 text-fruitful-mint" />
+          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-nectar-emerald to-nectar-forest flex items-center justify-center text-white mx-auto mb-3 shadow-md">
+            <Leaf className="w-6 h-6 text-nectar-mint" />
           </div>
-          <h2 className="text-2xl font-serif font-bold text-fruitful-forest dark:text-fruitful-mint">
+          <h2 className="text-2xl font-serif font-bold text-nectar-forest dark:text-nectar-mint">
             Sign In to Nectar
           </h2>
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
@@ -66,7 +66,7 @@ export default function Login() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="alex@nectar.com"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-fruitful-darkBorder bg-gray-50 dark:bg-fruitful-darkBg text-sm focus:outline-none focus:ring-2 focus:ring-fruitful-emerald"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-nectar-darkBorder bg-gray-50 dark:bg-nectar-darkBg text-sm focus:outline-none focus:ring-2 focus:ring-nectar-emerald"
                 required
               />
             </div>
@@ -83,7 +83,7 @@ export default function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-fruitful-darkBorder bg-gray-50 dark:bg-fruitful-darkBg text-sm focus:outline-none focus:ring-2 focus:ring-fruitful-emerald"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-nectar-darkBorder bg-gray-50 dark:bg-nectar-darkBg text-sm focus:outline-none focus:ring-2 focus:ring-nectar-emerald"
                 required
               />
             </div>
@@ -91,7 +91,7 @@ export default function Login() {
 
           <button
             type="submit"
-            className="w-full btn-fruitful btn-fruitful-primary py-3 mt-2"
+            className="w-full btn-nectar btn-nectar-primary py-3 mt-2"
           >
             <span>Sign In</span>
             <ArrowRight className="w-4 h-4" />
@@ -100,7 +100,7 @@ export default function Login() {
           <button
             type="button"
             onClick={handleFillDemo}
-            className="w-full flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-fruitful-wasabi dark:bg-fruitful-forest/20 text-fruitful-forest dark:text-fruitful-mint text-xs font-semibold hover:bg-emerald-100 dark:hover:bg-fruitful-forest/30 transition-colors"
+            className="w-full flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-nectar-wasabi dark:bg-nectar-forest/20 text-nectar-forest dark:text-nectar-mint text-xs font-semibold hover:bg-emerald-100 dark:hover:bg-nectar-forest/30 transition-colors"
           >
             <Sparkles className="w-3.5 h-3.5" />
             <span>Use Demo Credentials</span>
@@ -109,7 +109,7 @@ export default function Login() {
 
         <div className="text-center mt-6 text-xs text-gray-500">
           Don't have an account?{' '}
-          <Link to="/signup" className="font-bold text-fruitful-forest dark:text-fruitful-mint hover:underline">
+          <Link to="/signup" className="font-bold text-nectar-forest dark:text-nectar-mint hover:underline">
             Create an account
           </Link>
         </div>

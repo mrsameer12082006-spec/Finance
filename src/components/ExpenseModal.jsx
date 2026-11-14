@@ -93,13 +93,13 @@ export default function ExpenseModal({ isOpen, onClose, expenseToEdit }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-fadeIn">
       <div 
-        className="w-full max-w-lg bg-white dark:bg-fruitful-darkCard rounded-3xl border border-fruitful-forest/15 dark:border-fruitful-darkBorder shadow-fruitful-float p-6 sm:p-8 relative"
+        className="w-full max-w-lg bg-white dark:bg-nectar-darkCard rounded-3xl border border-nectar-forest/15 dark:border-nectar-darkBorder shadow-nectar-float p-6 sm:p-8 relative"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between pb-4 border-b border-gray-100 dark:border-fruitful-darkBorder mb-6">
+        <div className="flex items-center justify-between pb-4 border-b border-gray-100 dark:border-nectar-darkBorder mb-6">
           <div>
-            <h3 className="text-xl font-bold font-serif text-fruitful-forest dark:text-fruitful-mint">
+            <h3 className="text-xl font-bold font-serif text-nectar-forest dark:text-nectar-mint">
               {expenseToEdit ? 'Edit Expense' : 'Add New Expense'}
             </h3>
             <p className="text-xs text-gray-500 dark:text-gray-400">
@@ -108,7 +108,7 @@ export default function ExpenseModal({ isOpen, onClose, expenseToEdit }) {
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-fruitful-darkBg"
+            className="p-2 rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-nectar-darkBg"
           >
             <X className="w-5 h-5" />
           </button>
@@ -131,7 +131,7 @@ export default function ExpenseModal({ isOpen, onClose, expenseToEdit }) {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g. Trader Joe's, Uber, Rent"
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-fruitful-darkBorder bg-gray-50 dark:bg-fruitful-darkBg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-fruitful-emerald"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-nectar-darkBorder bg-gray-50 dark:bg-nectar-darkBg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-nectar-emerald"
               required
             />
           </div>
@@ -149,7 +149,7 @@ export default function ExpenseModal({ isOpen, onClose, expenseToEdit }) {
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
                 placeholder="0.00"
-                className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-fruitful-darkBorder bg-gray-50 dark:bg-fruitful-darkBg text-sm font-semibold font-mono focus:outline-none focus:ring-2 focus:ring-fruitful-emerald"
+                className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-nectar-darkBorder bg-gray-50 dark:bg-nectar-darkBg text-sm font-semibold font-mono focus:outline-none focus:ring-2 focus:ring-nectar-emerald"
                 required
               />
             </div>
@@ -162,7 +162,7 @@ export default function ExpenseModal({ isOpen, onClose, expenseToEdit }) {
                 type="date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-fruitful-darkBorder bg-gray-50 dark:bg-fruitful-darkBg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-fruitful-emerald"
+                className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-nectar-darkBorder bg-gray-50 dark:bg-nectar-darkBg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-nectar-emerald"
                 required
               />
             </div>
@@ -182,8 +182,8 @@ export default function ExpenseModal({ isOpen, onClose, expenseToEdit }) {
                   className={`
                     px-2.5 py-2 rounded-xl text-xs font-medium flex items-center justify-center gap-1.5 border transition-all
                     ${category === cat.id 
-                      ? 'bg-fruitful-wasabi border-fruitful-forest text-fruitful-forest dark:bg-fruitful-forest/30 dark:border-fruitful-mint dark:text-fruitful-mint font-bold shadow-sm'
-                      : 'border-gray-200 dark:border-fruitful-darkBorder bg-gray-50 dark:bg-fruitful-darkBg text-gray-600 dark:text-gray-400 hover:bg-gray-100'}
+                      ? 'bg-nectar-wasabi border-nectar-forest text-nectar-forest dark:bg-nectar-forest/30 dark:border-nectar-mint dark:text-nectar-mint font-bold shadow-sm'
+                      : 'border-gray-200 dark:border-nectar-darkBorder bg-gray-50 dark:bg-nectar-darkBg text-gray-600 dark:text-gray-400 hover:bg-gray-100'}
                   `}
                 >
                   <span>{cat.icon}</span>
@@ -202,7 +202,7 @@ export default function ExpenseModal({ isOpen, onClose, expenseToEdit }) {
               <select
                 value={type}
                 onChange={(e) => setType(e.target.value)}
-                className="w-full px-3 py-2.5 rounded-xl border border-gray-200 dark:border-fruitful-darkBorder bg-gray-50 dark:bg-fruitful-darkBg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-fruitful-emerald"
+                className="w-full px-3 py-2.5 rounded-xl border border-gray-200 dark:border-nectar-darkBorder bg-gray-50 dark:bg-nectar-darkBg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-nectar-emerald"
               >
                 <option value="needs">Needs (50%)</option>
                 <option value="wants">Wants (30%)</option>
@@ -217,7 +217,7 @@ export default function ExpenseModal({ isOpen, onClose, expenseToEdit }) {
               <select
                 value={paymentMethod}
                 onChange={(e) => setPaymentMethod(e.target.value)}
-                className="w-full px-3 py-2.5 rounded-xl border border-gray-200 dark:border-fruitful-darkBorder bg-gray-50 dark:bg-fruitful-darkBg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-fruitful-emerald"
+                className="w-full px-3 py-2.5 rounded-xl border border-gray-200 dark:border-nectar-darkBorder bg-gray-50 dark:bg-nectar-darkBg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-nectar-emerald"
               >
                 <option value="Credit Card">Credit Card</option>
                 <option value="Apple Pay">Apple Pay</option>
@@ -238,7 +238,7 @@ export default function ExpenseModal({ isOpen, onClose, expenseToEdit }) {
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               placeholder="e.g. Monthly recurring bill, split with roommate"
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-fruitful-darkBorder bg-gray-50 dark:bg-fruitful-darkBg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-fruitful-emerald"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-nectar-darkBorder bg-gray-50 dark:bg-nectar-darkBg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-nectar-emerald"
             />
           </div>
 
@@ -247,13 +247,13 @@ export default function ExpenseModal({ isOpen, onClose, expenseToEdit }) {
             <button
               type="button"
               onClick={onClose}
-              className="px-5 py-2.5 rounded-full text-sm font-semibold text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-fruitful-darkBg"
+              className="px-5 py-2.5 rounded-full text-sm font-semibold text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-nectar-darkBg"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="btn-fruitful btn-fruitful-primary"
+              className="btn-nectar btn-nectar-primary"
             >
               <Check className="w-4 h-4" />
               <span>{expenseToEdit ? 'Save Changes' : 'Create Expense'}</span>

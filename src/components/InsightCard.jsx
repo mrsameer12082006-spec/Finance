@@ -16,12 +16,12 @@ export default function InsightCard({ insight }) {
       iconColor: 'text-amber-600 dark:text-amber-400'
     },
     success: {
-      bg: 'bg-fruitful-wasabi dark:bg-emerald-950/20 border-fruitful-mint dark:border-emerald-900/40 text-fruitful-forest dark:text-fruitful-mint',
+      bg: 'bg-nectar-wasabi dark:bg-emerald-950/20 border-nectar-mint dark:border-emerald-900/40 text-nectar-forest dark:text-nectar-mint',
       icon: CheckCircle2,
-      iconColor: 'text-fruitful-emerald dark:text-fruitful-leaf'
+      iconColor: 'text-nectar-emerald dark:text-nectar-leaf'
     },
     info: {
-      bg: 'bg-fruitful-droplet dark:bg-sky-950/20 border-blue-200 dark:border-sky-900/40 text-blue-900 dark:text-sky-200',
+      bg: 'bg-nectar-droplet dark:bg-sky-950/20 border-blue-200 dark:border-sky-900/40 text-blue-900 dark:text-sky-200',
       icon: Info,
       iconColor: 'text-blue-600 dark:text-sky-400'
     }

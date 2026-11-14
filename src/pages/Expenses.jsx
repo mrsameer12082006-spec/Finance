@@ -112,7 +112,7 @@ export default function Expenses() {
       {/* Top Controls Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-serif font-bold text-fruitful-forest dark:text-fruitful-mint">
+          <h2 className="text-2xl font-serif font-bold text-nectar-forest dark:text-nectar-mint">
             Expense Ledger
           </h2>
           <p className="text-xs text-gray-500 dark:text-gray-400">
@@ -123,7 +123,7 @@ export default function Expenses() {
         <div className="flex items-center gap-2.5 flex-wrap">
           <button
             onClick={handleExport}
-            className="btn-fruitful btn-fruitful-secondary text-xs"
+            className="btn-nectar btn-nectar-secondary text-xs"
             title="Export filtered records to CSV"
           >
             <Download className="w-3.5 h-3.5" />
@@ -136,7 +136,7 @@ export default function Expenses() {
                 dispatch(resetToDemoData());
               }
             }}
-            className="p-2.5 rounded-full border border-gray-200 dark:border-fruitful-darkBorder bg-white dark:bg-fruitful-darkCard text-gray-600 dark:text-gray-400 hover:text-fruitful-forest dark:hover:text-fruitful-mint"
+            className="p-2.5 rounded-full border border-gray-200 dark:border-nectar-darkBorder bg-white dark:bg-nectar-darkCard text-gray-600 dark:text-gray-400 hover:text-nectar-forest dark:hover:text-nectar-mint"
             title="Reset Demo Data"
           >
             <RotateCcw className="w-4 h-4" />
@@ -147,7 +147,7 @@ export default function Expenses() {
               setExpenseToEdit(null);
               setIsModalOpen(true);
             }}
-            className="btn-fruitful btn-fruitful-primary text-xs"
+            className="btn-nectar btn-nectar-primary text-xs"
           >
             <Plus className="w-4 h-4 stroke-[2.5]" />
             <span>Add Expense</span>
@@ -156,7 +156,7 @@ export default function Expenses() {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="bg-white dark:bg-fruitful-darkCard p-4 sm:p-5 rounded-3xl border border-fruitful-forest/10 dark:border-fruitful-darkBorder shadow-fruitful space-y-4">
+      <div className="bg-white dark:bg-nectar-darkCard p-4 sm:p-5 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
           {/* Debounced Search */}
           <div className="md:col-span-5 relative">
@@ -166,7 +166,7 @@ export default function Expenses() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search expenses by title, notes, method..."
-              className="w-full pl-10 pr-4 py-2 rounded-xl text-xs sm:text-sm bg-gray-50 dark:bg-fruitful-darkBg border border-gray-200 dark:border-fruitful-darkBorder focus:outline-none focus:ring-2 focus:ring-fruitful-emerald"
+              className="w-full pl-10 pr-4 py-2 rounded-xl text-xs sm:text-sm bg-gray-50 dark:bg-nectar-darkBg border border-gray-200 dark:border-nectar-darkBorder focus:outline-none focus:ring-2 focus:ring-nectar-emerald"
             />
           </div>
 
@@ -176,7 +176,7 @@ export default function Expenses() {
               type="date"
               value={filters.startDate}
               onChange={(e) => dispatch(setFilters({ startDate: e.target.value }))}
-              className="w-full px-3 py-2 rounded-xl text-xs bg-gray-50 dark:bg-fruitful-darkBg border border-gray-200 dark:border-fruitful-darkBorder focus:outline-none focus:ring-2 focus:ring-fruitful-emerald"
+              className="w-full px-3 py-2 rounded-xl text-xs bg-gray-50 dark:bg-nectar-darkBg border border-gray-200 dark:border-nectar-darkBorder focus:outline-none focus:ring-2 focus:ring-nectar-emerald"
               title="Start Date"
             />
           </div>
@@ -187,7 +187,7 @@ export default function Expenses() {
               type="date"
               value={filters.endDate}
               onChange={(e) => dispatch(setFilters({ endDate: e.target.value }))}
-              className="w-full px-3 py-2 rounded-xl text-xs bg-gray-50 dark:bg-fruitful-darkBg border border-gray-200 dark:border-fruitful-darkBorder focus:outline-none focus:ring-2 focus:ring-fruitful-emerald"
+              className="w-full px-3 py-2 rounded-xl text-xs bg-gray-50 dark:bg-nectar-darkBg border border-gray-200 dark:border-nectar-darkBorder focus:outline-none focus:ring-2 focus:ring-nectar-emerald"
               title="End Date"
             />
           </div>
@@ -199,7 +199,7 @@ export default function Expenses() {
                 setSearchTerm('');
                 dispatch(resetFilters());
               }}
-              className="p-2 text-xs text-gray-500 hover:text-fruitful-forest dark:hover:text-fruitful-mint"
+              className="p-2 text-xs text-gray-500 hover:text-nectar-forest dark:hover:text-nectar-mint"
               title="Reset Filters"
             >
               <RotateCcw className="w-4 h-4" />
@@ -216,8 +216,8 @@ export default function Expenses() {
               className={`
                 px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all
                 ${filters.category === cat 
-                  ? 'bg-fruitful-forest text-white dark:bg-fruitful-mint dark:text-fruitful-forest shadow-sm' 
-                  : 'bg-gray-100 dark:bg-fruitful-darkBg text-gray-600 dark:text-gray-400 hover:bg-gray-200'}
+                  ? 'bg-nectar-forest text-white dark:bg-nectar-mint dark:text-nectar-forest shadow-sm' 
+                  : 'bg-gray-100 dark:bg-nectar-darkBg text-gray-600 dark:text-gray-400 hover:bg-gray-200'}
               `}
             >
               {cat}
@@ -227,10 +227,10 @@ export default function Expenses() {
       </div>
 
       {/* Transactions Table Card */}
-      <div className="bg-white dark:bg-fruitful-darkCard rounded-3xl border border-fruitful-forest/10 dark:border-fruitful-darkBorder shadow-fruitful overflow-hidden">
+      <div className="bg-white dark:bg-nectar-darkCard rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-gray-50 dark:bg-fruitful-darkBg/60 text-gray-500 dark:text-gray-400 uppercase tracking-wider font-bold border-b border-gray-100 dark:border-fruitful-darkBorder">
+            <thead className="bg-gray-50 dark:bg-nectar-darkBg/60 text-gray-500 dark:text-gray-400 uppercase tracking-wider font-bold border-b border-gray-100 dark:border-nectar-darkBorder">
               <tr>
                 <th className="py-3.5 px-4">Title / Note</th>
                 <th className="py-3.5 px-4">Category</th>
@@ -256,7 +256,7 @@ export default function Expenses() {
                 <th className="py-3.5 px-4 text-center">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100 dark:divide-fruitful-darkBorder">
+            <tbody className="divide-y divide-gray-100 dark:divide-nectar-darkBorder">
               {paginatedExpenses.length === 0 ? (
                 <tr>
                   <td colSpan="6" className="py-12 text-center text-gray-400">
@@ -268,7 +268,7 @@ export default function Expenses() {
                 paginatedExpenses.map((expense) => (
                   <tr 
                     key={expense.id}
-                    className="hover:bg-fruitful-wasabi/40 dark:hover:bg-fruitful-darkBg/40 transition-colors"
+                    className="hover:bg-nectar-wasabi/40 dark:hover:bg-nectar-darkBg/40 transition-colors"
                   >
                     <td className="py-3 px-4">
                       <div className="font-bold text-gray-900 dark:text-gray-100">
@@ -281,14 +281,14 @@ export default function Expenses() {
                       )}
                     </td>
                     <td className="py-3 px-4">
-                      <span className="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-gray-100 dark:bg-fruitful-darkBg text-gray-700 dark:text-gray-300">
+                      <span className="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-gray-100 dark:bg-nectar-darkBg text-gray-700 dark:text-gray-300">
                         {expense.category}
                       </span>
                     </td>
                     <td className="py-3 px-4 capitalize">
                       <span className={`
                         text-[11px] font-semibold
-                        ${expense.type === 'needs' ? 'text-fruitful-forest dark:text-fruitful-mint' : ''}
+                        ${expense.type === 'needs' ? 'text-nectar-forest dark:text-nectar-mint' : ''}
                         ${expense.type === 'wants' ? 'text-amber-600 dark:text-amber-400' : ''}
                         ${expense.type === 'savings' ? 'text-emerald-600 dark:text-emerald-400' : ''}
                       `}>
@@ -305,7 +305,7 @@ export default function Expenses() {
                       <div className="flex items-center justify-center gap-1">
                         <button
                           onClick={() => handleEdit(expense)}
-                          className="p-1.5 rounded-lg text-gray-400 hover:text-fruitful-forest dark:hover:text-fruitful-mint hover:bg-gray-100 dark:hover:bg-fruitful-darkBg"
+                          className="p-1.5 rounded-lg text-gray-400 hover:text-nectar-forest dark:hover:text-nectar-mint hover:bg-gray-100 dark:hover:bg-nectar-darkBg"
                           title="Edit"
                         >
                           <Edit3 className="w-3.5 h-3.5" />

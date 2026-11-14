@@ -41,18 +41,18 @@ export default function Sidebar({ isOpen, onClose }) {
       )}
 
       <aside className={`
-        fixed top-0 bottom-0 left-0 z-50 w-64 bg-white dark:bg-fruitful-darkCard border-r border-fruitful-forest/10 dark:border-fruitful-darkBorder flex flex-col justify-between transition-transform duration-300 ease-in-out
+        fixed top-0 bottom-0 left-0 z-50 w-64 bg-white dark:bg-nectar-darkCard border-r border-nectar-forest/10 dark:border-nectar-darkBorder flex flex-col justify-between transition-transform duration-300 ease-in-out
         ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
       `}>
         <div>
           {/* Logo Brand Header */}
-          <div className="h-20 flex items-center justify-between px-6 border-b border-fruitful-forest/10 dark:border-fruitful-darkBorder">
+          <div className="h-20 flex items-center justify-between px-6 border-b border-nectar-forest/10 dark:border-nectar-darkBorder">
             <NavLink to="/" className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-fruitful-emerald to-fruitful-forest flex items-center justify-center text-white shadow-md">
-                <Leaf className="w-5 h-5 text-fruitful-mint" />
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-nectar-emerald to-nectar-forest flex items-center justify-center text-white shadow-md">
+                <Leaf className="w-5 h-5 text-nectar-mint" />
               </div>
               <div>
-                <h1 className="font-bold text-fruitful-forest dark:text-fruitful-mint tracking-tight text-base leading-tight">
+                <h1 className="font-bold text-nectar-forest dark:text-nectar-mint tracking-tight text-base leading-tight">
                   Nectar Finance
                 </h1>
                 <span className="text-[11px] font-medium text-gray-500 dark:text-gray-400">
@@ -63,7 +63,7 @@ export default function Sidebar({ isOpen, onClose }) {
 
             <button 
               onClick={onClose} 
-              className="lg:hidden p-1.5 rounded-lg text-gray-500 hover:bg-gray-100 dark:hover:bg-fruitful-darkBg"
+              className="lg:hidden p-1.5 rounded-lg text-gray-500 hover:bg-gray-100 dark:hover:bg-nectar-darkBg"
               aria-label="Close sidebar"
             >
               <X className="w-5 h-5" />
@@ -88,8 +88,8 @@ export default function Sidebar({ isOpen, onClose }) {
                   className={({ isActive }) => `
                     flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-200
                     ${isActive 
-                      ? 'bg-fruitful-wasabi text-fruitful-forest dark:bg-fruitful-forest/30 dark:text-fruitful-mint shadow-sm font-bold' 
-                      : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-fruitful-darkBg hover:text-fruitful-forest dark:hover:text-white'}
+                      ? 'bg-nectar-wasabi text-nectar-forest dark:bg-nectar-forest/30 dark:text-nectar-mint shadow-sm font-bold' 
+                      : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-nectar-darkBg hover:text-nectar-forest dark:hover:text-white'}
                   `}
                 >
                   <Icon className="w-4 h-4" />
@@ -101,22 +101,22 @@ export default function Sidebar({ isOpen, onClose }) {
         </div>
 
         {/* User Card & Logout Footer */}
-        <div className="p-4 border-t border-fruitful-forest/10 dark:border-fruitful-darkBorder">
-          <div className="flex items-center gap-3 p-2.5 rounded-xl bg-fruitful-canvas dark:bg-fruitful-darkBg border border-fruitful-forest/10 dark:border-fruitful-darkBorder mb-3">
+        <div className="p-4 border-t border-nectar-forest/10 dark:border-nectar-darkBorder">
+          <div className="flex items-center gap-3 p-2.5 rounded-xl bg-nectar-canvas dark:bg-nectar-darkBg border border-nectar-forest/10 dark:border-nectar-darkBorder mb-3">
             <img 
               src={user?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80'} 
               alt={user?.name || 'User'} 
-              className="w-9 h-9 rounded-full object-cover ring-2 ring-fruitful-emerald/20"
+              className="w-9 h-9 rounded-full object-cover ring-2 ring-nectar-emerald/20"
             />
             <div className="min-w-0 flex-1">
-              <p className="text-xs font-bold text-fruitful-forest dark:text-fruitful-mint truncate">
+              <p className="text-xs font-bold text-nectar-forest dark:text-nectar-mint truncate">
                 {user?.name || 'Alex Morgan'}
               </p>
               <p className="text-[11px] text-gray-500 dark:text-gray-400 truncate">
                 {user?.email || 'alex@nectar.com'}
               </p>
             </div>
-            <ShieldCheck className="w-4 h-4 text-fruitful-emerald flex-shrink-0" />
+            <ShieldCheck className="w-4 h-4 text-nectar-emerald flex-shrink-0" />
           </div>
 
           <button

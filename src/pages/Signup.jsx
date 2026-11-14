@@ -74,14 +74,14 @@ export default function Signup() {
   };
 
   return (
-    <div className="min-h-screen bg-fruitful-canvas dark:bg-fruitful-darkBg flex items-center justify-center p-4 sm:p-6 lg:p-10 transition-colors">
-      <div className="w-full max-w-4xl bg-white dark:bg-fruitful-darkCard rounded-3xl border border-fruitful-forest/15 dark:border-fruitful-darkBorder shadow-fruitful-float overflow-hidden grid grid-cols-1 lg:grid-cols-12">
+    <div className="min-h-screen bg-nectar-canvas dark:bg-nectar-darkBg flex items-center justify-center p-4 sm:p-6 lg:p-10 transition-colors">
+      <div className="w-full max-w-4xl bg-white dark:bg-nectar-darkCard rounded-3xl border border-nectar-forest/15 dark:border-nectar-darkBorder shadow-nectar-float overflow-hidden grid grid-cols-1 lg:grid-cols-12">
         
-        {/* Left Value Prop Sidebar (Fruitful Deep Forest Green) */}
-        <div className="lg:col-span-5 bg-gradient-to-br from-fruitful-forest via-fruitful-emerald to-emerald-950 p-8 sm:p-10 text-white flex flex-col justify-between relative overflow-hidden">
+        {/* Left Value Prop Sidebar (Nectar Deep Forest Green) */}
+        <div className="lg:col-span-5 bg-gradient-to-br from-nectar-forest via-nectar-emerald to-emerald-950 p-8 sm:p-10 text-white flex flex-col justify-between relative overflow-hidden">
           <div className="relative z-10 space-y-6">
             <Link to="/" className="inline-flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-fruitful-mint">
+              <div className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-nectar-mint">
                 <Leaf className="w-4 h-4" />
               </div>
               <span className="font-bold text-white tracking-tight text-base">
@@ -101,21 +101,21 @@ export default function Signup() {
             {/* Benefits Checklist */}
             <div className="space-y-3.5 pt-2">
               <div className="flex items-start gap-3">
-                <div className="w-5 h-5 rounded-full bg-fruitful-mint text-fruitful-forest flex items-center justify-center flex-shrink-0 mt-0.5">
+                <div className="w-5 h-5 rounded-full bg-nectar-mint text-nectar-forest flex items-center justify-center flex-shrink-0 mt-0.5">
                   <Check className="w-3 h-3 stroke-[3]" />
                 </div>
                 <span className="text-xs text-gray-200">Automated 50/30/20 money allocation out of the box</span>
               </div>
 
               <div className="flex items-start gap-3">
-                <div className="w-5 h-5 rounded-full bg-fruitful-mint text-fruitful-forest flex items-center justify-center flex-shrink-0 mt-0.5">
+                <div className="w-5 h-5 rounded-full bg-nectar-mint text-nectar-forest flex items-center justify-center flex-shrink-0 mt-0.5">
                   <Check className="w-3 h-3 stroke-[3]" />
                 </div>
                 <span className="text-xs text-gray-200">100% Client-Side Privacy with zero external tracking</span>
               </div>
 
               <div className="flex items-start gap-3">
-                <div className="w-5 h-5 rounded-full bg-fruitful-mint text-fruitful-forest flex items-center justify-center flex-shrink-0 mt-0.5">
+                <div className="w-5 h-5 rounded-full bg-nectar-mint text-nectar-forest flex items-center justify-center flex-shrink-0 mt-0.5">
                   <Check className="w-3 h-3 stroke-[3]" />
                 </div>
                 <span className="text-xs text-gray-200">Real-time daily safe-to-spend limits & category alerts</span>
@@ -135,19 +135,19 @@ export default function Signup() {
             <p className="text-xs italic text-gray-200 mb-2">
               "For the first time in years, I know exactly what I can spend today without worrying about next week's bills."
             </p>
-            <p className="text-[11px] font-bold text-fruitful-mint">
+            <p className="text-[11px] font-bold text-nectar-mint">
               — Elena R., San Francisco
             </p>
           </div>
 
           {/* Glow backdrop */}
-          <div className="absolute -right-12 -bottom-12 w-48 h-48 bg-fruitful-mint/20 rounded-full blur-2xl pointer-events-none" />
+          <div className="absolute -right-12 -bottom-12 w-48 h-48 bg-nectar-mint/20 rounded-full blur-2xl pointer-events-none" />
         </div>
 
         {/* Right Form Area */}
         <div className="lg:col-span-7 p-8 sm:p-10 flex flex-col justify-center">
           <div className="mb-6">
-            <h2 className="text-2xl font-serif font-bold text-fruitful-forest dark:text-fruitful-mint">
+            <h2 className="text-2xl font-serif font-bold text-nectar-forest dark:text-nectar-mint">
               Create Your Account
             </h2>
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
@@ -174,7 +174,7 @@ export default function Signup() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="e.g. Jordan Bell"
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-fruitful-darkBorder bg-gray-50 dark:bg-fruitful-darkBg text-sm focus:outline-none focus:ring-2 focus:ring-fruitful-emerald"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-nectar-darkBorder bg-gray-50 dark:bg-nectar-darkBg text-sm focus:outline-none focus:ring-2 focus:ring-nectar-emerald"
                   required
                 />
               </div>
@@ -192,7 +192,7 @@ export default function Signup() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="jordan@nectar.com"
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-fruitful-darkBorder bg-gray-50 dark:bg-fruitful-darkBg text-sm focus:outline-none focus:ring-2 focus:ring-fruitful-emerald"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-nectar-darkBorder bg-gray-50 dark:bg-nectar-darkBg text-sm focus:outline-none focus:ring-2 focus:ring-nectar-emerald"
                   required
                 />
               </div>
@@ -210,7 +210,7 @@ export default function Signup() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="•••••••• (6+ characters)"
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-fruitful-darkBorder bg-gray-50 dark:bg-fruitful-darkBg text-sm focus:outline-none focus:ring-2 focus:ring-fruitful-emerald"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-nectar-darkBorder bg-gray-50 dark:bg-nectar-darkBg text-sm focus:outline-none focus:ring-2 focus:ring-nectar-emerald"
                   required
                 />
               </div>
@@ -233,7 +233,7 @@ export default function Signup() {
                   value={income}
                   onChange={(e) => setIncome(e.target.value)}
                   placeholder="e.g. 80000 (sets your 50/30/20 goals)"
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-fruitful-darkBorder bg-gray-50 dark:bg-fruitful-darkBg text-sm font-mono focus:outline-none focus:ring-2 focus:ring-fruitful-emerald"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-nectar-darkBorder bg-gray-50 dark:bg-nectar-darkBg text-sm font-mono focus:outline-none focus:ring-2 focus:ring-nectar-emerald"
                 />
               </div>
             </div>
@@ -245,17 +245,17 @@ export default function Signup() {
                 id="terms"
                 checked={agreeTerms}
                 onChange={(e) => setAgreeTerms(e.target.checked)}
-                className="w-4 h-4 accent-fruitful-forest rounded cursor-pointer"
+                className="w-4 h-4 accent-nectar-forest rounded cursor-pointer"
               />
               <label htmlFor="terms" className="text-xs text-gray-500 cursor-pointer select-none">
-                I agree to the <span className="font-semibold text-fruitful-forest dark:text-fruitful-mint">Terms of Service</span> and client-side privacy policy.
+                I agree to the <span className="font-semibold text-nectar-forest dark:text-nectar-mint">Terms of Service</span> and client-side privacy policy.
               </label>
             </div>
 
             {/* Primary Submit */}
             <button
               type="submit"
-              className="w-full btn-fruitful btn-fruitful-primary py-3 text-sm mt-3"
+              className="w-full btn-nectar btn-nectar-primary py-3 text-sm mt-3"
             >
               <span>Complete Registration</span>
               <ArrowRight className="w-4 h-4" />
@@ -265,7 +265,7 @@ export default function Signup() {
             <button
               type="button"
               onClick={handleQuickDemo}
-              className="w-full flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-fruitful-wasabi dark:bg-fruitful-forest/20 text-fruitful-forest dark:text-fruitful-mint text-xs font-semibold hover:bg-emerald-100 dark:hover:bg-fruitful-forest/30 transition-colors"
+              className="w-full flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-nectar-wasabi dark:bg-nectar-forest/20 text-nectar-forest dark:text-nectar-mint text-xs font-semibold hover:bg-emerald-100 dark:hover:bg-nectar-forest/30 transition-colors"
             >
               <Sparkles className="w-3.5 h-3.5" />
               <span>Fill Quick Demo Details</span>
@@ -274,7 +274,7 @@ export default function Signup() {
 
           <div className="text-center mt-6 text-xs text-gray-500">
             Already have an account?{' '}
-            <Link to="/login" className="font-bold text-fruitful-forest dark:text-fruitful-mint hover:underline">
+            <Link to="/login" className="font-bold text-nectar-forest dark:text-nectar-mint hover:underline">
               Sign In
             </Link>
           </div>

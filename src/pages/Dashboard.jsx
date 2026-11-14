@@ -99,9 +99,9 @@ export default function Dashboard() {
   return (
     <div className="space-y-8 animate-fadeIn">
       {/* Hero Welcome & Quick Smart Entry */}
-      <div className="bg-gradient-to-r from-fruitful-forest via-fruitful-emerald to-emerald-950 text-white rounded-3xl p-6 sm:p-8 shadow-fruitful-float relative overflow-hidden">
+      <div className="bg-gradient-to-r from-nectar-forest via-nectar-emerald to-emerald-950 text-white rounded-3xl p-6 sm:p-8 shadow-nectar-float relative overflow-hidden">
         <div className="relative z-10 max-w-2xl">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-fruitful-mint text-xs font-semibold mb-3">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-nectar-mint text-xs font-semibold mb-3">
             <Sparkles className="w-3.5 h-3.5" />
             <span>AI Natural Language Parser</span>
           </div>
@@ -110,7 +110,7 @@ export default function Dashboard() {
             Turn everyday spending into clarity.
           </h2>
           <p className="text-sm text-gray-200 mb-6">
-            Type anything into the smart input bar e.g. <span className="text-fruitful-mint font-semibold">"₹450 dinner at Social"</span> or <span className="text-fruitful-mint font-semibold">"Uber ₹280"</span>.
+            Type anything into the smart input bar e.g. <span className="text-nectar-mint font-semibold">"₹450 dinner at Social"</span> or <span className="text-nectar-mint font-semibold">"Uber ₹280"</span>.
           </p>
 
           <form onSubmit={handleQuickAdd} className="flex items-center gap-2 bg-white rounded-full p-1.5 pl-5 shadow-lg max-w-lg text-gray-800">
@@ -123,7 +123,7 @@ export default function Dashboard() {
             />
             <button
               type="submit"
-              className="p-2.5 rounded-full bg-fruitful-forest hover:bg-fruitful-emerald text-white transition-transform active:scale-95"
+              className="p-2.5 rounded-full bg-nectar-forest hover:bg-nectar-emerald text-white transition-transform active:scale-95"
               title="Quick Add Expense"
             >
               <Send className="w-4 h-4" />
@@ -132,18 +132,18 @@ export default function Dashboard() {
         </div>
 
         {/* Decorative backdrop glow */}
-        <div className="absolute -right-10 -bottom-10 w-64 h-64 bg-fruitful-mint/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -right-10 -bottom-10 w-64 h-64 bg-nectar-mint/20 rounded-full blur-3xl pointer-events-none" />
       </div>
 
       {/* KPI Stats Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {/* KPI 1: Monthly Total Spending */}
-        <div className="bg-white dark:bg-fruitful-darkCard p-6 rounded-3xl border border-fruitful-forest/10 dark:border-fruitful-darkBorder shadow-fruitful">
+        <div className="bg-white dark:bg-nectar-darkCard p-6 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar">
           <div className="flex items-center justify-between text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-wider mb-2">
             <span>Total Monthly Spend</span>
-            <Calendar className="w-4 h-4 text-fruitful-emerald" />
+            <Calendar className="w-4 h-4 text-nectar-emerald" />
           </div>
-          <div className="text-2xl sm:text-3xl font-serif font-bold text-fruitful-forest dark:text-fruitful-mint mb-2">
+          <div className="text-2xl sm:text-3xl font-serif font-bold text-nectar-forest dark:text-nectar-mint mb-2">
             {formatCurrency(totalSpending)}
           </div>
           <div className="flex items-center gap-1.5 text-xs">
@@ -156,7 +156,7 @@ export default function Dashboard() {
         </div>
 
         {/* KPI 2: Daily Safe Spend */}
-        <div className="bg-white dark:bg-fruitful-darkCard p-6 rounded-3xl border border-fruitful-forest/10 dark:border-fruitful-darkBorder shadow-fruitful">
+        <div className="bg-white dark:bg-nectar-darkCard p-6 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar">
           <div className="flex items-center justify-between text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-wider mb-2">
             <span>Daily Safe-to-Spend</span>
             <Zap className="w-4 h-4 text-amber-500" />
@@ -170,12 +170,12 @@ export default function Dashboard() {
         </div>
 
         {/* KPI 3: Top Category */}
-        <div className="bg-white dark:bg-fruitful-darkCard p-6 rounded-3xl border border-fruitful-forest/10 dark:border-fruitful-darkBorder shadow-fruitful">
+        <div className="bg-white dark:bg-nectar-darkCard p-6 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar">
           <div className="flex items-center justify-between text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-wider mb-2">
             <span>Top Category</span>
             <PieChart className="w-4 h-4 text-purple-500" />
           </div>
-          <div className="text-2xl sm:text-3xl font-serif font-bold text-fruitful-forest dark:text-fruitful-mint mb-2 truncate">
+          <div className="text-2xl sm:text-3xl font-serif font-bold text-nectar-forest dark:text-nectar-mint mb-2 truncate">
             {topCategory.name}
           </div>
           <p className="text-xs text-gray-400">
@@ -184,17 +184,17 @@ export default function Dashboard() {
         </div>
 
         {/* KPI 4: Budget Capacity */}
-        <div className="bg-white dark:bg-fruitful-darkCard p-6 rounded-3xl border border-fruitful-forest/10 dark:border-fruitful-darkBorder shadow-fruitful">
+        <div className="bg-white dark:bg-nectar-darkCard p-6 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar">
           <div className="flex items-center justify-between text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-wider mb-2">
             <span>Budget Utilization</span>
-            <ShieldAlert className={`w-4 h-4 ${isBudgetExceeded ? 'text-red-500' : 'text-fruitful-emerald'}`} />
+            <ShieldAlert className={`w-4 h-4 ${isBudgetExceeded ? 'text-red-500' : 'text-nectar-emerald'}`} />
           </div>
           <div className={`text-2xl sm:text-3xl font-serif font-bold mb-2 ${isBudgetExceeded ? 'text-red-600 dark:text-red-400' : 'text-gray-900 dark:text-white'}`}>
             {budgetUtilizationPercent}%
           </div>
-          <div className="w-full h-2 bg-gray-100 dark:bg-fruitful-darkBg rounded-full overflow-hidden">
+          <div className="w-full h-2 bg-gray-100 dark:bg-nectar-darkBg rounded-full overflow-hidden">
             <div 
-              className={`h-full transition-all duration-500 ${isBudgetExceeded ? 'bg-red-500' : 'bg-fruitful-emerald'}`}
+              className={`h-full transition-all duration-500 ${isBudgetExceeded ? 'bg-red-500' : 'bg-nectar-emerald'}`}
               style={{ width: `${Math.min(100, budgetUtilizationPercent)}%` }}
             />
           </div>
@@ -204,10 +204,10 @@ export default function Dashboard() {
       {/* Visual Analytics Grid: Pie/Donut & Trend Curve */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Category Pie Chart Card */}
-        <div className="bg-white dark:bg-fruitful-darkCard p-6 sm:p-8 rounded-3xl border border-fruitful-forest/10 dark:border-fruitful-darkBorder shadow-fruitful">
+        <div className="bg-white dark:bg-nectar-darkCard p-6 sm:p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="text-lg font-bold font-serif text-fruitful-forest dark:text-fruitful-mint">
+              <h3 className="text-lg font-bold font-serif text-nectar-forest dark:text-nectar-mint">
                 Category Distribution
               </h3>
               <p className="text-xs text-gray-500 dark:text-gray-400">
@@ -219,17 +219,17 @@ export default function Dashboard() {
         </div>
 
         {/* Daily Spending Trend Line Card */}
-        <div className="bg-white dark:bg-fruitful-darkCard p-6 sm:p-8 rounded-3xl border border-fruitful-forest/10 dark:border-fruitful-darkBorder shadow-fruitful">
+        <div className="bg-white dark:bg-nectar-darkCard p-6 sm:p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="text-lg font-bold font-serif text-fruitful-forest dark:text-fruitful-mint">
+              <h3 className="text-lg font-bold font-serif text-nectar-forest dark:text-nectar-mint">
                 Daily Spending Trajectory
               </h3>
               <p className="text-xs text-gray-500 dark:text-gray-400">
                 Cumulative velocity across current cycle
               </p>
             </div>
-            <div className="flex items-center gap-1 text-xs font-semibold text-fruitful-forest dark:text-fruitful-mint bg-fruitful-wasabi dark:bg-fruitful-forest/20 px-2.5 py-1 rounded-full">
+            <div className="flex items-center gap-1 text-xs font-semibold text-nectar-forest dark:text-nectar-mint bg-nectar-wasabi dark:bg-nectar-forest/20 px-2.5 py-1 rounded-full">
               <TrendingUp className="w-3.5 h-3.5" />
               <span>30-Day Curve</span>
             </div>
@@ -241,9 +241,9 @@ export default function Dashboard() {
       {/* 50/30/20 Rule Progress & Insights Section */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* 50/30/20 Breakdown (2 cols) */}
-        <div className="lg:col-span-2 bg-white dark:bg-fruitful-darkCard p-6 sm:p-8 rounded-3xl border border-fruitful-forest/10 dark:border-fruitful-darkBorder shadow-fruitful space-y-6">
+        <div className="lg:col-span-2 bg-white dark:bg-nectar-darkCard p-6 sm:p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar space-y-6">
           <div>
-            <h3 className="text-lg font-bold font-serif text-fruitful-forest dark:text-fruitful-mint">
+            <h3 className="text-lg font-bold font-serif text-nectar-forest dark:text-nectar-mint">
               50/30/20 Financial Equilibrium
             </h3>
             <p className="text-xs text-gray-500 dark:text-gray-400">
@@ -256,11 +256,11 @@ export default function Dashboard() {
             <div>
               <div className="flex justify-between text-xs font-bold mb-1.5">
                 <span className="text-gray-700 dark:text-gray-300">Essential Needs (50% Target)</span>
-                <span className="font-mono text-fruitful-forest dark:text-fruitful-mint">{formatCurrency(needsTotal)}</span>
+                <span className="font-mono text-nectar-forest dark:text-nectar-mint">{formatCurrency(needsTotal)}</span>
               </div>
-              <div className="w-full h-3 bg-gray-100 dark:bg-fruitful-darkBg rounded-full overflow-hidden">
+              <div className="w-full h-3 bg-gray-100 dark:bg-nectar-darkBg rounded-full overflow-hidden">
                 <div 
-                  className="h-full bg-fruitful-forest dark:bg-fruitful-emerald rounded-full transition-all duration-500" 
+                  className="h-full bg-nectar-forest dark:bg-nectar-emerald rounded-full transition-all duration-500" 
                   style={{ width: `${Math.min(100, (needsTotal / (monthlyLimit * 0.5)) * 100)}%` }}
                 />
               </div>
@@ -272,7 +272,7 @@ export default function Dashboard() {
                 <span className="text-gray-700 dark:text-gray-300">Lifestyle Wants (30% Target)</span>
                 <span className="font-mono text-amber-700 dark:text-amber-400">{formatCurrency(wantsTotal)}</span>
               </div>
-              <div className="w-full h-3 bg-gray-100 dark:bg-fruitful-darkBg rounded-full overflow-hidden">
+              <div className="w-full h-3 bg-gray-100 dark:bg-nectar-darkBg rounded-full overflow-hidden">
                 <div 
                   className="h-full bg-amber-500 rounded-full transition-all duration-500" 
                   style={{ width: `${Math.min(100, (wantsTotal / (monthlyLimit * 0.3)) * 100)}%` }}
@@ -286,7 +286,7 @@ export default function Dashboard() {
                 <span className="text-gray-700 dark:text-gray-300">Savings & Growth (20% Goal)</span>
                 <span className="font-mono text-emerald-700 dark:text-emerald-400">{formatCurrency(savingsTotal)}</span>
               </div>
-              <div className="w-full h-3 bg-gray-100 dark:bg-fruitful-darkBg rounded-full overflow-hidden">
+              <div className="w-full h-3 bg-gray-100 dark:bg-nectar-darkBg rounded-full overflow-hidden">
                 <div 
                   className="h-full bg-emerald-500 rounded-full transition-all duration-500" 
                   style={{ width: `${Math.min(100, (savingsTotal / (monthlyLimit * 0.2)) * 100)}%` }}
@@ -297,9 +297,9 @@ export default function Dashboard() {
         </div>
 
         {/* Rule-Based Insights (1 col) */}
-        <div className="bg-white dark:bg-fruitful-darkCard p-6 sm:p-8 rounded-3xl border border-fruitful-forest/10 dark:border-fruitful-darkBorder shadow-fruitful space-y-4">
+        <div className="bg-white dark:bg-nectar-darkCard p-6 sm:p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar space-y-4">
           <div>
-            <h3 className="text-lg font-bold font-serif text-fruitful-forest dark:text-fruitful-mint">
+            <h3 className="text-lg font-bold font-serif text-nectar-forest dark:text-nectar-mint">
               Smart Advice
             </h3>
             <p className="text-xs text-gray-500 dark:text-gray-400">
