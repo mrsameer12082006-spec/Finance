@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { Leaf, Lock, Mail, ArrowRight, Sparkles, ArrowLeft } from 'lucide-react';
@@ -10,6 +10,45 @@ export default function Login() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  // Cursor-following ambient green aura state
+  const [glowPos, setGlowPos] = useState({ x: -400, y: -400 });
+  const [isOutsideForm, setIsOutsideForm] = useState(true);
+  const [hasMoved, setHasMoved] = useState(false);
+
+  useEffect(() => {
+    let animationFrameId;
+    let targetX = -400;
+    let targetY = -400;
+    let currentX = -400;
+    let currentY = -400;
+
+    const handleMouseMove = (e) => {
+      targetX = e.clientX;
+      targetY = e.clientY;
+      if (!hasMoved) {
+        currentX = e.clientX;
+        currentY = e.clientY;
+        setHasMoved(true);
+      }
+    };
+
+    const updatePosition = () => {
+      currentX += (targetX - currentX) * 0.12;
+      currentY += (targetY - currentY) * 0.12;
+
+      setGlowPos({ x: currentX, y: currentY });
+      animationFrameId = requestAnimationFrame(updatePosition);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    animationFrameId = requestAnimationFrame(updatePosition);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, [hasMoved]);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -29,8 +68,31 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-nectar-canvas dark:bg-nectar-darkBg flex items-center justify-center p-6 transition-colors">
-      <div className="w-full max-w-md bg-white dark:bg-nectar-darkCard rounded-3xl border border-nectar-forest/15 dark:border-nectar-darkBorder shadow-nectar-float p-8 sm:p-10 relative">
+    <div className="min-h-screen bg-nectar-canvas dark:bg-nectar-darkBg flex items-center justify-center p-6 transition-colors relative overflow-hidden">
+      {/* Floating Interactive Cursor-Tracking Green Aura */}
+      <div
+        className={`pointer-events-none fixed -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl will-change-transform z-0 ${
+          hasMoved ? (isOutsideForm ? 'opacity-85 scale-100' : 'opacity-35 scale-110') : 'opacity-0'
+        }`}
+        style={{
+          left: `${glowPos.x}px`,
+          top: `${glowPos.y}px`,
+          width: isOutsideForm ? '440px' : '520px',
+          height: isOutsideForm ? '440px' : '520px',
+          background: 'radial-gradient(circle, rgba(97, 188, 118, 0.50) 0%, rgba(209, 250, 223, 0.40) 35%, rgba(11, 116, 67, 0.18) 65%, transparent 85%)',
+          transition: 'opacity 0.35s ease, transform 0.35s ease, width 0.4s ease, height 0.4s ease',
+        }}
+      />
+
+      {/* Multi-layered organic drifting aura backdrops (matching front page) */}
+      <div className="absolute top-1/4 left-1/4 w-[600px] h-[340px] bg-gradient-to-tr from-nectar-mint/45 via-emerald-100/35 to-nectar-peach/25 rounded-full blur-3xl pointer-events-none animate-ambient-drift-1" />
+      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[280px] bg-gradient-to-br from-nectar-leaf/25 via-nectar-wasabi/40 to-nectar-peachLight/30 rounded-full blur-3xl pointer-events-none animate-ambient-drift-2" />
+
+      <div 
+        onMouseEnter={() => setIsOutsideForm(false)}
+        onMouseLeave={() => setIsOutsideForm(true)}
+        className="relative z-10 w-full max-w-md bg-white/90 dark:bg-nectar-darkCard/90 backdrop-blur-xl rounded-3xl border border-nectar-forest/15 dark:border-nectar-darkBorder shadow-nectar-float p-8 sm:p-10 transition-all duration-300"
+      >
         
         {/* Back to Home Link */}
         <Link 
@@ -91,7 +153,7 @@ export default function Login() {
 
           <button
             type="submit"
-            className="w-full btn-nectar btn-nectar-primary py-3 mt-2"
+            className="w-full btn-nectar btn-nectar-primary btn-shine py-3 mt-2"
           >
             <span>Sign In</span>
             <ArrowRight className="w-4 h-4" />
@@ -112,6 +174,11 @@ export default function Login() {
           <Link to="/signup" className="font-bold text-nectar-forest dark:text-nectar-mint hover:underline">
             Create an account
           </Link>
+          <div className="pt-2">
+            <Link to="/signin-demo" className="inline-flex items-center gap-1 text-[11px] text-gray-400 hover:text-nectar-forest dark:hover:text-nectar-mint transition-colors">
+              <span>✨ View 21st.dev Glassmorphic Sign-In</span>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

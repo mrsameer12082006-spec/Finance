@@ -93,7 +93,7 @@ export default function ExpenseModal({ isOpen, onClose, expenseToEdit }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-fadeIn">
       <div 
-        className="w-full max-w-lg bg-white dark:bg-nectar-darkCard rounded-3xl border border-nectar-forest/15 dark:border-nectar-darkBorder shadow-nectar-float p-6 sm:p-8 relative"
+        className="w-full max-w-lg bg-white dark:bg-nectar-darkCard rounded-3xl border border-nectar-forest/15 dark:border-nectar-darkBorder shadow-nectar-float p-6 sm:p-8 relative animate-modal-pop"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -253,7 +253,7 @@ export default function ExpenseModal({ isOpen, onClose, expenseToEdit }) {
             </button>
             <button
               type="submit"
-              className="btn-nectar btn-nectar-primary"
+              className="btn-nectar btn-nectar-primary btn-shine"
             >
               <Check className="w-4 h-4" />
               <span>{expenseToEdit ? 'Save Changes' : 'Create Expense'}</span>

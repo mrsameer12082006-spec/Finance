@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
@@ -26,6 +26,46 @@ export default function Signup() {
   const [income, setIncome] = useState('');
   const [agreeTerms, setAgreeTerms] = useState(true);
   const [error, setError] = useState('');
+
+  // Cursor-following ambient green aura state
+  const [glowPos, setGlowPos] = useState({ x: -400, y: -400 });
+  const [isOutsideForm, setIsOutsideForm] = useState(true);
+  const [hasMoved, setHasMoved] = useState(false);
+
+  useEffect(() => {
+    let animationFrameId;
+    let targetX = -400;
+    let targetY = -400;
+    let currentX = -400;
+    let currentY = -400;
+
+    const handleMouseMove = (e) => {
+      targetX = e.clientX;
+      targetY = e.clientY;
+      if (!hasMoved) {
+        currentX = e.clientX;
+        currentY = e.clientY;
+        setHasMoved(true);
+      }
+    };
+
+    const updatePosition = () => {
+      // Fluid lerp momentum
+      currentX += (targetX - currentX) * 0.12;
+      currentY += (targetY - currentY) * 0.12;
+
+      setGlowPos({ x: currentX, y: currentY });
+      animationFrameId = requestAnimationFrame(updatePosition);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    animationFrameId = requestAnimationFrame(updatePosition);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, [hasMoved]);
 
   const handleSignup = (e) => {
     e.preventDefault();
@@ -74,8 +114,32 @@ export default function Signup() {
   };
 
   return (
-    <div className="min-h-screen bg-nectar-canvas dark:bg-nectar-darkBg flex items-center justify-center p-4 sm:p-6 lg:p-10 transition-colors">
-      <div className="w-full max-w-4xl bg-white dark:bg-nectar-darkCard rounded-3xl border border-nectar-forest/15 dark:border-nectar-darkBorder shadow-nectar-float overflow-hidden grid grid-cols-1 lg:grid-cols-12">
+    <div className="min-h-screen bg-nectar-canvas dark:bg-nectar-darkBg flex items-center justify-center p-4 sm:p-6 lg:p-10 transition-colors relative overflow-hidden">
+      {/* Floating Interactive Cursor-Tracking Green Aura ("where ever cursor goes outside the form") */}
+      <div
+        className={`pointer-events-none fixed -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl will-change-transform z-0 ${
+          hasMoved ? (isOutsideForm ? 'opacity-85 scale-100' : 'opacity-35 scale-110') : 'opacity-0'
+        }`}
+        style={{
+          left: `${glowPos.x}px`,
+          top: `${glowPos.y}px`,
+          width: isOutsideForm ? '480px' : '560px',
+          height: isOutsideForm ? '480px' : '560px',
+          background: 'radial-gradient(circle, rgba(97, 188, 118, 0.50) 0%, rgba(209, 250, 223, 0.40) 35%, rgba(11, 116, 67, 0.18) 65%, transparent 85%)',
+          transition: 'opacity 0.35s ease, transform 0.35s ease, width 0.4s ease, height 0.4s ease',
+        }}
+      />
+
+      {/* Multi-layered organic drifting aura backdrops (matching front page) */}
+      <div className="absolute top-1/4 left-1/4 w-[650px] h-[360px] bg-gradient-to-tr from-nectar-mint/45 via-emerald-100/35 to-nectar-peach/25 rounded-full blur-3xl pointer-events-none animate-ambient-drift-1" />
+      <div className="absolute bottom-1/4 right-1/4 w-[540px] h-[300px] bg-gradient-to-br from-nectar-leaf/25 via-nectar-wasabi/40 to-nectar-peachLight/30 rounded-full blur-3xl pointer-events-none animate-ambient-drift-2" />
+      <div className="absolute top-2/3 left-1/2 -translate-x-1/2 w-[580px] h-[320px] bg-gradient-to-r from-nectar-emerald/15 via-nectar-mint/30 to-transparent rounded-full blur-3xl pointer-events-none animate-ambient-drift-1" />
+
+      <div 
+        onMouseEnter={() => setIsOutsideForm(false)}
+        onMouseLeave={() => setIsOutsideForm(true)}
+        className="relative z-10 w-full max-w-4xl bg-white/90 dark:bg-nectar-darkCard/90 backdrop-blur-xl rounded-3xl border border-nectar-forest/15 dark:border-nectar-darkBorder shadow-nectar-float overflow-hidden grid grid-cols-1 lg:grid-cols-12 transition-all duration-300"
+      >
         
         {/* Left Value Prop Sidebar (Nectar Deep Forest Green) */}
         <div className="lg:col-span-5 bg-gradient-to-br from-nectar-forest via-nectar-emerald to-emerald-950 p-8 sm:p-10 text-white flex flex-col justify-between relative overflow-hidden">
@@ -255,7 +319,7 @@ export default function Signup() {
             {/* Primary Submit */}
             <button
               type="submit"
-              className="w-full btn-nectar btn-nectar-primary py-3 text-sm mt-3"
+              className="w-full btn-nectar btn-nectar-primary btn-shine py-3 text-sm mt-3"
             >
               <span>Complete Registration</span>
               <ArrowRight className="w-4 h-4" />

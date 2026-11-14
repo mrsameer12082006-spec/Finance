@@ -12,6 +12,7 @@ const Expenses = lazy(() => import('./pages/Expenses'));
 const BudgetSettings = lazy(() => import('./pages/BudgetSettings'));
 const Login = lazy(() => import('./pages/Login'));
 const Signup = lazy(() => import('./pages/Signup'));
+const SignInPageDemo = lazy(() => import('./components/ui/demo'));
 
 function LoadingFallback() {
   return (
@@ -80,6 +81,10 @@ export default function App() {
         <Route 
           path="/signup" 
           element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <Signup />} 
+        />
+        <Route 
+          path="/signin-demo" 
+          element={<SignInPageDemo />} 
         />
 
         {/* Protected Dashboard & App Routes */}

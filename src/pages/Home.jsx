@@ -293,7 +293,7 @@ export default function Home() {
                 </Link>
                 <Link
                   to="/signup"
-                  className="btn-nectar btn-nectar-primary text-xs py-2 px-4 shadow-sm"
+                  className="btn-nectar btn-nectar-primary btn-shine text-xs py-2 px-4 shadow-sm"
                 >
                   <span>Sign Up</span>
                   <ArrowRight className="w-3 h-3" />
@@ -305,14 +305,15 @@ export default function Home() {
       </div>
 
       {/* ==========================================================================
-           HERO SECTION (zaro.ai blur & slide entrance animation)
+           HERO SECTION (zaro.ai blur & slide entrance animation + organic floating aura)
            ========================================================================== */}
       <section className="pt-36 pb-20 px-6 sm:px-10 max-w-6xl mx-auto text-center relative overflow-hidden">
-        {/* Glow backdrop */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-gradient-to-tr from-nectar-mint/30 to-nectar-peach/20 rounded-full blur-3xl pointer-events-none" />
+        {/* Multi-layered organic drifting aura backdrops */}
+        <div className="absolute top-1/3 left-1/2 w-[650px] h-[340px] bg-gradient-to-tr from-nectar-mint/45 via-emerald-100/35 to-nectar-peach/25 rounded-full blur-3xl pointer-events-none animate-ambient-drift-1" />
+        <div className="absolute top-1/4 left-1/2 w-[520px] h-[290px] bg-gradient-to-br from-nectar-leaf/20 via-nectar-wasabi/40 to-nectar-peachLight/30 rounded-full blur-3xl pointer-events-none animate-ambient-drift-2" />
 
         <div className="relative z-10 max-w-3xl mx-auto space-y-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-nectar-peach dark:bg-nectar-darkCard border border-nectar-peachDeep/10 dark:border-nectar-darkBorder text-nectar-peachDeep dark:text-nectar-mint text-xs font-semibold hero-fade-in">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-nectar-peach dark:bg-nectar-darkCard border border-nectar-peachDeep/10 dark:border-nectar-darkBorder text-nectar-peachDeep dark:text-nectar-mint text-xs font-semibold hero-fade-in shadow-xs transition-transform duration-300 hover:scale-[1.02]">
             <span className="w-2 h-2 rounded-full bg-nectar-forest dark:bg-nectar-mint animate-pulse" />
             <span>Smart Personal Finance Architecture</span>
           </div>
@@ -329,7 +330,7 @@ export default function Home() {
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4 hero-fade-in hero-fade-in--cta">
             <Link
               to="/signup"
-              className="btn-nectar btn-nectar-primary text-base py-3.5 px-8 shadow-nectar hover:shadow-nectar-float w-full sm:w-auto"
+              className="btn-nectar btn-nectar-primary btn-shine text-base py-3.5 px-8 shadow-nectar hover:shadow-nectar-float w-full sm:w-auto"
             >
               <span>Get Started Free</span>
               <ArrowRight className="w-4 h-4" />
@@ -337,7 +338,7 @@ export default function Home() {
 
             <Link
               to="/login"
-              className="btn-nectar btn-nectar-secondary text-base py-3.5 px-8 w-full sm:w-auto"
+              className="btn-nectar btn-nectar-secondary text-base py-3.5 px-8 w-full sm:w-auto hover:border-nectar-emerald/30"
             >
               <span>Explore Demo Dashboard</span>
             </Link>
@@ -360,31 +361,31 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white dark:bg-nectar-darkCard p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar space-y-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-nectar-float">
-            <div className="w-10 h-10 rounded-xl bg-nectar-wasabi dark:bg-nectar-forest/20 flex items-center justify-center text-nectar-forest dark:text-nectar-mint">
+          <div className="card-interactive group bg-white dark:bg-nectar-darkCard p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-nectar-wasabi dark:bg-nectar-forest/20 flex items-center justify-center text-nectar-forest dark:text-nectar-mint transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3 shadow-xs">
               <Sparkles className="w-5 h-5" />
             </div>
-            <h3 className="font-bold text-base text-nectar-forest dark:text-nectar-mint">Natural Language Parsing</h3>
+            <h3 className="font-bold text-base text-nectar-forest dark:text-nectar-mint transition-colors">Natural Language Parsing</h3>
             <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
               Log expenses by typing casually like "₹450 dinner with team". Our parser extracts amount, category, and date automatically.
             </p>
           </div>
 
-          <div className="bg-white dark:bg-nectar-darkCard p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar space-y-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-nectar-float">
-            <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/20 flex items-center justify-center text-amber-600">
+          <div className="card-interactive group bg-white dark:bg-nectar-darkCard p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/20 flex items-center justify-center text-amber-600 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3 shadow-xs">
               <Zap className="w-5 h-5" />
             </div>
-            <h3 className="font-bold text-base text-nectar-forest dark:text-nectar-mint">Daily Safe-to-Spend Limit</h3>
+            <h3 className="font-bold text-base text-nectar-forest dark:text-nectar-mint transition-colors">Daily Safe-to-Spend Limit</h3>
             <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
               Dynamic calculations that divide remaining discretionary allowance by the days remaining in your monthly billing cycle.
             </p>
           </div>
 
-          <div className="bg-white dark:bg-nectar-darkCard p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar space-y-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-nectar-float">
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/20 flex items-center justify-center text-emerald-600">
+          <div className="card-interactive group bg-white dark:bg-nectar-darkCard p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/20 flex items-center justify-center text-emerald-600 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3 shadow-xs">
               <Lock className="w-5 h-5" />
             </div>
-            <h3 className="font-bold text-base text-nectar-forest dark:text-nectar-mint">Zero Telemetry & Offline</h3>
+            <h3 className="font-bold text-base text-nectar-forest dark:text-nectar-mint transition-colors">Zero Telemetry & Offline</h3>
             <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
               Your financial records never leave your browser. Full CRUD and export capabilities operate completely client-side in localStorage.
             </p>
@@ -444,7 +445,7 @@ export default function Home() {
             })}
           </div>
 
-          {/* Right Live Device Simulator with smooth keyframe morphing */}
+          {/* Right Live Device Simulator with smooth keyframe morphing & radar status */}
           <div className="lg:col-span-6 flex justify-center">
             <div className="w-full max-w-sm bg-nectar-canvas dark:bg-nectar-darkBg rounded-3xl p-6 border border-nectar-forest/15 dark:border-nectar-darkBorder shadow-nectar-float space-y-5">
               <div className="w-20 h-3.5 rounded-full bg-gray-200 dark:bg-nectar-darkCard mx-auto" />
@@ -455,9 +456,15 @@ export default function Home() {
               >
                 <div className="bg-white dark:bg-nectar-darkCard rounded-2xl p-5 border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-sm space-y-3 transition-colors">
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
-                      Active System
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-nectar-emerald opacity-75" />
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-nectar-emerald" />
+                      </span>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                        Active Engine
+                      </span>
+                    </div>
                     <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-nectar-mint text-nectar-forest shadow-xs transition-transform duration-300">
                       {flowTabs[activeTab].preview.tag}
                     </span>
@@ -470,9 +477,9 @@ export default function Home() {
                     {flowTabs[activeTab].preview.sub}
                   </p>
 
-                  <div className="w-full h-2 bg-gray-100 dark:bg-nectar-darkBg rounded-full overflow-hidden">
+                  <div className="w-full h-2.5 bg-gray-100 dark:bg-nectar-darkBg rounded-full overflow-hidden shadow-inner">
                     <div 
-                      className="h-full bg-nectar-emerald rounded-full transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                      className="h-full bg-gradient-to-r from-nectar-emerald to-nectar-leaf rounded-full transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] animate-shimmer"
                       style={{ width: `${flowTabs[activeTab].preview.barPct}%` }}
                     />
                   </div>
@@ -539,30 +546,75 @@ export default function Home() {
               <span>₹1,50,000 / mo</span>
               <span>₹3,00,000+ / mo</span>
             </div>
+
+            {/* Interactive Visual 50/30/20 Distribution Bar */}
+            <div className="pt-2 border-t border-nectar-forest/10 dark:border-nectar-darkBorder space-y-2">
+              <div className="flex justify-between items-center text-[11px] font-bold text-gray-500 dark:text-gray-400">
+                <span>Balanced Allocation</span>
+                <span className="font-mono text-nectar-forest dark:text-nectar-mint">100% of Net Income</span>
+              </div>
+              <div className="w-full h-3.5 rounded-full bg-gray-100 dark:bg-nectar-darkCard overflow-hidden flex shadow-inner">
+                <div 
+                  className="h-full bg-nectar-forest dark:bg-nectar-emerald transition-all duration-300 ease-out flex items-center justify-center text-[9px] font-bold text-white tracking-wider"
+                  style={{ width: '50%' }}
+                  title="50% Needs"
+                >
+                  50%
+                </div>
+                <div 
+                  className="h-full bg-amber-500 transition-all duration-300 ease-out flex items-center justify-center text-[9px] font-bold text-white tracking-wider"
+                  style={{ width: '30%' }}
+                  title="30% Wants"
+                >
+                  30%
+                </div>
+                <div 
+                  className="h-full bg-nectar-leaf dark:bg-nectar-mint text-nectar-forest transition-all duration-300 ease-out flex items-center justify-center text-[9px] font-bold tracking-wider"
+                  style={{ width: '20%' }}
+                  title="20% Growth"
+                >
+                  20%
+                </div>
+              </div>
+              <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] text-gray-600 dark:text-gray-400 pt-0.5">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-nectar-forest dark:bg-nectar-emerald" />
+                  <span>Needs (₹{(income * 0.50).toLocaleString('en-IN')})</span>
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
+                  <span>Wants (₹{(income * 0.30).toLocaleString('en-IN')})</span>
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-nectar-leaf dark:bg-nectar-mint" />
+                  <span>Growth (₹{(income * 0.20).toLocaleString('en-IN')})</span>
+                </span>
+              </div>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="p-5 rounded-2xl bg-gray-50 dark:bg-nectar-darkBg border border-gray-100 dark:border-nectar-darkBorder transition-all duration-300 hover:shadow-xs">
+            <div className="card-interactive p-5 rounded-2xl bg-gray-50 dark:bg-nectar-darkBg border border-gray-100 dark:border-nectar-darkBorder">
               <span className="text-xs font-bold uppercase tracking-wider text-gray-400">
                 50% Needs Cap
               </span>
               <div className="text-2xl font-serif font-bold text-nectar-forest dark:text-nectar-mint my-1.5">
                 {formatCurrency(needs).split('.')[0]}
               </div>
-              <p className="text-[11px] text-gray-500">Rent, groceries, utilities, basic transit, healthcare</p>
+              <p className="text-[11px] text-gray-500 dark:text-gray-400">Rent, groceries, utilities, basic transit, healthcare</p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-gray-50 dark:bg-nectar-darkBg border border-gray-100 dark:border-nectar-darkBorder transition-all duration-300 hover:shadow-xs">
+            <div className="card-interactive p-5 rounded-2xl bg-gray-50 dark:bg-nectar-darkBg border border-gray-100 dark:border-nectar-darkBorder">
               <span className="text-xs font-bold uppercase tracking-wider text-gray-400">
                 30% Wants Cap
               </span>
               <div className="text-2xl font-serif font-bold text-amber-700 dark:text-amber-400 my-1.5">
                 {formatCurrency(wants).split('.')[0]}
               </div>
-              <p className="text-[11px] text-gray-500">Dining, weekend travel, hobbies, entertainment</p>
+              <p className="text-[11px] text-gray-500 dark:text-gray-400">Dining, weekend travel, hobbies, entertainment</p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-nectar-wasabi dark:bg-nectar-forest/30 border border-nectar-mint dark:border-nectar-darkBorder transition-all duration-300 hover:shadow-xs">
+            <div className="card-interactive p-5 rounded-2xl bg-nectar-wasabi dark:bg-nectar-forest/30 border border-nectar-mint dark:border-nectar-darkBorder">
               <span className="text-xs font-bold uppercase tracking-wider text-nectar-forest dark:text-nectar-mint">
                 20% Growth Goal
               </span>
@@ -575,28 +627,31 @@ export default function Home() {
         </div>
       </section>
 
-
       {/* ==========================================================================
            CALL TO ACTION (Nectar Luxury Banner)
            ========================================================================== */}
       <section className="py-20 px-6 sm:px-10 max-w-5xl mx-auto text-center reveal-on-scroll">
         <div className="bg-gradient-to-br from-nectar-forest to-emerald-950 text-white rounded-3xl p-10 sm:p-16 shadow-nectar-float relative overflow-hidden space-y-6">
-          <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center mx-auto text-nectar-mint">
+          {/* Subtle ambient rotating glow */}
+          <div className="absolute -top-24 -left-24 w-80 h-80 bg-nectar-mint/20 rounded-full blur-3xl pointer-events-none animate-ambient-drift-1" />
+          <div className="absolute -bottom-24 -right-24 w-80 h-80 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none animate-ambient-drift-2" />
+
+          <div className="relative z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center mx-auto text-nectar-mint">
             <Leaf className="w-6 h-6" />
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-serif font-medium tracking-tight">
+          <h2 className="relative z-10 text-3xl sm:text-5xl font-serif font-medium tracking-tight">
             Ready to feel great about your money?
           </h2>
 
-          <p className="text-sm sm:text-base text-gray-200 max-w-xl mx-auto">
+          <p className="relative z-10 text-sm sm:text-base text-gray-200 max-w-xl mx-auto">
             Join thousands who turned paycheck anxiety into automated financial clarity. Set up your personal money system in under 2 minutes.
           </p>
 
-          <div className="pt-2">
+          <div className="relative z-10 pt-2">
             <Link
               to="/signup"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-nectar-mint text-nectar-forest font-bold text-sm hover:bg-emerald-200 transition-transform active:scale-95 shadow-lg"
+              className="btn-shine inline-flex items-center gap-2 px-8 py-4 rounded-full bg-nectar-mint text-nectar-forest font-bold text-sm hover:bg-emerald-200 transition-transform active:scale-95 shadow-lg"
             >
               <span>Create Free Account</span>
               <ArrowRight className="w-4 h-4" />

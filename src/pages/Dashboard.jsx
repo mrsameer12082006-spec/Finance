@@ -138,7 +138,7 @@ export default function Dashboard() {
       {/* KPI Stats Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {/* KPI 1: Monthly Total Spending */}
-        <div className="bg-white dark:bg-nectar-darkCard p-6 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar">
+        <div className="card-interactive bg-white dark:bg-nectar-darkCard p-6 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar">
           <div className="flex items-center justify-between text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-wider mb-2">
             <span>Total Monthly Spend</span>
             <Calendar className="w-4 h-4 text-nectar-emerald" />
@@ -156,7 +156,7 @@ export default function Dashboard() {
         </div>
 
         {/* KPI 2: Daily Safe Spend */}
-        <div className="bg-white dark:bg-nectar-darkCard p-6 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar">
+        <div className="card-interactive bg-white dark:bg-nectar-darkCard p-6 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar">
           <div className="flex items-center justify-between text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-wider mb-2">
             <span>Daily Safe-to-Spend</span>
             <Zap className="w-4 h-4 text-amber-500" />
@@ -170,7 +170,7 @@ export default function Dashboard() {
         </div>
 
         {/* KPI 3: Top Category */}
-        <div className="bg-white dark:bg-nectar-darkCard p-6 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar">
+        <div className="card-interactive bg-white dark:bg-nectar-darkCard p-6 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar">
           <div className="flex items-center justify-between text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-wider mb-2">
             <span>Top Category</span>
             <PieChart className="w-4 h-4 text-purple-500" />
@@ -184,7 +184,7 @@ export default function Dashboard() {
         </div>
 
         {/* KPI 4: Budget Capacity */}
-        <div className="bg-white dark:bg-nectar-darkCard p-6 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar">
+        <div className="card-interactive bg-white dark:bg-nectar-darkCard p-6 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar">
           <div className="flex items-center justify-between text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-wider mb-2">
             <span>Budget Utilization</span>
             <ShieldAlert className={`w-4 h-4 ${isBudgetExceeded ? 'text-red-500' : 'text-nectar-emerald'}`} />
@@ -204,7 +204,7 @@ export default function Dashboard() {
       {/* Visual Analytics Grid: Pie/Donut & Trend Curve */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Category Pie Chart Card */}
-        <div className="bg-white dark:bg-nectar-darkCard p-6 sm:p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar">
+        <div className="card-interactive bg-white dark:bg-nectar-darkCard p-6 sm:p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h3 className="text-lg font-bold font-serif text-nectar-forest dark:text-nectar-mint">
@@ -219,7 +219,7 @@ export default function Dashboard() {
         </div>
 
         {/* Daily Spending Trend Line Card */}
-        <div className="bg-white dark:bg-nectar-darkCard p-6 sm:p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar">
+        <div className="card-interactive bg-white dark:bg-nectar-darkCard p-6 sm:p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h3 className="text-lg font-bold font-serif text-nectar-forest dark:text-nectar-mint">
@@ -241,7 +241,7 @@ export default function Dashboard() {
       {/* 50/30/20 Rule Progress & Insights Section */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* 50/30/20 Breakdown (2 cols) */}
-        <div className="lg:col-span-2 bg-white dark:bg-nectar-darkCard p-6 sm:p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar space-y-6">
+        <div className="card-interactive lg:col-span-2 bg-white dark:bg-nectar-darkCard p-6 sm:p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar space-y-6">
           <div>
             <h3 className="text-lg font-bold font-serif text-nectar-forest dark:text-nectar-mint">
               50/30/20 Financial Equilibrium
