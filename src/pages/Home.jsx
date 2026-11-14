@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { 
@@ -16,6 +16,17 @@ import {
 } from 'lucide-react';
 import { toggleTheme } from '../redux/slices/themeSlice';
 import { formatCurrency } from '../utils/formatters';
+import { smoothScrollTo } from '../utils/smoothScroll';
+import { useNavIndicator } from '../hooks/useNavIndicator';
+import { useScrollSpy } from '../hooks/useScrollSpy';
+import { useScrollReveal } from '../hooks/useScrollReveal';
+
+const NAV_ITEMS = [
+  { id: 'features', label: 'Features', href: '#features' },
+  { id: 'flow', label: 'Money Flow', href: '#flow' },
+  { id: 'simulator', label: 'Simulator', href: '#simulator' },
+  { id: 'integrity', label: 'Privacy', href: '#integrity' },
+];
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -30,6 +41,42 @@ export default function Home() {
   const needs = income * 0.50;
   const wants = income * 0.30;
   const savings = income * 0.20;
+
+  // Active section tracking for zaro.ai style scroll-spy
+  const sectionIds = ['features', 'flow', 'simulator', 'integrity'];
+  const activeSection = useScrollSpy(sectionIds, 'features');
+  const { containerRef, itemRefs, indicator, mounted, moveTo, hide } = useNavIndicator();
+
+  // Trigger smooth reveal on scroll (inspired by zaro.ai render-on-scroll)
+  useScrollReveal();
+
+  // Synchronize sliding nav indicator with active section on scroll
+  useEffect(() => {
+    if (activeSection) {
+      moveTo(activeSection);
+    }
+  }, [activeSection, moveTo]);
+
+  // Handle initial page load with URL hash
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.hash) {
+      const hashId = window.location.hash.slice(1);
+      if (sectionIds.includes(hashId)) {
+        const timer = setTimeout(() => {
+          smoothScrollTo(hashId, { behavior: 'smooth' });
+          moveTo(hashId);
+        }, 150);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [moveTo]);
+
+  // Handle smooth scroll when clicking navigation link (zaro.ai Te + Ae algorithm)
+  const handleNavClick = (e, targetId) => {
+    e.preventDefault();
+    moveTo(targetId);
+    smoothScrollTo(targetId, { behavior: 'smooth' });
+  };
 
   const flowTabs = [
     {
@@ -98,14 +145,14 @@ export default function Home() {
     <div className="min-h-screen bg-nectar-canvas dark:bg-nectar-darkBg text-gray-900 dark:text-gray-100 transition-colors">
       
       {/* ==========================================================================
-           FLOATING PILL NAVIGATION (Nectar Design)
+           FLOATING PILL NAVIGATION (Nectar Design - zaro.ai style smooth indicator)
            ========================================================================== */}
       <div className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
-        <header className="pointer-events-auto w-full max-w-5xl bg-white/80 dark:bg-nectar-darkCard/80 backdrop-blur-xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar-float rounded-full px-5 py-3 flex items-center justify-between transition-all">
+        <header className="pointer-events-auto w-full max-w-5xl bg-white/85 dark:bg-nectar-darkCard/85 backdrop-blur-xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar-float rounded-full px-5 py-2.5 flex items-center justify-between transition-all">
           
           {/* Brand */}
-          <Link to="/" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-nectar-emerald to-nectar-forest flex items-center justify-center text-white shadow-sm">
+          <Link to="/" className="flex items-center gap-2.5 group">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-nectar-emerald to-nectar-forest flex items-center justify-center text-white shadow-sm transition-transform duration-300 group-hover:scale-105">
               <Leaf className="w-4 h-4 text-nectar-mint" />
             </div>
             <span className="font-bold text-nectar-forest dark:text-nectar-mint tracking-tight text-base">
@@ -116,12 +163,54 @@ export default function Home() {
             </span>
           </Link>
 
-          {/* Nav Links */}
-          <nav className="hidden md:flex items-center gap-6 text-xs font-semibold text-gray-600 dark:text-gray-300">
-            <a href="#features" className="hover:text-nectar-forest dark:hover:text-nectar-mint transition-colors">Features</a>
-            <a href="#flow" className="hover:text-nectar-forest dark:hover:text-nectar-mint transition-colors">Money Flow</a>
-            <a href="#simulator" className="hover:text-nectar-forest dark:hover:text-nectar-mint transition-colors">Simulator</a>
-            <a href="#integrity" className="hover:text-nectar-forest dark:hover:text-nectar-mint transition-colors">Privacy</a>
+          {/* Nav Links with sliding indicator pill (zaro.ai style) */}
+          <nav
+            onMouseLeave={() => {
+              if (activeSection) {
+                moveTo(activeSection);
+              }
+            }}
+            className="hidden md:flex items-center"
+            aria-label="Main Navigation"
+          >
+            <div
+              ref={containerRef}
+              className="relative flex items-center p-1 rounded-full bg-gray-100/70 dark:bg-white/[0.04] border border-nectar-forest/5 dark:border-white/5"
+            >
+              {/* Hardware-accelerated sliding indicator pill */}
+              <span
+                aria-hidden="true"
+                className={`pointer-events-none absolute inset-y-1 -z-0 rounded-full bg-nectar-mint/90 dark:bg-nectar-emerald/30 shadow-xs border border-nectar-forest/10 dark:border-nectar-mint/20 ${
+                  mounted ? 'nav-indicator-glide' : 'transition-opacity duration-200'
+                }`}
+                style={{
+                  transform: `translateX(${indicator.left}px)`,
+                  width: `${indicator.width}px`,
+                  opacity: indicator.visible ? 1 : 0,
+                }}
+              />
+
+              {NAV_ITEMS.map((item) => {
+                const isActive = activeSection === item.id;
+                return (
+                  <a
+                    key={item.id}
+                    ref={(el) => itemRefs.current.set(item.id, el)}
+                    href={item.href}
+                    onClick={(e) => handleNavClick(e, item.id)}
+                    onMouseEnter={() => moveTo(item.id)}
+                    onFocus={() => moveTo(item.id)}
+                    className={`relative z-10 px-4 py-1.5 rounded-full text-xs font-semibold tracking-tight transition-colors duration-200 select-none ${
+                      isActive
+                        ? 'text-nectar-forest dark:text-nectar-mint font-bold'
+                        : 'text-gray-600 dark:text-gray-300 hover:text-nectar-forest dark:hover:text-nectar-mint'
+                    }`}
+                  >
+                    {item.label}
+                  </a>
+                );
+              })}
+            </div>
           </nav>
 
           {/* Right Actions */}
@@ -164,28 +253,28 @@ export default function Home() {
       </div>
 
       {/* ==========================================================================
-           HERO SECTION
+           HERO SECTION (zaro.ai blur & slide entrance animation)
            ========================================================================== */}
       <section className="pt-36 pb-20 px-6 sm:px-10 max-w-6xl mx-auto text-center relative overflow-hidden">
         {/* Glow backdrop */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-gradient-to-tr from-nectar-mint/30 to-nectar-peach/20 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 max-w-3xl mx-auto space-y-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-nectar-peach dark:bg-nectar-darkCard border border-nectar-peachDeep/10 dark:border-nectar-darkBorder text-nectar-peachDeep dark:text-nectar-mint text-xs font-semibold">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-nectar-peach dark:bg-nectar-darkCard border border-nectar-peachDeep/10 dark:border-nectar-darkBorder text-nectar-peachDeep dark:text-nectar-mint text-xs font-semibold hero-fade-in">
             <span className="w-2 h-2 rounded-full bg-nectar-forest dark:bg-nectar-mint animate-pulse" />
             <span>Smart Personal Finance Architecture</span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-serif font-medium text-nectar-forest dark:text-nectar-mint tracking-tight leading-[1.08]">
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-serif font-medium text-nectar-forest dark:text-nectar-mint tracking-tight leading-[1.08] hero-fade-in hero-fade-in--headline">
             Turn every dollar into <br />
             <span className="italic font-normal text-nectar-emerald dark:text-emerald-400">peace of mind.</span>
           </h1>
 
-          <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed hero-fade-in hero-fade-in--subhead">
             A modern financial insights system that automatically organizes every paycheck into a balanced 50/30/20 money flow. Know exactly what to spend, save, and grow without the stress.
           </p>
 
-          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4 hero-fade-in hero-fade-in--cta">
             <Link
               to="/signup"
               className="btn-nectar btn-nectar-primary text-base py-3.5 px-8 shadow-nectar hover:shadow-nectar-float w-full sm:w-auto"
@@ -206,9 +295,9 @@ export default function Home() {
       </section>
 
       {/* ==========================================================================
-           MONEYFLOW INTERACTIVE SHOWCASE (Nectar Signature Split)
+           MONEYFLOW INTERACTIVE SHOWCASE (Smooth Tab Switching Animation)
            ========================================================================== */}
-      <section id="flow" className="py-20 px-6 sm:px-10 max-w-6xl mx-auto">
+      <section id="flow" className="scroll-mt-28 py-20 px-6 sm:px-10 max-w-6xl mx-auto reveal-on-scroll">
         <div className="text-center max-w-xl mx-auto mb-14">
           <span className="text-xs font-bold uppercase tracking-wider text-nectar-forest dark:text-nectar-mint">
             The MoneyFlow Engine
@@ -222,75 +311,88 @@ export default function Home() {
         </div>
 
         <div className="bg-white dark:bg-nectar-darkCard rounded-3xl p-6 sm:p-12 border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          {/* Left Tabs */}
+          {/* Left Tabs with smooth active indicators */}
           <div className="lg:col-span-6 space-y-3">
-            {flowTabs.map((tab, idx) => (
-              <button
-                key={idx}
-                onClick={() => setActiveTab(idx)}
-                className={`
-                  w-full text-left p-5 rounded-2xl border transition-all duration-300 flex items-start justify-between gap-4
-                  ${activeTab === idx
-                    ? 'bg-nectar-wasabi dark:bg-nectar-forest/30 border-nectar-forest dark:border-nectar-mint shadow-sm'
-                    : 'bg-gray-50 dark:bg-nectar-darkBg border-transparent hover:border-gray-200'}
-                `}
-              >
-                <div>
-                  <h3 className={`text-base font-bold mb-1 ${activeTab === idx ? 'text-nectar-forest dark:text-nectar-mint' : 'text-gray-800 dark:text-gray-200'}`}>
-                    {tab.title}
-                  </h3>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
-                    {tab.desc}
-                  </p>
-                </div>
-                <div className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 transition-transform ${
-                  activeTab === idx ? 'bg-nectar-forest text-white scale-100' : 'opacity-0 scale-50'
-                }`}>
-                  <Check className="w-3.5 h-3.5 stroke-[3]" />
-                </div>
-              </button>
-            ))}
+            {flowTabs.map((tab, idx) => {
+              const isSelected = activeTab === idx;
+              return (
+                <button
+                  key={idx}
+                  onClick={() => setActiveTab(idx)}
+                  className={`
+                    w-full text-left p-5 rounded-2xl border transition-all duration-300 ease-out flex items-start justify-between gap-4 relative overflow-hidden group
+                    ${isSelected
+                      ? 'bg-nectar-wasabi dark:bg-nectar-forest/30 border-nectar-forest dark:border-nectar-mint shadow-sm translate-x-1'
+                      : 'bg-gray-50/80 dark:bg-nectar-darkBg/60 border-transparent hover:border-gray-200 dark:hover:border-nectar-darkBorder hover:bg-white dark:hover:bg-nectar-darkBg'}
+                  `}
+                >
+                  <div className="relative z-10">
+                    <h3 className={`text-base font-bold mb-1 transition-colors duration-200 ${isSelected ? 'text-nectar-forest dark:text-nectar-mint' : 'text-gray-800 dark:text-gray-200'}`}>
+                      {tab.title}
+                    </h3>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+                      {tab.desc}
+                    </p>
+                  </div>
+                  <div className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
+                    isSelected
+                      ? 'bg-nectar-forest text-white scale-100 rotate-0 shadow-sm'
+                      : 'opacity-0 scale-50 -rotate-45'
+                  }`}>
+                    <Check className="w-3.5 h-3.5 stroke-[3]" />
+                  </div>
+                </button>
+              );
+            })}
           </div>
 
-          {/* Right Live Device Simulator */}
+          {/* Right Live Device Simulator with smooth keyframe morphing */}
           <div className="lg:col-span-6 flex justify-center">
-            <div className="w-full max-w-sm bg-nectar-canvas dark:bg-nectar-darkBg rounded-3xl p-6 border border-nectar-forest/15 dark:border-nectar-darkBorder shadow-nectar-float space-y-5 animate-fadeIn">
+            <div className="w-full max-w-sm bg-nectar-canvas dark:bg-nectar-darkBg rounded-3xl p-6 border border-nectar-forest/15 dark:border-nectar-darkBorder shadow-nectar-float space-y-5">
               <div className="w-20 h-3.5 rounded-full bg-gray-200 dark:bg-nectar-darkCard mx-auto" />
 
-              <div className="bg-white dark:bg-nectar-darkCard rounded-2xl p-5 border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-sm space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
-                    Active System
-                  </span>
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-nectar-mint text-nectar-forest">
-                    {flowTabs[activeTab].preview.tag}
-                  </span>
-                </div>
-
-                <div className="text-3xl font-serif font-bold text-nectar-forest dark:text-nectar-mint">
-                  {flowTabs[activeTab].preview.amount}
-                </div>
-                <p className="text-xs text-gray-500">
-                  {flowTabs[activeTab].preview.sub}
-                </p>
-
-                <div className="w-full h-2 bg-gray-100 dark:bg-nectar-darkBg rounded-full overflow-hidden">
-                  <div 
-                    className="h-full bg-nectar-emerald rounded-full transition-all duration-500"
-                    style={{ width: `${flowTabs[activeTab].preview.barPct}%` }}
-                  />
-                </div>
-              </div>
-
-              <div className="bg-white dark:bg-nectar-darkCard rounded-2xl p-4 border border-nectar-forest/10 dark:border-nectar-darkBorder space-y-2.5">
-                {flowTabs[activeTab].preview.details.map((item, i) => (
-                  <div key={i} className="flex justify-between text-xs">
-                    <span className="text-gray-500 dark:text-gray-400">{item.label}</span>
-                    <span className={`font-bold ${item.highlight ? 'text-nectar-emerald font-mono' : 'text-gray-800 dark:text-gray-200'}`}>
-                      {item.val}
+              <div
+                key={activeTab}
+                className="space-y-4 animate-fade-in-up"
+              >
+                <div className="bg-white dark:bg-nectar-darkCard rounded-2xl p-5 border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-sm space-y-3 transition-colors">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
+                      Active System
+                    </span>
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-nectar-mint text-nectar-forest shadow-xs transition-transform duration-300">
+                      {flowTabs[activeTab].preview.tag}
                     </span>
                   </div>
-                ))}
+
+                  <div className="text-3xl font-serif font-bold text-nectar-forest dark:text-nectar-mint tracking-tight transition-all duration-300">
+                    {flowTabs[activeTab].preview.amount}
+                  </div>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                    {flowTabs[activeTab].preview.sub}
+                  </p>
+
+                  <div className="w-full h-2 bg-gray-100 dark:bg-nectar-darkBg rounded-full overflow-hidden">
+                    <div 
+                      className="h-full bg-nectar-emerald rounded-full transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                      style={{ width: `${flowTabs[activeTab].preview.barPct}%` }}
+                    />
+                  </div>
+                </div>
+
+                <div className="bg-white dark:bg-nectar-darkCard rounded-2xl p-4 border border-nectar-forest/10 dark:border-nectar-darkBorder space-y-2.5 transition-colors">
+                  {flowTabs[activeTab].preview.details.map((item, i) => (
+                    <div
+                      key={i}
+                      className="flex justify-between text-xs py-0.5 border-b border-gray-50 dark:border-nectar-darkBorder/40 last:border-none"
+                    >
+                      <span className="text-gray-500 dark:text-gray-400">{item.label}</span>
+                      <span className={`font-bold transition-colors ${item.highlight ? 'text-nectar-emerald dark:text-nectar-mint font-mono' : 'text-gray-800 dark:text-gray-200'}`}>
+                        {item.val}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -300,7 +402,7 @@ export default function Home() {
       {/* ==========================================================================
            50/30/20 INTERACTIVE INCOME SIMULATOR
            ========================================================================== */}
-      <section id="simulator" className="py-20 px-6 sm:px-10 max-w-5xl mx-auto">
+      <section id="simulator" className="scroll-mt-28 py-20 px-6 sm:px-10 max-w-5xl mx-auto reveal-on-scroll">
         <div className="bg-white dark:bg-nectar-darkCard rounded-3xl p-8 sm:p-12 border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar space-y-8">
           <div className="text-center max-w-xl mx-auto">
             <span className="text-xs font-bold uppercase tracking-wider text-nectar-forest dark:text-nectar-mint">
@@ -342,7 +444,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="p-5 rounded-2xl bg-gray-50 dark:bg-nectar-darkBg border border-gray-100 dark:border-nectar-darkBorder">
+            <div className="p-5 rounded-2xl bg-gray-50 dark:bg-nectar-darkBg border border-gray-100 dark:border-nectar-darkBorder transition-all duration-300 hover:shadow-xs">
               <span className="text-xs font-bold uppercase tracking-wider text-gray-400">
                 50% Needs Cap
               </span>
@@ -352,7 +454,7 @@ export default function Home() {
               <p className="text-[11px] text-gray-500">Rent, groceries, utilities, basic transit, healthcare</p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-gray-50 dark:bg-nectar-darkBg border border-gray-100 dark:border-nectar-darkBorder">
+            <div className="p-5 rounded-2xl bg-gray-50 dark:bg-nectar-darkBg border border-gray-100 dark:border-nectar-darkBorder transition-all duration-300 hover:shadow-xs">
               <span className="text-xs font-bold uppercase tracking-wider text-gray-400">
                 30% Wants Cap
               </span>
@@ -362,7 +464,7 @@ export default function Home() {
               <p className="text-[11px] text-gray-500">Dining, weekend travel, hobbies, entertainment</p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-nectar-wasabi dark:bg-nectar-forest/30 border border-nectar-mint dark:border-nectar-darkBorder">
+            <div className="p-5 rounded-2xl bg-nectar-wasabi dark:bg-nectar-forest/30 border border-nectar-mint dark:border-nectar-darkBorder transition-all duration-300 hover:shadow-xs">
               <span className="text-xs font-bold uppercase tracking-wider text-nectar-forest dark:text-nectar-mint">
                 20% Growth Goal
               </span>
@@ -376,9 +478,9 @@ export default function Home() {
       </section>
 
       {/* ==========================================================================
-           BENTO FEATURES GRID
+           BENTO FEATURES GRID (with Staggered Scroll Reveal)
            ========================================================================== */}
-      <section id="features" className="py-20 px-6 sm:px-10 max-w-6xl mx-auto">
+      <section id="features" className="scroll-mt-28 py-20 px-6 sm:px-10 max-w-6xl mx-auto reveal-on-scroll">
         <div className="text-center max-w-xl mx-auto mb-14">
           <span className="text-xs font-bold uppercase tracking-wider text-nectar-forest dark:text-nectar-mint">
             Designed for Serenity
@@ -389,7 +491,7 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white dark:bg-nectar-darkCard p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar space-y-3">
+          <div className="bg-white dark:bg-nectar-darkCard p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar space-y-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-nectar-float">
             <div className="w-10 h-10 rounded-xl bg-nectar-wasabi dark:bg-nectar-forest/20 flex items-center justify-center text-nectar-forest dark:text-nectar-mint">
               <Sparkles className="w-5 h-5" />
             </div>
@@ -399,7 +501,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="bg-white dark:bg-nectar-darkCard p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar space-y-3">
+          <div className="bg-white dark:bg-nectar-darkCard p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar space-y-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-nectar-float">
             <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/20 flex items-center justify-center text-amber-600">
               <Zap className="w-5 h-5" />
             </div>
@@ -409,7 +511,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="bg-white dark:bg-nectar-darkCard p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar space-y-3">
+          <div className="bg-white dark:bg-nectar-darkCard p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar space-y-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-nectar-float">
             <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/20 flex items-center justify-center text-emerald-600">
               <Lock className="w-5 h-5" />
             </div>
@@ -424,7 +526,7 @@ export default function Home() {
       {/* ==========================================================================
            CALL TO ACTION (Nectar Luxury Banner)
            ========================================================================== */}
-      <section className="py-20 px-6 sm:px-10 max-w-5xl mx-auto text-center">
+      <section className="py-20 px-6 sm:px-10 max-w-5xl mx-auto text-center reveal-on-scroll">
         <div className="bg-gradient-to-br from-nectar-forest to-emerald-950 text-white rounded-3xl p-10 sm:p-16 shadow-nectar-float relative overflow-hidden space-y-6">
           <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center mx-auto text-nectar-mint">
             <Leaf className="w-6 h-6" />
@@ -453,7 +555,7 @@ export default function Home() {
       {/* ==========================================================================
            FOOTER (Nectar Editorial Layout)
            ========================================================================== */}
-      <footer id="integrity" className="border-t border-nectar-forest/10 dark:border-nectar-darkBorder py-12 px-6 sm:px-10 max-w-6xl mx-auto text-xs text-gray-500 dark:text-gray-400">
+      <footer id="integrity" className="scroll-mt-28 border-t border-nectar-forest/10 dark:border-nectar-darkBorder py-12 px-6 sm:px-10 max-w-6xl mx-auto text-xs text-gray-500 dark:text-gray-400 reveal-on-scroll">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-2 text-nectar-forest dark:text-nectar-mint font-bold">
             <Leaf className="w-4 h-4" />
