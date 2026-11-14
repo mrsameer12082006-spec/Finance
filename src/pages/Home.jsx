@@ -47,9 +47,42 @@ export default function Home() {
   const { activeSection, setActiveSection, lockSpy } = useScrollSpy(sectionIds, 'features');
   const { containerRef, itemRefs, indicator, mounted, moveTo, hide } = useNavIndicator();
   const [hoveredSection, setHoveredSection] = useState(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // Track scroll position to retract navbar into floating pill on scroll (SevaSetu style)
+  useEffect(() => {
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 30);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Trigger smooth reveal on scroll (inspired by zaro.ai render-on-scroll)
   useScrollReveal();
+
+  // Re-measure indicator position when navbar width morphs between full-width & pill
+  useEffect(() => {
+    const t1 = setTimeout(() => {
+      if (activeSection) moveTo(activeSection);
+    }, 150);
+    const t2 = setTimeout(() => {
+      if (activeSection) moveTo(activeSection);
+    }, 320);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, [isScrolled, activeSection, moveTo]);
 
   // Synchronize sliding nav indicator with active or hovered section
   useEffect(() => {
@@ -150,10 +183,22 @@ export default function Home() {
     <div className="min-h-screen bg-nectar-canvas dark:bg-nectar-darkBg text-gray-900 dark:text-gray-100 transition-colors">
       
       {/* ==========================================================================
-           FLOATING PILL NAVIGATION (Nectar Design - zaro.ai style smooth indicator)
+           RETRACTING NAVBAR (Full-width at top -> Morphs into Floating Pill on scroll)
            ========================================================================== */}
-      <div className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
-        <header className="pointer-events-auto w-full max-w-5xl bg-white/85 dark:bg-nectar-darkCard/85 backdrop-blur-xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar-float rounded-full px-5 py-2.5 flex items-center justify-between transition-all">
+      <div 
+        className={`fixed left-0 right-0 z-50 flex justify-center pointer-events-none transition-all duration-300 ease-out ${
+          isScrolled 
+            ? 'top-3 sm:top-4 px-4' 
+            : 'top-0 px-0'
+        }`}
+      >
+        <header 
+          className={`pointer-events-auto transition-all duration-300 ease-out flex items-center justify-between ${
+            isScrolled
+              ? 'w-full max-w-5xl bg-white/85 dark:bg-nectar-darkCard/85 backdrop-blur-xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar-float rounded-full px-5 py-2.5'
+              : 'w-full max-w-full bg-white/80 dark:bg-nectar-darkBg/80 backdrop-blur-xl border-b border-nectar-forest/10 dark:border-nectar-darkBorder shadow-none rounded-none px-6 lg:px-12 py-3.5'
+          }`}
+        >
           
           {/* Brand */}
           <Link to="/" className="flex items-center gap-2.5 group">
