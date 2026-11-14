@@ -1,86 +1,20 @@
 /**
- * Reverse-engineered smooth scroll and navigation indicator engine inspired by zaro.ai.
- * Provides micro-calibrated scroll settling (Ae/Te algorithm), scroll-spy intersection tracking,
- * and hardware-accelerated sliding indicator positioning.
+ * Smooth scroll engine for Nectar landing navigation.
+ * Calculates target coordinates accounting for floating navbar height and executes
+ * buttery-smooth, hardware-accelerated scrolling with zero jitter or snapping.
  */
 
-const SETTLE_TIMEOUT_MS = 2000;
-const SETTLE_FRAMES = 3;
-const TOLERANCE_PX = 2;
+const DEFAULT_NAVBAR_OFFSET = 84;
 
 /**
- * Calculates effective scroll offset taking scroll-padding-top and scroll-margin-top into account.
+ * Calculates effective scroll offset for target element.
  */
-export function getScrollOffset(element) {
-  if (typeof window === 'undefined' || !element) return 0;
-  const scrollingEl = document.scrollingElement || document.documentElement;
-  const scrollPadding = parseFloat(window.getComputedStyle(scrollingEl).scrollPaddingTop) || 0;
-  const scrollMargin = parseFloat(window.getComputedStyle(element).scrollMarginTop) || 0;
-  return scrollPadding + scrollMargin;
+export function getScrollOffset() {
+  return DEFAULT_NAVBAR_OFFSET;
 }
 
 /**
- * Monitors smooth scroll velocity until settling, then fine-adjusts
- * to eliminate sticky header collision with 2px accuracy.
- * Cancels immediately if user interacts (wheel, touch, key).
- */
-export function settleScroll(targetElement) {
-  if (typeof window === 'undefined' || !targetElement) return;
-
-  const deadline = performance.now() + SETTLE_TIMEOUT_MS;
-  let lastY = window.scrollY;
-  let settledFrameCount = 0;
-  let cancelListeners = [];
-
-  const cleanup = () => {
-    cancelListeners.forEach((remove) => remove());
-    cancelListeners = [];
-  };
-
-  ['wheel', 'touchstart', 'keydown'].forEach((event) => {
-    const onUserInterrupt = () => cleanup();
-    window.addEventListener(event, onUserInterrupt, { passive: true });
-    cancelListeners.push(() => window.removeEventListener(event, onUserInterrupt));
-  });
-
-  const checkVelocity = () => {
-    if (cancelListeners.length === 0) return;
-
-    if (performance.now() > deadline) {
-      cleanup();
-      return;
-    }
-
-    const currentY = window.scrollY;
-    if (Math.abs(currentY - lastY) > 0.5) {
-      lastY = currentY;
-      settledFrameCount = 0;
-      requestAnimationFrame(checkVelocity);
-      return;
-    }
-
-    // Scroll has settled for consecutive frames
-    if (++settledFrameCount < SETTLE_FRAMES) {
-      requestAnimationFrame(checkVelocity);
-      return;
-    }
-
-    // Calculate final delta against dynamic scroll padding & margins
-    const delta = targetElement.getBoundingClientRect().top - getScrollOffset(targetElement);
-    if (Math.abs(delta) > TOLERANCE_PX) {
-      window.scrollBy({ top: delta, behavior: 'auto' });
-      lastY = window.scrollY;
-      settledFrameCount = 0;
-    }
-
-    requestAnimationFrame(checkVelocity);
-  };
-
-  requestAnimationFrame(checkVelocity);
-}
-
-/**
- * Smoothly scrolls to target ID, updates URL hash cleanly, and settles with micro-precision.
+ * Smoothly scrolls to target ID, updates URL hash cleanly, and perfectly frames the section.
  */
 export function smoothScrollTo(targetId, options = {}) {
   if (typeof window === 'undefined' || !targetId) return;
@@ -89,10 +23,11 @@ export function smoothScrollTo(targetId, options = {}) {
   if (!id) return;
 
   const {
+    offset = DEFAULT_NAVBAR_OFFSET,
     behavior = 'smooth',
-    maxAttempts = 40,
-    intervalMs = 30,
-    updateHash = true
+    maxAttempts = 30,
+    intervalMs = 25,
+    updateHash = true,
   } = options;
 
   let attempts = 0;
@@ -100,14 +35,22 @@ export function smoothScrollTo(targetId, options = {}) {
   const attemptScroll = () => {
     const el = document.getElementById(id);
     if (el) {
+      el.classList.add('is-revealed');
+
       if (updateHash) {
         const hash = `#${id}`;
         if (window.location.hash !== hash) {
           window.history.replaceState(window.history.state, '', hash);
         }
       }
-      el.scrollIntoView({ behavior });
-      settleScroll(el);
+
+      const rect = el.getBoundingClientRect();
+      const targetY = Math.max(0, rect.top + window.scrollY - offset);
+
+      window.scrollTo({
+        top: targetY,
+        behavior,
+      });
       return;
     }
 
@@ -118,3 +61,4 @@ export function smoothScrollTo(targetId, options = {}) {
 
   attemptScroll();
 }
+

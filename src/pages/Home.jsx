@@ -42,40 +42,45 @@ export default function Home() {
   const wants = income * 0.30;
   const savings = income * 0.20;
 
-  // Active section tracking for zaro.ai style scroll-spy
+  // Active section tracking with lockable smooth scroll-spy
   const sectionIds = ['features', 'flow', 'simulator', 'integrity'];
-  const activeSection = useScrollSpy(sectionIds, 'features');
+  const { activeSection, setActiveSection, lockSpy } = useScrollSpy(sectionIds, 'features');
   const { containerRef, itemRefs, indicator, mounted, moveTo, hide } = useNavIndicator();
+  const [hoveredSection, setHoveredSection] = useState(null);
 
   // Trigger smooth reveal on scroll (inspired by zaro.ai render-on-scroll)
   useScrollReveal();
 
-  // Synchronize sliding nav indicator with active section on scroll
+  // Synchronize sliding nav indicator with active or hovered section
   useEffect(() => {
-    if (activeSection) {
-      moveTo(activeSection);
+    const target = hoveredSection || activeSection;
+    if (target) {
+      moveTo(target);
     }
-  }, [activeSection, moveTo]);
+  }, [activeSection, hoveredSection, moveTo]);
 
   // Handle initial page load with URL hash
   useEffect(() => {
     if (typeof window !== 'undefined' && window.location.hash) {
       const hashId = window.location.hash.slice(1);
       if (sectionIds.includes(hashId)) {
+        lockSpy(hashId, 900);
         const timer = setTimeout(() => {
-          smoothScrollTo(hashId, { behavior: 'smooth' });
+          smoothScrollTo(hashId);
           moveTo(hashId);
-        }, 150);
+        }, 120);
         return () => clearTimeout(timer);
       }
     }
-  }, [moveTo]);
+  }, [lockSpy, moveTo]);
 
-  // Handle smooth scroll when clicking navigation link (zaro.ai Te + Ae algorithm)
+  // Handle smooth scroll when clicking navigation link
   const handleNavClick = (e, targetId) => {
     e.preventDefault();
+    setHoveredSection(null);
+    lockSpy(targetId, 850);
     moveTo(targetId);
-    smoothScrollTo(targetId, { behavior: 'smooth' });
+    smoothScrollTo(targetId);
   };
 
   const flowTabs = [
@@ -163,9 +168,10 @@ export default function Home() {
             </span>
           </Link>
 
-          {/* Nav Links with sliding indicator pill (zaro.ai style) */}
+          {/* Nav Links with sliding indicator pill */}
           <nav
             onMouseLeave={() => {
+              setHoveredSection(null);
               if (activeSection) {
                 moveTo(activeSection);
               }
@@ -175,33 +181,34 @@ export default function Home() {
           >
             <div
               ref={containerRef}
-              className="relative flex items-center p-1 rounded-full bg-gray-100/70 dark:bg-white/[0.04] border border-nectar-forest/5 dark:border-white/5"
+              className="relative flex items-center rounded-full bg-gray-100/70 dark:bg-white/[0.04] border border-nectar-forest/10 dark:border-white/10 overflow-hidden shadow-xs"
             >
               {/* Hardware-accelerated sliding indicator pill */}
               <span
                 aria-hidden="true"
-                className={`pointer-events-none absolute inset-y-1 -z-0 rounded-full bg-nectar-mint/90 dark:bg-nectar-emerald/30 shadow-xs border border-nectar-forest/10 dark:border-nectar-mint/20 ${
+                className={`pointer-events-none absolute inset-y-0 -z-0 rounded-full bg-nectar-mint/90 dark:bg-nectar-emerald/30 shadow-xs ${
                   mounted ? 'nav-indicator-glide' : 'transition-opacity duration-200'
                 }`}
                 style={{
-                  transform: `translateX(${indicator.left}px)`,
+                  transform: `translate3d(${indicator.left}px, 0, 0)`,
                   width: `${indicator.width}px`,
                   opacity: indicator.visible ? 1 : 0,
                 }}
               />
 
               {NAV_ITEMS.map((item) => {
-                const isActive = activeSection === item.id;
+                const isCurrent = (hoveredSection || activeSection) === item.id;
                 return (
                   <a
                     key={item.id}
                     ref={(el) => itemRefs.current.set(item.id, el)}
                     href={item.href}
                     onClick={(e) => handleNavClick(e, item.id)}
-                    onMouseEnter={() => moveTo(item.id)}
-                    onFocus={() => moveTo(item.id)}
-                    className={`relative z-10 px-4 py-1.5 rounded-full text-xs font-semibold tracking-tight transition-colors duration-200 select-none ${
-                      isActive
+                    onMouseEnter={() => setHoveredSection(item.id)}
+                    onFocus={() => setHoveredSection(item.id)}
+                    onBlur={() => setHoveredSection(null)}
+                    className={`relative z-10 px-4 sm:px-5 py-2 rounded-full text-xs font-semibold tracking-tight transition-colors duration-200 select-none ${
+                      isCurrent
                         ? 'text-nectar-forest dark:text-nectar-mint font-bold'
                         : 'text-gray-600 dark:text-gray-300 hover:text-nectar-forest dark:hover:text-nectar-mint'
                     }`}
@@ -295,9 +302,55 @@ export default function Home() {
       </section>
 
       {/* ==========================================================================
+           BENTO FEATURES GRID (with Staggered Scroll Reveal)
+           ========================================================================== */}
+      <section id="features" className="scroll-mt-24 py-20 px-6 sm:px-10 max-w-6xl mx-auto reveal-on-scroll">
+        <div className="text-center max-w-xl mx-auto mb-14">
+          <span className="text-xs font-bold uppercase tracking-wider text-nectar-forest dark:text-nectar-mint">
+            Designed for Serenity
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-nectar-forest dark:text-nectar-mint mt-2 mb-3">
+            Everything you need.<br />Nothing you don't.
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-white dark:bg-nectar-darkCard p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar space-y-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-nectar-float">
+            <div className="w-10 h-10 rounded-xl bg-nectar-wasabi dark:bg-nectar-forest/20 flex items-center justify-center text-nectar-forest dark:text-nectar-mint">
+              <Sparkles className="w-5 h-5" />
+            </div>
+            <h3 className="font-bold text-base text-nectar-forest dark:text-nectar-mint">Natural Language Parsing</h3>
+            <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+              Log expenses by typing casually like "₹450 dinner with team". Our parser extracts amount, category, and date automatically.
+            </p>
+          </div>
+
+          <div className="bg-white dark:bg-nectar-darkCard p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar space-y-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-nectar-float">
+            <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/20 flex items-center justify-center text-amber-600">
+              <Zap className="w-5 h-5" />
+            </div>
+            <h3 className="font-bold text-base text-nectar-forest dark:text-nectar-mint">Daily Safe-to-Spend Limit</h3>
+            <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+              Dynamic calculations that divide remaining discretionary allowance by the days remaining in your monthly billing cycle.
+            </p>
+          </div>
+
+          <div className="bg-white dark:bg-nectar-darkCard p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar space-y-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-nectar-float">
+            <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/20 flex items-center justify-center text-emerald-600">
+              <Lock className="w-5 h-5" />
+            </div>
+            <h3 className="font-bold text-base text-nectar-forest dark:text-nectar-mint">Zero Telemetry & Offline</h3>
+            <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+              Your financial records never leave your browser. Full CRUD and export capabilities operate completely client-side in localStorage.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ==========================================================================
            MONEYFLOW INTERACTIVE SHOWCASE (Smooth Tab Switching Animation)
            ========================================================================== */}
-      <section id="flow" className="scroll-mt-28 py-20 px-6 sm:px-10 max-w-6xl mx-auto reveal-on-scroll">
+      <section id="flow" className="scroll-mt-24 py-20 px-6 sm:px-10 max-w-6xl mx-auto reveal-on-scroll">
         <div className="text-center max-w-xl mx-auto mb-14">
           <span className="text-xs font-bold uppercase tracking-wider text-nectar-forest dark:text-nectar-mint">
             The MoneyFlow Engine
@@ -402,7 +455,7 @@ export default function Home() {
       {/* ==========================================================================
            50/30/20 INTERACTIVE INCOME SIMULATOR
            ========================================================================== */}
-      <section id="simulator" className="scroll-mt-28 py-20 px-6 sm:px-10 max-w-5xl mx-auto reveal-on-scroll">
+      <section id="simulator" className="scroll-mt-24 py-20 px-6 sm:px-10 max-w-5xl mx-auto reveal-on-scroll">
         <div className="bg-white dark:bg-nectar-darkCard rounded-3xl p-8 sm:p-12 border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar space-y-8">
           <div className="text-center max-w-xl mx-auto">
             <span className="text-xs font-bold uppercase tracking-wider text-nectar-forest dark:text-nectar-mint">
@@ -477,51 +530,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ==========================================================================
-           BENTO FEATURES GRID (with Staggered Scroll Reveal)
-           ========================================================================== */}
-      <section id="features" className="scroll-mt-28 py-20 px-6 sm:px-10 max-w-6xl mx-auto reveal-on-scroll">
-        <div className="text-center max-w-xl mx-auto mb-14">
-          <span className="text-xs font-bold uppercase tracking-wider text-nectar-forest dark:text-nectar-mint">
-            Designed for Serenity
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-nectar-forest dark:text-nectar-mint mt-2 mb-3">
-            Everything you need.<br />Nothing you don't.
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white dark:bg-nectar-darkCard p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar space-y-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-nectar-float">
-            <div className="w-10 h-10 rounded-xl bg-nectar-wasabi dark:bg-nectar-forest/20 flex items-center justify-center text-nectar-forest dark:text-nectar-mint">
-              <Sparkles className="w-5 h-5" />
-            </div>
-            <h3 className="font-bold text-base text-nectar-forest dark:text-nectar-mint">Natural Language Parsing</h3>
-            <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
-              Log expenses by typing casually like "₹450 dinner with team". Our parser extracts amount, category, and date automatically.
-            </p>
-          </div>
-
-          <div className="bg-white dark:bg-nectar-darkCard p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar space-y-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-nectar-float">
-            <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/20 flex items-center justify-center text-amber-600">
-              <Zap className="w-5 h-5" />
-            </div>
-            <h3 className="font-bold text-base text-nectar-forest dark:text-nectar-mint">Daily Safe-to-Spend Limit</h3>
-            <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
-              Dynamic calculations that divide remaining discretionary allowance by the days remaining in your monthly billing cycle.
-            </p>
-          </div>
-
-          <div className="bg-white dark:bg-nectar-darkCard p-8 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar space-y-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-nectar-float">
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/20 flex items-center justify-center text-emerald-600">
-              <Lock className="w-5 h-5" />
-            </div>
-            <h3 className="font-bold text-base text-nectar-forest dark:text-nectar-mint">Zero Telemetry & Offline</h3>
-            <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
-              Your financial records never leave your browser. Full CRUD and export capabilities operate completely client-side in localStorage.
-            </p>
-          </div>
-        </div>
-      </section>
 
       {/* ==========================================================================
            CALL TO ACTION (Nectar Luxury Banner)
@@ -555,7 +563,7 @@ export default function Home() {
       {/* ==========================================================================
            FOOTER (Nectar Editorial Layout)
            ========================================================================== */}
-      <footer id="integrity" className="scroll-mt-28 border-t border-nectar-forest/10 dark:border-nectar-darkBorder py-12 px-6 sm:px-10 max-w-6xl mx-auto text-xs text-gray-500 dark:text-gray-400 reveal-on-scroll">
+      <footer id="integrity" className="scroll-mt-24 border-t border-nectar-forest/10 dark:border-nectar-darkBorder py-12 px-6 sm:px-10 max-w-6xl mx-auto text-xs text-gray-500 dark:text-gray-400 reveal-on-scroll">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-2 text-nectar-forest dark:text-nectar-mint font-bold">
             <Leaf className="w-4 h-4" />

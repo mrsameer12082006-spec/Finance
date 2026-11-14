@@ -1,8 +1,8 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 
 /**
- * Hook for hardware-accelerated sliding navigation pill indicator,
- * based on zaro.ai's desktop navigation system.
+ * Hook for hardware-accelerated sliding navigation pill indicator.
+ * Provides micro-smooth pill sliding transitions between tabs.
  */
 export function useNavIndicator() {
   const containerRef = useRef(null);
@@ -21,13 +21,16 @@ export function useNavIndicator() {
     const itemRect = item.getBoundingClientRect();
     const containerRect = container.getBoundingClientRect();
 
+    let left = itemRect.left - containerRect.left;
+    if (Math.abs(left) < 1) left = 0;
+
     setIndicator((prev) => {
       if (!prev.visible) {
         setMounted(false);
         requestAnimationFrame(() => setMounted(true));
       }
       return {
-        left: itemRect.left - containerRect.left,
+        left,
         width: itemRect.width,
         visible: true,
       };
@@ -39,15 +42,28 @@ export function useNavIndicator() {
     setIndicator((prev) => ({ ...prev, visible: false }));
   }, []);
 
-  // Recalculate indicator position on resize
+  // Recalculate indicator position on resize or font loading
   useEffect(() => {
-    const handleResize = () => {
-      if (currentTargetRef.current) {
-        moveTo(currentTargetRef.current);
-      }
+    let rafId = null;
+    const updatePosition = () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        if (currentTargetRef.current) {
+          moveTo(currentTargetRef.current);
+        }
+      });
     };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+
+    updatePosition();
+    window.addEventListener('resize', updatePosition);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(updatePosition);
+    }
+
+    return () => {
+      window.removeEventListener('resize', updatePosition);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, [moveTo]);
 
   return {
@@ -59,3 +75,4 @@ export function useNavIndicator() {
     hide,
   };
 }
+
