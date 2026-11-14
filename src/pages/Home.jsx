@@ -6,7 +6,6 @@ import {
   ArrowRight, 
   Check, 
   Sparkles, 
-  ShieldCheck, 
   TrendingUp, 
   PieChart, 
   Zap, 
@@ -204,26 +203,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Social Proof Trust Ribbon */}
-        <div className="mt-16 pt-8 border-t border-nectar-forest/10 dark:border-nectar-darkBorder flex flex-wrap items-center justify-center gap-8 sm:gap-14 text-xs font-medium text-gray-500 dark:text-gray-400">
-          <div className="flex items-center gap-2">
-            <div className="text-amber-500 flex">★★★★★</div>
-            <span className="font-bold text-gray-800 dark:text-gray-200">Rated 4.9 / 5.0</span>
-            <span>by 12,000+ members</span>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-nectar-emerald" />
-            <span className="font-bold text-gray-800 dark:text-gray-200">FinTech Award 2026</span>
-            <span>Best Planning UX</span>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-nectar-forest dark:text-nectar-mint" />
-            <span className="font-bold text-gray-800 dark:text-gray-200">100% Private</span>
-            <span>Client-side storage</span>
-          </div>
-        </div>
       </section>
 
       {/* ==========================================================================
