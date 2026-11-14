@@ -1,80 +1,74 @@
-# Nectar &bull; Smart Expense Tracker & Financial Insights Dashboard
+# 🌿 Nectar &bull; Smart Expense Tracker & Financial Insights Dashboard
 
-A modern full-stack-ready frontend architecture for personal finance tracking and automated 50/30/20 money flow, built with **React + Vite** and styled with the serene aesthetic, typography, and micro-interactions of **Nectar**.
+[![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](LICENSE)
+[![React](https://img.shields.io/badge/React-18.3.1-61dafb.svg)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-6.0.1-646cff.svg)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.15-38bdf8.svg)](https://tailwindcss.com/)
+[![shadcn/ui compatible](https://img.shields.io/badge/shadcn%2Fui-compatible-black.svg)](https://ui.shadcn.com/)
+
+A modern, open-source personal finance tracking architecture that turns paycheck anxiety into automated financial clarity. Designed with serene aesthetic tokens, glassmorphism, fluid micro-interactions, and offline zero-telemetry client-side privacy.
+
+---
+
+## ✨ Highlights & Features
+
+### 1. 🧭 Morphing Glassmorphic Navbar & Smooth Navigation
+- **Scroll-Driven Retraction**: The navigation bar smoothly morphs between a full-width header at the top of the page into an edge-frosted, floating capsule pill as you scroll down.
+- **Hardware-Accelerated Indicator Pill**: A GPU-composited sliding green indicator pill dynamically glides across navigation links with zero subpixel jitter.
+- **ScrollSpy with Conflict Locking (`lockSpy`)**: Programmatic navigation clicks lock the active section tracker during travel, preventing intermediate sections from hijacking state.
+
+### 2. 📊 Executive Financial Insights Dashboard
+- **Daily Safe-to-Spend Velocity**: Automatically calculates your guilt-free daily allowance based on remaining discretionary budget and billing days left.
+- **50/30/20 Financial Equilibrium**: Automatically splits monthly net income into Essential Needs ($50\%$), Lifestyle Wants ($30\%$), and Wealth/Savings Growth ($20\%$).
+- **Visual Analytics (Recharts)**: Interactive hoverable Category Distribution Donut Chart and 30-Day Spending Trajectory Area Curve.
+- **Natural Language Parsing**: Log expenses effortlessly by typing casually (e.g. *"₹450 dinner with team"* or *"Uber ₹280"*).
+
+### 3. 🎨 High-End Animations & Micro-Interactions
+- **Ambient Drifting Auras**: Multi-layered organic floating gradient blobs (`animate-ambient-drift-1` & `2`) that breathe depth into backgrounds.
+- **Interactive Cursor-Following Glow**: Dynamic ambient radial green aura that fluidly follows your mouse across the authentication and landing pages.
+- **Luxury Button Sheen (`.btn-shine`)**: $45^\circ$ specular light-sweep reflection gliding across primary CTA buttons on hover.
+- **Apple-Style Spring Modals**: Modal drawers pop smoothly into view using physics-inspired cubic-bezier spring easing.
+- **Interactive Stacked Ratio Bar**: Real-time visual 50/30/20 breakdown that updates live as you drag the income calculator slider.
+
+### 4. 🔒 Zero-Telemetry Client-Side Privacy
+- Your financial records never leave your browser.
+- Full CRUD operations, budget ceilings, and CSV export operate completely client-side in browser `localStorage`.
+
+### 5. 🧩 shadcn/ui & TypeScript Architecture
+- Standardized `components/ui` directory for atomic reusable primitives.
+- Path aliases configured (`@/*` mapping to `./src/*`) with `components.json` and `src/lib/utils.ts` (`cn` helper).
+- Fully supports `.tsx` TypeScript components out-of-the-box.
 
 ---
 
 ## 🚀 Tech Stack
 
-- **React 18 (Vite, ES6+)** — Blazing fast component runtime with Hot Module Replacement (HMR).
-- **Redux Toolkit + React Redux** — Predictable, modular state management with typed slices (`authSlice`, `expenseSlice`, `themeSlice`).
-- **React Router (v6)** — Declarative client-side routing with route-level code splitting and `React.lazy` / `Suspense`.
-- **Tailwind CSS** — Utility-first styling configured with Nectar design tokens (warm peach `#FFFBF7`, deep forest `#054F31`, mint `#D1FADF`, pill buttons, and responsive grid layouts).
-- **Recharts** — Interactive, responsive data visualizations (Donut / Pie category chart and daily spending velocity area chart).
-- **LocalStorage Persistence** — Zero backend required for immediate demo; mock authentication and transactional data are persisted locally.
-- **Lucide Icons** — Clean, minimalist iconography.
+- **Framework**: React 18 + Vite 6
+- **State Management**: Redux Toolkit + React Redux
+- **Routing**: React Router DOM (v6) with code-splitting (`React.lazy` / `Suspense`)
+- **Styling**: Tailwind CSS (with custom Nectar palette & CSS variables)
+- **Visualizations**: Recharts (PieChart, ResponsiveContainer, AreaChart)
+- **Icons**: Lucide React
+- **Utilities**: `clsx`, `tailwind-merge`
 
 ---
 
-## ✨ Features
-
-### 1. Mock Authentication & Session Persistence
-- Login & Registration flows with persistent session in browser `localStorage`.
-- One-click "Use Demo Credentials" button for instant testing.
-- Protected route layout with user avatar and session status.
-
-### 2. Executive Financial Insights Dashboard
-- **Monthly Total Spending** metric with calculated Month-over-Month (MoM) delta.
-- **Daily Safe-to-Spend limit** dynamically calculated from remaining discretionary budget and days left in the month.
-- **Category-wise Donut Chart (Recharts)** with interactive hover tooltips and center total readout.
-- **Daily Trend Area Chart (Recharts)** showing cumulative spending velocity across the 30-day billing cycle.
-- **50/30/20 Financial Equilibrium** progress bars tracking Essential Needs (50%), Lifestyle Wants (30%), and Savings/Growth (20%).
-- **Rule-Based Smart Insights** highlighting top expense categories, budget threshold warnings, and wealth accumulation progress.
-- **Natural Language Quick Entry** bar in the dashboard header (e.g. `"$45 dinner at Nobu"`, `"$18.99 Netflix"`).
-
-### 3. Expense Management (Full CRUD)
-- **Add, Edit, and Delete** expenses with validation.
-- Support for Title, Amount, Category (9 distinct groups), 50/30/20 Group, Date, Payment Method, and Notes.
-- Modal drawer with smooth entrance animations.
-
-### 4. Search, Filtering, and Sorting
-- **Debounced search** across titles, notes, and payment methods.
-- **Category filter chips** for instant single-category isolation.
-- **Date range filter** (start date and end date).
-- **Multi-criteria sorting**: Sort by Date (newest/oldest) and Amount (high/low).
-- **Pagination** controls for handling large transaction volumes.
-
-### 5. Budget Settings & Alerts
-- Monthly Spending Ceiling configuration with automatic real-time exceeded alert status.
-- Monthly Take-Home Income adjustment for 50/30/20 goal recalibration.
-- Category-level budget limit settings.
-
-### 6. UI/UX & Dark Mode
-- Collapsible sidebar navigation for desktop and mobile drawer.
-- Floating top navigation bar with user profile.
-- Dark mode toggle with persistent theme selection.
-- Pill buttons with smooth active scale effects.
-
-### 7. Data Export (CSV)
-- Export all filtered transactions into a `.csv` file with a single click.
-
----
-
-## 📁 Project Structure
+## 📁 Directory Structure
 
 ```
-w3/
-├── index.html
-├── package.json
-├── postcss.config.js
-├── tailwind.config.js
-├── vite.config.js
+nectar/
+├── components.json          # shadcn/ui configuration
+├── tsconfig.json            # TypeScript path resolution (@/*)
+├── tailwind.config.js       # Design tokens & semantic HSL variables
+├── vite.config.js           # Vite config with path aliases
+├── LICENSE                  # Open-source MIT License
 ├── README.md
 └── src/
-    ├── App.jsx
-    ├── index.css
-    ├── main.jsx
+    ├── App.jsx              # App layout, lazy routes & theme wrapper
+    ├── index.css            # Glassmorphism, keyframes & animations
+    ├── main.jsx             # React DOM root & Redux Provider
     ├── components/
+    │   ├── ui/              # Reusable shadcn/ui primitives (sign-in, etc.)
     │   ├── CategoryPieChart.jsx
     │   ├── DailyTrendChart.jsx
     │   ├── ExpenseModal.jsx
@@ -84,13 +78,18 @@ w3/
     │   └── Sidebar.jsx
     ├── hooks/
     │   ├── useDebounce.js
-    │   └── useFinancialInsights.js
+    │   ├── useFinancialInsights.js
+    │   ├── useNavIndicator.js
+    │   └── useScrollSpy.js
+    ├── lib/
+    │   └── utils.ts         # shadcn cn() class combiner
     ├── pages/
     │   ├── BudgetSettings.jsx
     │   ├── Dashboard.jsx
     │   ├── Expenses.jsx
+    │   ├── Home.jsx         # Landing page with interactive engine
     │   ├── Login.jsx
-    │   └── Signup.jsx
+    │   └── Signup.jsx       # Register with cursor-following aura
     ├── redux/
     │   ├── store.js
     │   └── slices/
@@ -101,37 +100,59 @@ w3/
     │   └── localStorageService.js
     └── utils/
         ├── csvExport.js
-        └── formatters.js
+        ├── formatters.js
+        └── smoothScroll.js
 ```
 
 ---
 
-## 🛠️ Getting Started
+## 🛠️ Quick Start
 
-### 1. Install Dependencies
+### 1. Clone the repository
+```bash
+git clone https://github.com/your-username/nectar-smart-finance.git
+cd nectar-smart-finance
+```
+
+### 2. Install dependencies
 ```bash
 npm install
 ```
 
-### 2. Start Development Server
+### 3. Run development server
 ```bash
 npm run dev
 ```
-The application will launch at `http://localhost:3000`.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### 3. Build for Production
+### 4. Build for production
 ```bash
 npm run build
 ```
 Creates an optimized production bundle inside the `dist/` directory.
 
-### 4. Preview Production Build
+### 5. Preview production build
 ```bash
 npm run preview
 ```
 
 ---
 
-## 📝 Notes
-- All data is persisted in browser `localStorage` (no external database or server required).
-- The state management and service layer (`localStorageService.js`) are modular and ready to swap for a real REST or GraphQL API backend.
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+Feel free to check the [issues page](https://github.com/your-username/nectar-smart-finance/issues) if you want to contribute.
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+Copyright &copy; 2026 Nectar Contributors.
