@@ -1,0 +1,147 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@layer base {
+  html {
+    scroll-padding-top: 6rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+/* Nectar Signature Pill Button with scale-fill effect */
+.btn-nectar {
+  @apply relative inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full font-semibold text-sm transition-all duration-200 overflow-hidden active:scale-95;
+}
+
+.btn-nectar-primary {
+  @apply bg-nectar-forest text-white hover:text-nectar-mint hover:bg-nectar-emerald dark:bg-nectar-emerald dark:hover:bg-nectar-forest shadow-sm;
+}
+
+.btn-nectar-secondary {
+  @apply bg-white dark:bg-nectar-darkCard text-nectar-forest dark:text-nectar-mint border border-nectar-forest/15 dark:border-nectar-darkBorder hover:bg-nectar-wasabi dark:hover:bg-nectar-darkBg;
+}
+
+.btn-nectar-mint {
+  @apply bg-nectar-mint text-nectar-forest hover:bg-emerald-200 font-bold;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 dark:bg-gray-700 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400 dark:bg-gray-600;
+}
+
+/* ==========================================================================
+   ZARO.AI REVERSE-ENGINEERED SCROLL & SWITCHING ANIMATIONS
+   ========================================================================== */
+
+/* Keyframe Animations from zaro.ai */
+@keyframes hero-fade-in {
+  0% {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(18px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-fade-in {
+  animation: hero-fade-in 0.8s var(--ease-out-expo) both;
+}
+
+.hero-fade-in--headline {
+  animation-delay: 0.05s;
+}
+
+.hero-fade-in--subhead {
+  animation-delay: 0.18s;
+}
+
+.hero-fade-in--cta {
+  animation-delay: 0.3s;
+}
+
+/* Scroll reveal utility (inspired by zaro.ai render-on-scroll) */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays for revealed grid items */
+.stagger-1 { transition-delay: 60ms; }
+.stagger-2 { transition-delay: 140ms; }
+.stagger-3 { transition-delay: 220ms; }
+.stagger-4 { transition-delay: 300ms; }
+
+/* Sliding nav pill indicator transition matching zaro.ai */
+.nav-indicator-glide {
+  transition: transform 280ms var(--ease-out-expo), width 280ms var(--ease-out-expo), opacity 200ms ease;
+  will-change: transform, width, opacity;
+}
+
+/* Money flow tab crossfade & morph transition */
+.tab-content-morph {
+  transition: opacity 320ms var(--ease-out-expo), transform 320ms var(--ease-out-expo);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-fade-in,
+  .reveal-on-scroll,
+  .nav-indicator-glide,
+  .tab-content-morph {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
