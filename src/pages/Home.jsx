@@ -684,12 +684,6 @@ export default function Home() {
             <span>Nectar Smart Finance</span>
           </div>
 
-          <div className="flex items-center gap-6">
-            <Link to="/login" className="hover:text-nectar-forest dark:hover:text-nectar-mint">Log in</Link>
-            <Link to="/signup" className="hover:text-nectar-forest dark:hover:text-nectar-mint">Sign up</Link>
-            <Link to="/dashboard" className="hover:text-nectar-forest dark:hover:text-nectar-mint">Dashboard</Link>
-          </div>
-
           <p className="text-center sm:text-right">
             © 2026 Nectar Smart Finance. Mindful wealth & automated cashflow.
           </p>
