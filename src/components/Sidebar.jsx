@@ -47,7 +47,7 @@ export default function Sidebar({ isOpen, onClose }) {
         <div>
           {/* Logo Brand Header */}
           <div className="h-20 flex items-center justify-between px-6 border-b border-nectar-forest/10 dark:border-nectar-darkBorder">
-            <NavLink to="/" className="flex items-center gap-3">
+            <div className="flex items-center gap-3 select-none">
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-nectar-emerald to-nectar-forest flex items-center justify-center text-white shadow-md">
                 <Leaf className="w-5 h-5 text-nectar-mint" />
               </div>
@@ -59,7 +59,7 @@ export default function Sidebar({ isOpen, onClose }) {
                   Smart Expense & Insights
                 </span>
               </div>
-            </NavLink>
+            </div>
 
             <button 
               onClick={onClose} 
