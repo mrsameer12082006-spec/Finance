@@ -16,6 +16,7 @@ import {
 import { toggleTheme } from '../redux/slices/themeSlice';
 import { loginSuccess } from '../redux/slices/authSlice';
 import { formatCurrency } from '../utils/formatters';
+import CursorAura from '../components/CursorAura';
 import { smoothScrollTo } from '../utils/smoothScroll';
 import { useNavIndicator } from '../hooks/useNavIndicator';
 import { useScrollSpy } from '../hooks/useScrollSpy';
@@ -200,7 +201,10 @@ export default function Home() {
   }, [activeTab, flowTabs.length]);
 
   return (
-    <div className="min-h-screen bg-nectar-canvas dark:bg-nectar-darkBg text-gray-900 dark:text-gray-100 transition-colors">
+    <div className="relative isolate min-h-screen bg-nectar-canvas dark:bg-nectar-darkBg text-gray-900 dark:text-gray-100 transition-colors">
+      {/* Cursor-following green aura (same effect as the login page) */}
+      <CursorAura />
+
       
       {/* ==========================================================================
            RETRACTING NAVBAR (Full-width at top -> Morphs into Floating Pill on scroll)
