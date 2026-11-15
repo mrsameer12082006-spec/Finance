@@ -73,14 +73,14 @@ export default function App() {
         {/* Public Landing Home Page */}
         <Route path="/" element={<Home />} />
 
-        {/* Auth Routes */}
+        {/* Auth Routes (always reachable, even if a login is saved in the browser) */}
         <Route 
           path="/login" 
-          element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <Login />} 
+          element={<Login />} 
         />
         <Route 
           path="/signup" 
-          element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <Signup />} 
+          element={<Signup />} 
         />
         <Route 
           path="/signin-demo" 
