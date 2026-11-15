@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
 import ExpenseModal from './components/ExpenseModal';
+import BackgroundAnimation from './components/BackgroundAnimation';
 
 // Lazy-loaded routes for performance
 const Home = lazy(() => import('./pages/Home'));
@@ -16,9 +17,9 @@ const SignInPageDemo = lazy(() => import('./components/ui/demo'));
 
 function LoadingFallback() {
   return (
-    <div className="min-h-screen bg-nectar-canvas dark:bg-nectar-darkBg flex flex-col items-center justify-center gap-3">
-      <div className="w-9 h-9 border-3 border-nectar-mint border-t-nectar-forest rounded-full animate-spin" />
-      <span className="text-xs font-semibold text-gray-500">Loading Nectar Finance...</span>
+    <div className="min-h-screen bg-transparent flex flex-col items-center justify-center gap-3">
+      <div className="w-9 h-9 border-3 border-teal-200 border-t-teal-700 rounded-full animate-spin" />
+      <span className="text-xs font-semibold text-slate-500">Loading Nectar Finance...</span>
     </div>
   );
 }
@@ -29,7 +30,7 @@ function ProtectedLayout() {
   const [addModalOpen, setAddModalOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-nectar-canvas dark:bg-nectar-darkBg transition-colors flex">
+    <div className="min-h-screen bg-transparent transition-colors flex">
       {/* Sidebar Navigation */}
       <Sidebar 
         isOpen={sidebarOpen} 
@@ -68,42 +69,47 @@ export default function App() {
   const { isAuthenticated } = useSelector((state) => state.auth);
 
   return (
-    <Suspense fallback={<LoadingFallback />}>
-      <Routes>
-        {/* Public Landing Home Page */}
-        <Route path="/" element={<Home />} />
+    <>
+      {/* Site-wide Living Ambient Background (Nectar Flow) */}
+      <BackgroundAnimation />
 
-        {/* Auth Routes */}
-        <Route 
-          path="/login" 
-          element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <Login />} 
-        />
-        <Route 
-          path="/signup" 
-          element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <Signup />} 
-        />
-        <Route 
-          path="/signin-demo" 
-          element={<SignInPageDemo />} 
-        />
+      <Suspense fallback={<LoadingFallback />}>
+        <Routes>
+          {/* Public Landing Home Page */}
+          <Route path="/" element={<Home />} />
 
-        {/* Protected Dashboard & App Routes */}
-        <Route 
-          path="/dashboard/*" 
-          element={isAuthenticated ? <ProtectedLayout /> : <Navigate to="/login" replace />} 
-        />
-        <Route 
-          path="/expenses/*" 
-          element={isAuthenticated ? <ProtectedLayout /> : <Navigate to="/login" replace />} 
-        />
-        <Route 
-          path="/budget/*" 
-          element={isAuthenticated ? <ProtectedLayout /> : <Navigate to="/login" replace />} 
-        />
+          {/* Auth Routes */}
+          <Route 
+            path="/login" 
+            element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <Login />} 
+          />
+          <Route 
+            path="/signup" 
+            element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <Signup />} 
+          />
+          <Route 
+            path="/signin-demo" 
+            element={<SignInPageDemo />} 
+          />
 
-        {/* Fallback */}
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </Suspense>
+          {/* Protected Dashboard & App Routes */}
+          <Route 
+            path="/dashboard/*" 
+            element={isAuthenticated ? <ProtectedLayout /> : <Navigate to="/login" replace />} 
+          />
+          <Route 
+            path="/expenses/*" 
+            element={isAuthenticated ? <ProtectedLayout /> : <Navigate to="/login" replace />} 
+          />
+          <Route 
+            path="/budget/*" 
+            element={isAuthenticated ? <ProtectedLayout /> : <Navigate to="/login" replace />} 
+          />
+
+          {/* Fallback */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Suspense>
+    </>
   );
 }

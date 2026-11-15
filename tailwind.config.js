@@ -30,23 +30,35 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
         nectar: {
-          canvas: '#FFFBF7',
-          canvasSubtle: '#F6F3EE',
-          forest: '#054F31',
-          emerald: '#0B7443',
-          accent: '#039855',
-          mint: '#D1FADF',
-          mintLight: '#E8F5EB',
-          leaf: '#61BC76',
-          wasabi: '#F2F9EB',
-          peach: '#FEE9D1',
-          peachLight: '#FFF2E4',
-          peachDeep: '#4E3411',
-          droplet: '#EFF7FF',
-          darkBg: '#09110D',
-          darkCard: '#111F17',
-          darkBorder: '#1A2E22',
-          darkMuted: '#8E9E94',
+          // Architectural Cool White Surfaces
+          canvas: '#F8FAFC',        // Slate-50 crisp cool white
+          canvasSubtle: '#F1F5F9',  // Slate-100 soft fog
+          surface: '#FFFFFF',       // Pure elevated card white
+          
+          // Deep Obsidian Slate Typography & Core Branding (Decent & High-End)
+          forest: '#0F172A',        // Slate-900 obsidian
+          emerald: '#164E63',       // Glacial Spruce / Deep Cyan-Slate
+          accent: '#0E7490',        // Calm Glacial Teal
+          mineral: '#1E3A34',       // Deep Pine
+          
+          // Soothing Ice & Mist Highlights (No AI-slop neons)
+          mint: '#E0F2FE',          // Frosted Glacial Sky (soothing active pill)
+          mintLight: '#F0F9FF',     // Whisper-light frost
+          leaf: '#38BDF8',          // Clean ice-water accent
+          wasabi: '#F1F5F9',        // Replaces muddy green with refined cool fog
+          
+          // Refined Slate & Fog replacements for peach
+          peach: '#F8FAFC',         // Subtle badge slate
+          peachLight: '#F1F5F9',
+          peachDeep: '#334155',     // Slate-700
+          
+          droplet: '#F0F9FF',
+          
+          // Dark Mode (Midnight Celestial Ink)
+          darkBg: '#0B0F17',        // Deep celestial slate-ink
+          darkCard: '#111827',      // Elevated dark surface (Slate-900)
+          darkBorder: '#1E293B',    // Hairline dark border (Slate-800)
+          darkMuted: '#94A3B8',     // Muted text (Slate-400)
         }
       },
       fontFamily: {
@@ -61,9 +73,13 @@ export default {
         '2card': '2rem'
       },
       boxShadow: {
-        'nectar': '0 16px 32px -8px rgba(5, 79, 49, 0.06), 0 4px 8px -2px rgba(5, 79, 49, 0.03)',
-        'nectar-float': '0 24px 48px -12px rgba(5, 79, 49, 0.12), 0 8px 16px -4px rgba(5, 79, 49, 0.06)',
-        'nectar-glow': '0 0 25px rgba(11, 116, 67, 0.15)'
+        'nectar': '0 16px 32px -8px rgba(15, 23, 42, 0.05), 0 4px 8px -2px rgba(15, 23, 42, 0.02)',
+        'nectar-float': '0 20px 40px -12px rgba(15, 23, 42, 0.08), 0 8px 16px -4px rgba(15, 23, 42, 0.04)',
+        'nectar-glow': '0 0 35px rgba(56, 189, 248, 0.12)',
+        'xs': '0 1px 2px 0 rgba(15, 23, 42, 0.04)',
+      },
+      transitionTimingFunction: {
+        'out-expo': 'cubic-bezier(0.16, 1, 0.3, 1)',
       }
     },
   },

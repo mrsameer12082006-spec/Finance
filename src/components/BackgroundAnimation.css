@@ -1,0 +1,152 @@
+/* src/components/BackgroundAnimation.css */
+
+/* ---------- GLOBAL WRAPPER ---------- */
+.nectar-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  background: hsl(var(--background));
+}
+
+/* ---------- LAYER 1: BREATHING GRADIENT BASE ---------- */
+.nectar-bg__base {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+      circle at 20% 30%,
+      rgba(209, 250, 223, 0.40) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(239, 247, 255, 0.35) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(248, 250, 252, 0.75) 0%,
+      transparent 70%
+    );
+  animation: nectar-breathe 24s ease-in-out infinite alternate;
+}
+
+.dark .nectar-bg__base {
+  background: radial-gradient(
+      circle at 20% 30%,
+      rgba(11, 116, 67, 0.22) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(56, 189, 248, 0.12) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(11, 15, 23, 0.92) 0%,
+      transparent 70%
+    );
+}
+
+@keyframes nectar-breathe {
+  0%   { transform: scale(1) translate(0, 0); }
+  50%  { transform: scale(1.04) translate(-1%, 1%); }
+  100% { transform: scale(1.02) translate(1%, -1%); }
+}
+
+/* ---------- LAYER 2: ORGANIC FLOATING BLOBS ---------- */
+.nectar-bg__blobs {
+  position: absolute;
+  inset: 0;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  filter: blur(80px);
+  opacity: 0.55;
+  will-change: transform;
+  animation: nectar-drift var(--speed) ease-in-out infinite alternate;
+}
+
+/* Light-mode blob colours */
+.blob--1 { top: -10%; left: -5%;  width: 45vw; height: 45vw; background: #D1FADF; --speed: 18s; animation-delay: 0s; }
+.blob--2 { top: 40%;  right: -8%; width: 38vw; height: 38vw; background: #F2F9EB; --speed: 22s; animation-delay: -4s; }
+.blob--3 { bottom: -12%; left: 15%; width: 40vw; height: 40vw; background: #EFF7FF; --speed: 20s; animation-delay: -8s; }
+.blob--4 { top: 10%;  right: 10%; width: 30vw; height: 30vw; background: #FEE9D1; --speed: 26s; animation-delay: -2s; }
+.blob--5 { top: 60%;  left: -5%;  width: 35vw; height: 35vw; background: #61BC76; --speed: 24s; animation-delay: -6s; opacity: 0.25; }
+.blob--6 { top: 20%;  left: 40%;  width: 28vw; height: 28vw; background: #0B7443; --speed: 28s; animation-delay: -10s; opacity: 0.18; }
+
+/* Dark-mode blob colours – richer, deeper greens & midnight cyan */
+.dark .blob--1 { background: #0B7443; opacity: 0.30; }
+.dark .blob--2 { background: #054F31; opacity: 0.35; }
+.dark .blob--3 { background: #164E63; opacity: 0.40; }
+.dark .blob--4 { background: #4E3411; opacity: 0.20; }
+.dark .blob--5 { background: #0E7490; opacity: 0.20; }
+.dark .blob--6 { background: #0F766E; opacity: 0.18; }
+
+@keyframes nectar-drift {
+  0% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translate(4%, -3%) scale(1.08) rotate(8deg);
+  }
+  100% {
+    transform: translate(-3%, 2%) scale(0.95) rotate(-6deg);
+  }
+}
+
+/* ---------- LAYER 3: GRAIN & PARTICLES ---------- */
+.nectar-bg__grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+
+.dark .nectar-bg__grain {
+  opacity: 0.06;
+  mix-blend-mode: screen;
+}
+
+.nectar-bg__particles {
+  position: absolute;
+  inset: 0;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(14, 116, 144, 0.30);
+  animation: nectar-float linear infinite;
+}
+
+.dark .particle {
+  background: rgba(56, 189, 248, 0.20);
+}
+
+.particle--1 { width: 4px; height: 4px; top: 10%; left: 20%; animation-duration: 35s; animation-delay: -5s; }
+.particle--2 { width: 3px; height: 3px; top: 70%; left: 80%; animation-duration: 42s; animation-delay: -12s; }
+.particle--3 { width: 5px; height: 5px; top: 30%; left: 60%; animation-duration: 38s; animation-delay: -8s; }
+.particle--4 { width: 2px; height: 2px; top: 85%; left: 35%; animation-duration: 45s; animation-delay: -20s; }
+
+@keyframes nectar-float {
+  0%   { transform: translate(0, 0) scale(1); opacity: 0.2; }
+  25%  { transform: translate(15px, -20px) scale(1.2); opacity: 0.5; }
+  50%  { transform: translate(-10px, -35px) scale(0.8); opacity: 0.3; }
+  75%  { transform: translate(20px, -15px) scale(1.1); opacity: 0.6; }
+  100% { transform: translate(0, 0) scale(1); opacity: 0.2; }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .nectar-bg__base,
+  .blob,
+  .particle {
+    animation: none !important;
+  }
+}

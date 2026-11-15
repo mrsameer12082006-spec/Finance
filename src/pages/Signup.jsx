@@ -114,7 +114,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="min-h-screen bg-nectar-canvas dark:bg-nectar-darkBg flex items-center justify-center p-4 sm:p-6 lg:p-10 transition-colors relative overflow-hidden">
+    <div className="min-h-screen bg-transparent flex items-center justify-center p-4 sm:p-6 lg:p-10 transition-colors relative overflow-hidden">
       {/* Floating Interactive Cursor-Tracking Green Aura ("where ever cursor goes outside the form") */}
       <div
         className={`pointer-events-none fixed -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl will-change-transform z-0 ${

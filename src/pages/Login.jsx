@@ -68,7 +68,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-nectar-canvas dark:bg-nectar-darkBg flex items-center justify-center p-6 transition-colors relative overflow-hidden">
+    <div className="min-h-screen bg-transparent flex items-center justify-center p-6 transition-colors relative overflow-hidden">
       {/* Floating Interactive Cursor-Tracking Green Aura */}
       <div
         className={`pointer-events-none fixed -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl will-change-transform z-0 ${

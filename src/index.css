@@ -6,36 +6,37 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
-  /* shadcn UI semantic theme variables (aligned with Nectar palette) */
-  --background: 40 43% 99%;
-  --foreground: 153 88% 16%;
-  --card: 0 0% 100%;
-  --card-foreground: 153 88% 16%;
-  --primary: 153 88% 16%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 138 78% 90%;
-  --secondary-foreground: 153 88% 16%;
-  --muted: 36 25% 94%;
-  --muted-foreground: 215 16% 47%;
-  --border: 153 20% 88%;
-  --input: 153 20% 88%;
-  --ring: 153 88% 16%;
+  /* Minimal Architectural Cool White Theme Variables */
+  --background: 210 40% 98%;      /* #F8FAFC Cool White */
+  --foreground: 222 47% 11%;      /* #0F172A Deep Obsidian Slate */
+  --card: 0 0% 100%;              /* #FFFFFF Crisp Elevated White */
+  --card-foreground: 222 47% 11%; /* #0F172A */
+  --primary: 222 47% 11%;         /* #0F172A Slate-900 */
+  --primary-foreground: 0 0% 100%;/* #FFFFFF */
+  --secondary: 210 40% 96%;       /* #F1F5F9 Soft Slate Fog */
+  --secondary-foreground: 222 47% 11%;
+  --muted: 210 40% 96%;           /* #F1F5F9 */
+  --muted-foreground: 215 16% 47%;/* #64748B */
+  --border: 214 32% 91%;          /* #E2E8F0 Hairline Border */
+  --input: 214 32% 91%;           /* #E2E8F0 */
+  --ring: 222 47% 11%;
 }
 
 .dark {
-  --background: 147 31% 5%;
-  --foreground: 138 78% 90%;
-  --card: 146 29% 10%;
-  --card-foreground: 138 78% 90%;
-  --primary: 151 83% 25%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 146 28% 15%;
-  --secondary-foreground: 138 78% 90%;
-  --muted: 146 28% 15%;
-  --muted-foreground: 145 10% 60%;
-  --border: 146 28% 18%;
-  --input: 146 28% 18%;
-  --ring: 151 83% 25%;
+  /* Midnight Celestial Ink (Clean Dark Mode) */
+  --background: 222 47% 6%;       /* #0B0F17 Deep Celestial Ink */
+  --foreground: 210 40% 98%;      /* #F8FAFC Crisp Text */
+  --card: 217 33% 11%;            /* #111827 Dark Surface */
+  --card-foreground: 210 40% 98%;
+  --primary: 210 40% 98%;         /* #F8FAFC */
+  --primary-foreground: 222 47% 11%;
+  --secondary: 217 33% 17%;       /* #1E293B */
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217 33% 17%;           /* #1E293B */
+  --muted-foreground: 215 20% 65%;/* #94A3B8 */
+  --border: 217 33% 20%;          /* #1E293B */
+  --input: 217 33% 20%;
+  --ring: 199 89% 48%;            /* Subtle Ice Highlight */
 }
 
 @layer base {
@@ -60,53 +61,53 @@
 }
 
 .btn-nectar-primary {
-  @apply bg-nectar-forest text-white hover:text-nectar-mint hover:bg-nectar-emerald dark:bg-nectar-emerald dark:hover:bg-nectar-forest shadow-sm;
+  @apply bg-slate-900 text-white hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white shadow-sm border border-slate-900/10 dark:border-white/20;
 }
 
 .btn-nectar-secondary {
-  @apply bg-white dark:bg-nectar-darkCard text-nectar-forest dark:text-nectar-mint border border-nectar-forest/15 dark:border-nectar-darkBorder hover:bg-nectar-wasabi dark:hover:bg-nectar-darkBg;
+  @apply bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/80 shadow-xs;
 }
 
 .btn-nectar-mint {
-  @apply bg-nectar-mint text-nectar-forest hover:bg-emerald-200 font-bold;
+  @apply bg-slate-900 text-white hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100 font-semibold shadow-xs;
 }
 
 /* ==========================================================================
-   GLASSMORPHISM STYLES (Frosted Glass with Specular Bevel & Refraction)
+   GLASSMORPHISM STYLES (Cool White Frosted Glass with Specular Bevel)
    ========================================================================== */
 .glass-nectar-pill {
-  background: rgba(255, 255, 255, 0.60);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.75);
-  box-shadow: 0 16px 40px -8px rgba(5, 79, 49, 0.12),
-              0 2px 6px -1px rgba(5, 79, 49, 0.04),
-              inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.90);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 16px 40px -8px rgba(15, 23, 42, 0.06),
+              0 2px 6px -1px rgba(15, 23, 42, 0.02),
+              inset 0 1px 1px 0 rgba(255, 255, 255, 1);
 }
 
 .dark .glass-nectar-pill {
-  background: rgba(12, 22, 17, 0.68);
+  background: rgba(17, 24, 39, 0.85);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(30, 41, 59, 0.9);
   box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.40),
               0 2px 6px -1px rgba(0, 0, 0, 0.20),
-              inset 0 1px 1px 0 rgba(255, 255, 255, 0.10);
+              inset 0 1px 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .glass-nectar-full {
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border-bottom: 1px solid rgba(5, 79, 49, 0.08);
-  box-shadow: 0 4px 20px -2px rgba(5, 79, 49, 0.03);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.03);
 }
 
 .dark .glass-nectar-full {
-  background: rgba(9, 17, 13, 0.78);
+  background: rgba(11, 15, 23, 0.85);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(30, 41, 59, 0.8);
   box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.30);
 }
 
@@ -121,18 +122,17 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-300 dark:bg-gray-700 rounded-full;
+  @apply bg-slate-300 dark:bg-slate-700 rounded-full;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-400 dark:bg-gray-600;
+  @apply bg-slate-400 dark:bg-slate-600;
 }
 
 /* ==========================================================================
-   ZARO.AI REVERSE-ENGINEERED SCROLL & SWITCHING ANIMATIONS
+   SCROLL & REVEAL ANIMATIONS
    ========================================================================== */
 
-/* Keyframe Animations from zaro.ai */
 @keyframes hero-fade-in {
   0% {
     opacity: 0;
@@ -173,7 +173,7 @@
   animation-delay: 0.3s;
 }
 
-/* Ambient Floating Background Auras */
+/* Ambient Floating Background Auras (Nordic Glacial Mist) */
 @keyframes ambient-drift-1 {
   0% {
     transform: translate(-50%, -50%) scale(1) rotate(0deg);
@@ -256,15 +256,15 @@
 @keyframes radar-ping {
   0% {
     transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(11, 116, 67, 0.55);
+    box-shadow: 0 0 0 0 rgba(14, 116, 144, 0.55);
   }
   70% {
     transform: scale(1);
-    box-shadow: 0 0 0 8px rgba(11, 116, 67, 0);
+    box-shadow: 0 0 0 8px rgba(14, 116, 144, 0);
   }
   100% {
     transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(11, 116, 67, 0);
+    box-shadow: 0 0 0 0 rgba(14, 116, 144, 0);
   }
 }
 
@@ -307,12 +307,12 @@
 
 .card-interactive:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 36px -10px rgba(5, 79, 49, 0.12), 0 2px 6px -1px rgba(5, 79, 49, 0.04);
+  box-shadow: 0 20px 36px -10px rgba(15, 23, 42, 0.08), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
 }
 
 .dark .card-interactive:hover {
-  box-shadow: 0 20px 36px -10px rgba(0, 0, 0, 0.6), 0 0 24px rgba(11, 116, 67, 0.18);
-  border-color: rgba(209, 250, 223, 0.22);
+  box-shadow: 0 20px 36px -10px rgba(0, 0, 0, 0.6), 0 0 24px rgba(56, 189, 248, 0.12);
+  border-color: rgba(56, 189, 248, 0.22);
 }
 
 /* Scroll reveal utility (inspired by zaro.ai render-on-scroll) */
