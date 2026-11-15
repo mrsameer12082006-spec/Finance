@@ -37,6 +37,7 @@ export default function Home() {
   // Simulator State in Hero/Landing
   const [income, setIncome] = useState(80000);
   const [activeTab, setActiveTab] = useState(0);
+  const [isFlowPaused, setIsFlowPaused] = useState(false);
 
   const needs = income * 0.50;
   const wants = income * 0.30;
@@ -178,6 +179,16 @@ export default function Home() {
       }
     }
   ];
+
+  // Auto-advance the MoneyFlow feature tabs every 3s, looping top -> bottom -> top.
+  // Pauses while the user hovers the section, and restarts the timer after a manual click.
+  useEffect(() => {
+    if (isFlowPaused) return;
+    const timer = setTimeout(() => {
+      setActiveTab((prev) => (prev + 1) % flowTabs.length);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [activeTab, isFlowPaused, flowTabs.length]);
 
   return (
     <div className="min-h-screen bg-nectar-canvas dark:bg-nectar-darkBg text-gray-900 dark:text-gray-100 transition-colors">
@@ -409,7 +420,10 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="bg-white dark:bg-nectar-darkCard rounded-3xl p-6 sm:p-12 border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="bg-white dark:bg-nectar-darkCard rounded-3xl p-6 sm:p-12 border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+          onMouseEnter={() => setIsFlowPaused(true)}
+          onMouseLeave={() => setIsFlowPaused(false)}
+        >
           {/* Left Tabs with smooth active indicators */}
           <div className="lg:col-span-6 space-y-3">
             {flowTabs.map((tab, idx) => {
