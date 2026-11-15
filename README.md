@@ -22,6 +22,10 @@ A modern, open-source personal finance tracking architecture that turns paycheck
 - **50/30/20 Financial Equilibrium**: Automatically splits monthly net income into Essential Needs ($50\%$), Lifestyle Wants ($30\%$), and Wealth/Savings Growth ($20\%$).
 - **Visual Analytics (Recharts)**: Interactive hoverable Category Distribution Donut Chart and 30-Day Spending Trajectory Area Curve.
 - **Natural Language Parsing**: Log expenses effortlessly by typing casually (e.g. *"₹450 dinner with team"* or *"Uber ₹280"*).
+- **Automatic Expense Categorization**: Expense titles suggest a category and 50/30/20 group as you type; quick entry parses amounts and descriptions without guessing missing values.
+- **Budget Threshold Alerts**: Dashboard and budget settings show dismissible alerts when monthly or category budgets reach 80% or are exceeded.
+- **Recurring Payment Reminders**: Detects stable monthly expense patterns and lets you opt into in-app reminders; Nectar never creates transactions automatically.
+- **Spending-Based Budget Suggestions**: Budget settings estimates category caps from up to three recorded months, projects the current month’s pace, and adds a reviewable buffer.
 
 ### 3. 🎨 High-End Animations & Micro-Interactions
 - **Ambient Drifting Auras**: Multi-layered organic floating gradient blobs (`animate-ambient-drift-1` & `2`) that breathe depth into backgrounds.

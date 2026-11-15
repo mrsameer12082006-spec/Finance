@@ -7,6 +7,7 @@ const STORAGE_KEYS = {
   REGISTERED_USERS: 'nectar_users',
   EXPENSES: 'nectar_inr_expenses',
   BUDGET: 'nectar_inr_budget',
+  RECURRING_REMINDERS: 'nectar_recurring_reminders',
   THEME: 'nectar_theme'
 };
 
@@ -218,6 +219,21 @@ export const localStorageService = {
 
   saveBudget(budget) {
     localStorage.setItem(STORAGE_KEYS.BUDGET, JSON.stringify(budget));
+  },
+
+  getRecurringReminders() {
+    try {
+      const data = localStorage.getItem(STORAGE_KEYS.RECURRING_REMINDERS);
+      const reminders = data ? JSON.parse(data) : [];
+      return Array.isArray(reminders) ? reminders : [];
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
+  },
+
+  saveRecurringReminders(reminders) {
+    localStorage.setItem(STORAGE_KEYS.RECURRING_REMINDERS, JSON.stringify(reminders));
   },
 
   // Theme

@@ -17,6 +17,8 @@ import { formatCurrency, formatPercent } from '../utils/formatters';
 import CategoryPieChart from '../components/CategoryPieChart';
 import DailyTrendChart from '../components/DailyTrendChart';
 import InsightCard from '../components/InsightCard';
+import BudgetAlerts from '../components/BudgetAlerts';
+import { getTodayLocalDate, parseQuickExpense } from '../utils/expenseAutomation';
 
 export default function Dashboard() {
   const dispatch = useDispatch();
@@ -31,69 +33,35 @@ export default function Dashboard() {
     momChange,
     monthlyLimit,
     isBudgetExceeded,
+    isBudgetLimitReached,
     budgetUtilizationPercent,
     dailySafeSpend,
     insights
   } = useFinancialInsights();
 
   const [quickInput, setQuickInput] = useState('');
+  const [quickInputError, setQuickInputError] = useState('');
 
-  // Natural Language Quick Add Handler
   const handleQuickAdd = (e) => {
     e.preventDefault();
     if (!quickInput.trim()) return;
 
-    let text = quickInput.trim();
-    let amount = 250.00;
-    const amountMatch = text.match(/(?:₹|rs\.?|\$|usd)?\s*(\d+(?:\.\d{1,2})?)/i);
-    if (amountMatch) {
-      amount = parseFloat(amountMatch[1]);
-      text = text.replace(amountMatch[0], '').trim();
+    const parsedExpense = parseQuickExpense(quickInput.trim());
+    if (!parsedExpense) {
+      setQuickInputError('Include an amount and expense description, like “₹450 dinner”.');
+      return;
     }
-
-    const lower = text.toLowerCase();
-    let category = 'Dining';
-    let type = 'wants';
-
-    if (lower.includes('grocer') || lower.includes('food') || lower.includes('market') || lower.includes('apple')) {
-      category = 'Groceries';
-      type = 'needs';
-    } else if (lower.includes('rent') || lower.includes('apartment')) {
-      category = 'Housing';
-      type = 'needs';
-    } else if (lower.includes('uber') || lower.includes('transit') || lower.includes('gas') || lower.includes('flight')) {
-      category = 'Transport';
-      type = 'needs';
-    } else if (lower.includes('netflix') || lower.includes('spotify') || lower.includes('sub')) {
-      category = 'Subscriptions';
-      type = 'wants';
-    } else if (lower.includes('bill') || lower.includes('utility') || lower.includes('electric') || lower.includes('wifi')) {
-      category = 'Utilities';
-      type = 'needs';
-    } else if (lower.includes('gym') || lower.includes('health') || lower.includes('doctor')) {
-      category = 'Wellness';
-      type = 'wants';
-    } else if (lower.includes('save') || lower.includes('invest') || lower.includes('stock')) {
-      category = 'Savings';
-      type = 'savings';
-    }
-
-    let title = text.replace(/^for\s+|^at\s+|^on\s+/i, '').trim();
-    if (!title) title = `${category} Expense`;
-    title = title.charAt(0).toUpperCase() + title.slice(1);
 
     dispatch(addExpense({
       id: `tx-${Date.now()}`,
-      title,
-      amount,
-      category,
-      type,
+      ...parsedExpense,
       paymentMethod: 'Credit Card',
-      date: new Date().toISOString().split('T')[0],
+      date: getTodayLocalDate(),
       notes: 'Quick AI Parsed'
     }));
 
     setQuickInput('');
+    setQuickInputError('');
   };
 
   return (
@@ -117,7 +85,10 @@ export default function Dashboard() {
             <input
               type="text"
               value={quickInput}
-              onChange={(e) => setQuickInput(e.target.value)}
+              onChange={(e) => {
+                setQuickInput(e.target.value);
+                setQuickInputError('');
+              }}
               placeholder="e.g. ₹650 electricity, ₹240 lunch..."
               className="w-full text-xs sm:text-sm font-medium bg-transparent focus:outline-none"
             />
@@ -129,6 +100,11 @@ export default function Dashboard() {
               <Send className="w-4 h-4" />
             </button>
           </form>
+          {quickInputError && (
+            <p role="alert" className="mt-2 text-xs font-medium text-red-200">
+              {quickInputError}
+            </p>
+          )}
         </div>
 
         {/* Decorative backdrop glow */}
@@ -187,9 +163,9 @@ export default function Dashboard() {
         <div className="card-interactive bg-white dark:bg-nectar-darkCard p-6 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar">
           <div className="flex items-center justify-between text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-wider mb-2">
             <span>Budget Utilization</span>
-            <ShieldAlert className={`w-4 h-4 ${isBudgetExceeded ? 'text-red-500' : 'text-nectar-emerald'}`} />
+            <ShieldAlert className={`w-4 h-4 ${isBudgetLimitReached ? 'text-red-500' : 'text-nectar-emerald'}`} />
           </div>
-          <div className={`text-2xl sm:text-3xl font-serif font-bold mb-2 ${isBudgetExceeded ? 'text-red-600 dark:text-red-400' : 'text-gray-900 dark:text-white'}`}>
+          <div className={`text-2xl sm:text-3xl font-serif font-bold mb-2 ${isBudgetLimitReached ? 'text-red-600 dark:text-red-400' : 'text-gray-900 dark:text-white'}`}>
             {budgetUtilizationPercent}%
           </div>
           <div className="w-full h-2 bg-gray-100 dark:bg-nectar-darkBg rounded-full overflow-hidden">
@@ -200,6 +176,8 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+
+      <BudgetAlerts />
 
       {/* Visual Analytics Grid: Pie/Donut & Trend Curve */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

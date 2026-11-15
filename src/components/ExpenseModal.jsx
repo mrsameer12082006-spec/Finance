@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { X, Check } from 'lucide-react';
+import { X, Check, Sparkles } from 'lucide-react';
 import { addExpense, updateExpense } from '../redux/slices/expenseSlice';
+import { getTodayLocalDate, suggestExpenseCategory } from '../utils/expenseAutomation';
 
 const CATEGORIES = [
   { id: 'Dining', label: 'Dining & Drinks', icon: '☕', defaultType: 'wants' },
@@ -26,6 +27,9 @@ export default function ExpenseModal({ isOpen, onClose, expenseToEdit }) {
   const [date, setDate] = useState('');
   const [notes, setNotes] = useState('');
   const [error, setError] = useState('');
+  const [categoryCustomized, setCategoryCustomized] = useState(false);
+
+  const categorySuggestion = suggestExpenseCategory(title);
 
   useEffect(() => {
     if (expenseToEdit) {
@@ -34,26 +38,50 @@ export default function ExpenseModal({ isOpen, onClose, expenseToEdit }) {
       setCategory(expenseToEdit.category || 'Dining');
       setType(expenseToEdit.type || 'wants');
       setPaymentMethod(expenseToEdit.paymentMethod || 'Credit Card');
-      setDate(expenseToEdit.date || new Date().toISOString().split('T')[0]);
+      setDate(expenseToEdit.date || getTodayLocalDate());
       setNotes(expenseToEdit.notes || '');
+      setCategoryCustomized(true);
     } else {
       setTitle('');
       setAmount('');
       setCategory('Dining');
       setType('wants');
       setPaymentMethod('Credit Card');
-      setDate(new Date().toISOString().split('T')[0]);
+      setDate(getTodayLocalDate());
       setNotes('');
+      setCategoryCustomized(false);
     }
     setError('');
   }, [expenseToEdit, isOpen]);
 
   const handleCategorySelect = (catId) => {
     setCategory(catId);
+    setCategoryCustomized(true);
     const found = CATEGORIES.find(c => c.id === catId);
     if (found) {
       setType(found.defaultType);
     }
+  };
+
+  const handleTitleChange = (nextTitle) => {
+    setTitle(nextTitle);
+    if (!categoryCustomized) {
+      const suggestion = suggestExpenseCategory(nextTitle);
+      if (suggestion) {
+        setCategory(suggestion.category);
+        setType(suggestion.type);
+      } else {
+        setCategory('Dining');
+        setType('wants');
+      }
+    }
+  };
+
+  const useCategorySuggestion = () => {
+    if (!categorySuggestion) return;
+    setCategory(categorySuggestion.category);
+    setType(categorySuggestion.type);
+    setCategoryCustomized(false);
   };
 
   const handleSubmit = (e) => {
@@ -75,7 +103,7 @@ export default function ExpenseModal({ isOpen, onClose, expenseToEdit }) {
       category,
       type,
       paymentMethod,
-      date: date || new Date().toISOString().split('T')[0],
+      date: date || getTodayLocalDate(),
       notes: notes.trim()
     };
 
@@ -129,11 +157,26 @@ export default function ExpenseModal({ isOpen, onClose, expenseToEdit }) {
             <input
               type="text"
               value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={(e) => handleTitleChange(e.target.value)}
               placeholder="e.g. Trader Joe's, Uber, Rent"
               className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-nectar-darkBorder bg-gray-50 dark:bg-nectar-darkBg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-nectar-emerald"
               required
             />
+            {categorySuggestion && (
+              <p className="mt-1.5 flex items-center gap-1 text-[11px] text-nectar-emerald dark:text-nectar-mint">
+                <Sparkles className="h-3 w-3" />
+                {categoryCustomized ? (
+                  <>
+                    Suggested: {categorySuggestion.category}
+                    <button type="button" onClick={useCategorySuggestion} className="ml-1 font-bold underline">
+                      Use suggestion
+                    </button>
+                  </>
+                ) : (
+                  <>Automatically categorized as {categorySuggestion.category} · {categorySuggestion.type}</>
+                )}
+              </p>
+            )}
           </div>
 
           {/* Amount & Date */}

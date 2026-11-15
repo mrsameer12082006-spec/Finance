@@ -31,14 +31,20 @@ export function useFinancialInsights() {
     const currentYear = now.getFullYear();
     const currentMonth = now.getMonth(); // 0-indexed
     const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-    const daysRemaining = Math.max(1, daysInMonth - now.getDate());
+    const daysRemaining = Math.max(1, daysInMonth - now.getDate() + 1);
 
     // Initialize daily map for days 1 to daysInMonth
     for (let day = 1; day <= daysInMonth; day++) {
       dailyMap[day] = 0;
     }
 
-    expenses.forEach((item) => {
+    const currentMonthExpenses = expenses.filter((item) => {
+      if (!item.date) return false;
+      const itemDate = new Date(`${item.date}T00:00:00`);
+      return itemDate.getFullYear() === currentYear && itemDate.getMonth() === currentMonth;
+    });
+
+    currentMonthExpenses.forEach((item) => {
       const amount = parseFloat(item.amount) || 0;
       totalSpending += amount;
 
@@ -91,12 +97,13 @@ export function useFinancialInsights() {
       : '0.0';
 
     // Budget utilization
-    const monthlyLimit = budget.monthlyLimit || 60000;
+    const monthlyLimit = Number(budget.monthlyLimit) || 60000;
     const isBudgetExceeded = totalSpending > monthlyLimit;
-    const budgetUtilizationPercent = Math.min(100, Math.round((totalSpending / monthlyLimit) * 100));
+    const isBudgetLimitReached = totalSpending >= monthlyLimit;
+    const budgetUtilizationPercent = Math.round((totalSpending / monthlyLimit) * 100);
 
     // Daily safe spend: remaining wants budget divided by days remaining
-    const wantsBudget = (budget.monthlyIncome || 80000) * 0.30;
+    const wantsBudget = (Number(budget.monthlyIncome) || 80000) * 0.30;
     const remainingWants = Math.max(0, wantsBudget - wantsTotal);
     const dailySafeSpend = (remainingWants / daysRemaining).toFixed(2);
 
@@ -145,6 +152,39 @@ export function useFinancialInsights() {
       });
     }
 
+    const budgetAlerts = [];
+    if (monthlyLimit > 0) {
+      const utilization = totalSpending / monthlyLimit;
+      if (utilization >= 0.8) {
+        budgetAlerts.push({
+          id: 'monthly-budget',
+          severity: utilization >= 1 ? 'danger' : 'warning',
+          title: isBudgetExceeded
+            ? 'Monthly budget exceeded'
+            : utilization >= 1
+              ? 'Monthly budget limit reached'
+              : 'Monthly budget nearly reached',
+          description: `${Math.round(utilization * 100)}% of your ${formatCurrency(monthlyLimit)} monthly limit is used.`,
+        });
+      }
+    }
+
+    Object.entries(budget.categoryLimits || {}).forEach(([category, limit]) => {
+      const categoryLimit = Number(limit);
+      const categorySpend = categoryMap[category] || 0;
+      const utilization = categoryLimit > 0 ? categorySpend / categoryLimit : 0;
+      if (utilization >= 0.8) {
+        budgetAlerts.push({
+          id: `category-${category}`,
+          severity: utilization >= 1 ? 'danger' : 'warning',
+          title: `${category} budget ${
+            categorySpend > categoryLimit ? 'exceeded' : utilization >= 1 ? 'limit reached' : 'nearly reached'
+          }`,
+          description: `${formatCurrency(categorySpend)} of ${formatCurrency(categoryLimit)} used (${Math.round(utilization * 100)}%).`,
+        });
+      }
+    });
+
     return {
       totalSpending,
       needsTotal,
@@ -156,10 +196,12 @@ export function useFinancialInsights() {
       momChange,
       monthlyLimit,
       isBudgetExceeded,
+      isBudgetLimitReached,
       budgetUtilizationPercent,
       dailySafeSpend,
       daysRemaining,
-      insights
+      insights,
+      budgetAlerts
     };
   }, [expenses, budget]);
 }

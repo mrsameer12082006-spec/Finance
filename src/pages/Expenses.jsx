@@ -24,6 +24,7 @@ import { formatCurrency, formatDate } from '../utils/formatters';
 import { exportExpensesToCSV } from '../utils/csvExport';
 import Pagination from '../components/Pagination';
 import ExpenseModal from '../components/ExpenseModal';
+import RecurringExpenses from '../components/RecurringExpenses';
 
 const CATEGORIES = ['All', 'Housing', 'Groceries', 'Dining', 'Transport', 'Subscriptions', 'Utilities', 'Shopping', 'Wellness', 'Savings'];
 
@@ -154,6 +155,8 @@ export default function Expenses() {
           </button>
         </div>
       </div>
+
+      <RecurringExpenses expenses={items} />
 
       {/* Filter and Search Bar */}
       <div className="bg-white dark:bg-nectar-darkCard p-4 sm:p-5 rounded-3xl border border-nectar-forest/10 dark:border-nectar-darkBorder shadow-nectar space-y-4">

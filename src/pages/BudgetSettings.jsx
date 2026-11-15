@@ -1,24 +1,44 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Sliders, Save, AlertTriangle, CheckCircle2, ShieldCheck, IndianRupee } from 'lucide-react';
+import { Sliders, Save, AlertTriangle, CheckCircle2, ShieldCheck, IndianRupee, Sparkles } from 'lucide-react';
 import { updateBudget } from '../redux/slices/expenseSlice';
 import { formatCurrency } from '../utils/formatters';
 import { useFinancialInsights } from '../hooks/useFinancialInsights';
+import { getCategoryBudgetRecommendations } from '../utils/expenseAutomation';
+import BudgetAlerts from '../components/BudgetAlerts';
 
 export default function BudgetSettings() {
   const dispatch = useDispatch();
-  const { budget } = useSelector((state) => state.expenses);
-  const { totalSpending, isBudgetExceeded, budgetUtilizationPercent } = useFinancialInsights();
+  const { items, budget } = useSelector((state) => state.expenses);
+  const { totalSpending, isBudgetExceeded, isBudgetLimitReached, budgetUtilizationPercent } = useFinancialInsights();
 
   const [monthlyLimit, setMonthlyLimit] = useState(budget.monthlyLimit || 60000);
   const [monthlyIncome, setMonthlyIncome] = useState(budget.monthlyIncome || 80000);
   const [categoryLimits, setCategoryLimits] = useState({ ...budget.categoryLimits });
   const [saveMessage, setSaveMessage] = useState('');
+  const recommendations = useMemo(
+    () => getCategoryBudgetRecommendations(items, budget.categoryLimits),
+    [items, budget.categoryLimits]
+  );
 
   const handleCategoryLimitChange = (cat, val) => {
     setCategoryLimits(prev => ({
       ...prev,
       [cat]: parseFloat(val) || 0
+    }));
+  };
+
+  const applyRecommendation = (recommendation) => {
+    setCategoryLimits((current) => ({
+      ...current,
+      [recommendation.category]: recommendation.recommendedLimit,
+    }));
+  };
+
+  const applyAllRecommendations = () => {
+    setCategoryLimits((current) => ({
+      ...current,
+      ...Object.fromEntries(recommendations.map(({ category, recommendedLimit }) => [category, recommendedLimit])),
     }));
   };
 
@@ -51,21 +71,23 @@ export default function BudgetSettings() {
         </div>
       )}
 
+      <BudgetAlerts />
+
       {/* Live Threshold Status Banner */}
       <div className={`p-6 rounded-3xl border ${
-        isBudgetExceeded 
+        isBudgetLimitReached
           ? 'bg-red-50 dark:bg-red-950/20 border-red-200 dark:border-red-900/40 text-red-900 dark:text-red-200' 
           : 'bg-white dark:bg-nectar-darkCard border-nectar-forest/10 dark:border-nectar-darkBorder'
       } shadow-nectar flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4`}>
         <div className="flex items-center gap-3.5">
           <div className={`w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0 ${
-            isBudgetExceeded ? 'bg-red-100 text-red-600' : 'bg-nectar-wasabi text-nectar-forest'
+            isBudgetLimitReached ? 'bg-red-100 text-red-600' : 'bg-nectar-wasabi text-nectar-forest'
           }`}>
-            {isBudgetExceeded ? <AlertTriangle className="w-6 h-6" /> : <ShieldCheck className="w-6 h-6" />}
+            {isBudgetLimitReached ? <AlertTriangle className="w-6 h-6" /> : <ShieldCheck className="w-6 h-6" />}
           </div>
           <div>
             <h4 className="font-bold text-sm">
-              {isBudgetExceeded ? 'Budget Exceeded Warning' : 'Budget Health Status: Normal'}
+              {isBudgetExceeded ? 'Budget Exceeded Warning' : isBudgetLimitReached ? 'Monthly Budget Limit Reached' : 'Budget Health Status: Normal'}
             </h4>
             <p className="text-xs opacity-80 mt-0.5">
               Current total spend: <span className="font-bold font-mono">{formatCurrency(totalSpending)}</span> of <span className="font-bold font-mono">{formatCurrency(monthlyLimit)}</span> limit ({budgetUtilizationPercent}% utilized).
@@ -133,6 +155,55 @@ export default function BudgetSettings() {
               Set targeted budgets for individual spending categories.
             </p>
           </div>
+
+          {recommendations.length > 0 && (
+            <div className="rounded-2xl border border-nectar-mint/60 bg-nectar-wasabi/50 p-4 dark:border-nectar-forest/50 dark:bg-nectar-forest/10">
+              <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <h4 className="flex items-center gap-1.5 text-xs font-bold text-nectar-forest dark:text-nectar-mint">
+                    <Sparkles className="h-4 w-4" />
+                    Suggested caps from your spending
+                  </h4>
+                  <p className="mt-1 text-[11px] text-gray-600 dark:text-gray-400">
+                    Uses up to 3 recorded months, projects this month’s pace, and adds a 10% buffer. Review before saving.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={applyAllRecommendations}
+                  className="rounded-full bg-nectar-forest px-3 py-1.5 text-[11px] font-bold text-white transition hover:bg-nectar-emerald dark:bg-nectar-mint dark:text-nectar-forest"
+                >
+                  Apply all
+                </button>
+              </div>
+              <div className="space-y-2">
+                {recommendations.map((recommendation) => (
+                  <div key={recommendation.category} className="flex items-center justify-between gap-3 rounded-xl bg-white/80 px-3 py-2 dark:bg-nectar-darkCard/80">
+                    <div className="min-w-0">
+                      <p className="text-xs font-semibold text-gray-800 dark:text-gray-100">{recommendation.category}</p>
+                      <p className="text-[11px] text-gray-500 dark:text-gray-400">
+                        Avg. {formatCurrency(recommendation.averageMonthlySpend)} across {recommendation.monthsAnalyzed} recorded month{recommendation.monthsAnalyzed === 1 ? '' : 's'}
+                        {' · '}current cap {formatCurrency(recommendation.currentLimit)}
+                      </p>
+                    </div>
+                    <div className="flex shrink-0 items-center gap-2">
+                      <span className="text-xs font-bold text-nectar-forest dark:text-nectar-mint">{formatCurrency(recommendation.recommendedLimit)}</span>
+                      <button
+                        type="button"
+                        onClick={() => applyRecommendation(recommendation)}
+                        className="rounded-full border border-nectar-forest/20 px-2.5 py-1 text-[11px] font-semibold text-nectar-forest hover:bg-nectar-wasabi dark:border-nectar-mint/30 dark:text-nectar-mint dark:hover:bg-nectar-forest/20"
+                      >
+                        Use
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-3 text-[11px] text-gray-500 dark:text-gray-400">
+                Applying suggestions only changes these form values. Select “Save Budget Configurations” to persist them.
+              </p>
+            </div>
+          )}
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {Object.keys(categoryLimits).map((cat) => (
