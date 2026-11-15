@@ -174,11 +174,6 @@ export default function Login() {
           <Link to="/signup" className="font-bold text-nectar-forest dark:text-nectar-mint hover:underline">
             Create an account
           </Link>
-          <div className="pt-2">
-            <Link to="/signin-demo" className="inline-flex items-center gap-1 text-[11px] text-gray-400 hover:text-nectar-forest dark:hover:text-nectar-mint transition-colors">
-              <span>✨ View 21st.dev Glassmorphic Sign-In</span>
-            </Link>
-          </div>
         </div>
       </div>
     </div>
