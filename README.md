@@ -110,8 +110,8 @@ nectar/
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/your-username/nectar-smart-finance.git
-cd nectar-smart-finance
+git clone https://github.com/mrsameer12082006-spec/Nectar.git
+cd Nectar
 ```
 
 ### 2. Install dependencies
@@ -121,9 +121,9 @@ npm install
 
 ### 3. Run development server
 ```bash
-npm run dev
+npm start
 ```
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+This starts the development server on port `3000` and opens the browser automatically. `npm run dev` is also available.
 
 ### 4. Build for production
 ```bash
@@ -131,10 +131,17 @@ npm run build
 ```
 Creates an optimized production bundle inside the `dist/` directory.
 
-### 5. Preview production build
+### 5. Build and preview production
 ```bash
-npm run preview
+npm run start:prod
 ```
+This builds the app and serves the production bundle on port `4173`, opening it in the browser. To preview an already-built bundle, use `npm run preview`.
+
+### 6. Verify changes
+```bash
+npm run check
+```
+This runs the production build as a local verification check. GitHub Actions runs the same check for pushes and pull requests. Dependency update pull requests are scheduled weekly through Dependabot.
 
 ---
 
