@@ -147,6 +147,9 @@ npm run check
 ```
 This runs the production build as a local verification check. GitHub Actions runs the same check for pushes and pull requests. Dependency update pull requests are scheduled weekly through Dependabot.
 
+### 7. Deploy to GitHub Pages
+Pushing to `master` automatically builds and deploys the app to [GitHub Pages](https://mrsameer12082006-spec.github.io/Nectar/). If Pages has not been enabled for the repository yet, set **Settings → Pages → Build and deployment → Source** to **GitHub Actions** once. The deployment workflow preserves client-side routes such as `/dashboard`.
+
 ---
 
 ## 🤝 Contributing
