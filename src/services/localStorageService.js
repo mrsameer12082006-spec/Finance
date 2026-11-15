@@ -155,12 +155,8 @@ export const localStorageService = {
   getAuthUser() {
     try {
       const user = localStorage.getItem(STORAGE_KEYS.AUTH_USER);
-      return user ? JSON.parse(user) : {
-        id: 'usr_demo',
-        name: 'Alex Morgan',
-        email: 'alex@nectar.com',
-        avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80'
-      };
+      // No saved user means the visitor is logged out (no auto demo login).
+      return user ? JSON.parse(user) : null;
     } catch {
       return null;
     }

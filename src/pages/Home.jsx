@@ -11,10 +11,10 @@ import {
   Zap, 
   Lock, 
   Sun, 
-  Moon,
-  LayoutDashboard
+  Moon
 } from 'lucide-react';
 import { toggleTheme } from '../redux/slices/themeSlice';
+import { loginSuccess } from '../redux/slices/authSlice';
 import { formatCurrency } from '../utils/formatters';
 import { smoothScrollTo } from '../utils/smoothScroll';
 import { useNavIndicator } from '../hooks/useNavIndicator';
@@ -32,7 +32,6 @@ export default function Home() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { mode } = useSelector((state) => state.theme);
-  const { isAuthenticated, user } = useSelector((state) => state.auth);
 
   // Simulator State in Hero/Landing
   const [income, setIncome] = useState(80000);
@@ -116,6 +115,18 @@ export default function Home() {
     smoothScrollTo(targetId);
   };
 
+  // Log in as the demo user and open the dashboard directly (no login form)
+  const handleDemoDashboard = (e) => {
+    e.preventDefault();
+    dispatch(loginSuccess({
+      id: 'usr_demo',
+      name: 'Alex Morgan',
+      email: 'alex@nectar.com',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80'
+    }));
+    navigate('/dashboard');
+  };
+
   const flowTabs = [
     {
       title: 'Automated 50/30/20 Balance',
@@ -178,6 +189,15 @@ export default function Home() {
       }
     }
   ];
+
+  // Auto-advance the MoneyFlow feature tabs every 3s, looping top -> bottom -> top.
+  // Never pauses; the timer simply restarts from the clicked tab after a manual click.
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setActiveTab((prev) => (prev + 1) % flowTabs.length);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [activeTab, flowTabs.length]);
 
   return (
     <div className="min-h-screen bg-nectar-canvas dark:bg-nectar-darkBg text-gray-900 dark:text-gray-100 transition-colors">
@@ -275,31 +295,19 @@ export default function Home() {
               {mode === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-nectar-forest" />}
             </button>
 
-            {isAuthenticated ? (
-              <Link
-                to="/dashboard"
-                className="btn-nectar btn-nectar-primary text-xs py-2 px-4 flex items-center gap-1.5"
-              >
-                <LayoutDashboard className="w-3.5 h-3.5" />
-                <span>Go to Dashboard</span>
-              </Link>
-            ) : (
-              <>
-                <Link
-                  to="/login"
-                  className="hidden sm:inline-flex px-4 py-2 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:text-nectar-forest dark:hover:text-nectar-mint transition-colors"
-                >
-                  Log in
-                </Link>
-                <Link
-                  to="/signup"
-                  className="btn-nectar btn-nectar-primary btn-shine text-xs py-2 px-4 shadow-sm"
-                >
-                  <span>Sign Up</span>
-                  <ArrowRight className="w-3 h-3" />
-                </Link>
-              </>
-            )}
+            <Link
+              to="/login"
+              className="inline-flex px-3 sm:px-4 py-2 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:text-nectar-forest dark:hover:text-nectar-mint transition-colors"
+            >
+              Log in
+            </Link>
+            <Link
+              to="/signup"
+              className="btn-nectar btn-nectar-primary btn-shine text-xs py-2 px-4 shadow-sm"
+            >
+              <span>Sign Up</span>
+              <ArrowRight className="w-3 h-3" />
+            </Link>
           </div>
         </header>
       </div>
@@ -337,7 +345,8 @@ export default function Home() {
             </Link>
 
             <Link
-              to="/login"
+              to="/dashboard"
+              onClick={handleDemoDashboard}
               className="btn-nectar btn-nectar-secondary text-base py-3.5 px-8 w-full sm:w-auto hover:border-nectar-emerald/30"
             >
               <span>Explore Demo Dashboard</span>
@@ -668,12 +677,6 @@ export default function Home() {
           <div className="flex items-center gap-2 text-nectar-forest dark:text-nectar-mint font-bold">
             <Leaf className="w-4 h-4" />
             <span>Nectar Smart Finance</span>
-          </div>
-
-          <div className="flex items-center gap-6">
-            <Link to="/login" className="hover:text-nectar-forest dark:hover:text-nectar-mint">Log in</Link>
-            <Link to="/signup" className="hover:text-nectar-forest dark:hover:text-nectar-mint">Sign up</Link>
-            <Link to="/dashboard" className="hover:text-nectar-forest dark:hover:text-nectar-mint">Dashboard</Link>
           </div>
 
           <p className="text-center sm:text-right">
